@@ -1,0 +1,15 @@
+project structure:
+    --_tests // unit test using gtest framework(setup included in cmake)
+    --assets // used to store image and Font
+    --includes // where all of the code reside
+      --button // clickable button class, and buttons class for the button used in this project
+      --config // managing global resource, and system variables
+      --engine // processing input/output and updating the screen
+      --header // header class to show text and draw to the screen
+      --input_box // input box that allows user to input from Keyboard, for bet event in this project
+      --lib // include the data structure to be used in this project, includes trie
+      
+    --main.cpp // the main entry of the program
+    --design.txt // project introduction
+    --CMakeLists.txt // cmake for this project
+// todo
