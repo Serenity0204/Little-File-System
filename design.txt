@@ -13,3 +13,9 @@ project structure:
     --design.txt // project introduction
     --CMakeLists.txt // cmake for this project
 // todo
+
+
+design an UI that allows user to input command line to input custom commands, using string parsing
+design a text file sytem that can handle (5) text files that allow user to
+  1. do prefix search 
+  2. undo for the 5 most recent save 
