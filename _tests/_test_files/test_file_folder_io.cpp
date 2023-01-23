@@ -10,32 +10,28 @@ using namespace std;
 //------------------------------------------------------------------------------
 //@TODO: include all files we are testing:
 
-
+#include "../../lib/folder_file_manager/folder_file_manager.h"
 
 //------------------------------------------------------------------------------
-bool dirExists(const std::string &path) {
-    struct stat info;
-    if (stat(path.c_str(), &info) == 0 && info.st_mode & S_IFDIR) {
-        return true;
-    }
-    return false;
-}
 
-using namespace std;
+
 bool test_folder_file1(bool debug=false)
 {
-  string root = "../../root/";
-  if(!dirExists(root))
-  {
-    if(mkdir(root.c_str()) == -1) return false;
-  }
+  FolderFileManager fm;
+  bool test = fm.add_file("test.txt");
+  if(!test) return false;
+  // string root = "../../root/";
+  // if(!dirExists(root))
+  // {
+  //   if(mkdir(root.c_str()) == -1) return false;
+  // }
 
-  ofstream out;
+  // ofstream out;
   
-  out.open(root + "test.txt", std::ios_base::app);
-  if(out.fail()) return false;
-  out << "Test message 101" << endl;
-  out.close();
+  // out.open(root + "test.txt", std::ios_base::app);
+  // if(out.fail()) return false;
+  // out << "Test message 101" << endl;
+  // out.close();
   return true;
 }
 
