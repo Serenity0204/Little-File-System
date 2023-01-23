@@ -24,21 +24,30 @@ using namespace std;
 
 bool remove_all(bool debug=false)
 {
-    ifstream ins;
-    string path = "../../root/delete_all.txt";
-    ins.open(path);
-    if(ins.fail()) return false;
-    string line;
-    while(getline(ins, line))
-    {
-        rmdir(line.c_str());
-        remove(line.c_str());
-    }
-    ins.close();
-    ofstream out;
-    out.open(path);
-    if(out.fail()) return false;
-    out.close();
+    ifstream ins_folder, ins_file;
+    string path_folder = "../../root/delete_all_folder.txt";
+    string path_file = "../../root/delete_all_file.txt";
+
+    ins_file.open(path_file);
+    if(ins_file.fail()) return false;
+    ins_folder.open(path_folder);
+    if(ins_folder.fail()) return false;
+    string line_folder, line_file;
+    while(getline(ins_file, line_file)) remove(line_file.c_str());
+    while(getline(ins_folder, line_folder)) rmdir(line_folder.c_str());
+    
+    
+    ins_file.close();
+    ins_folder.close();
+    ofstream out_folder, out_file;
+    out_folder.open(path_folder);
+    if(out_folder.fail()) return false;
+    out_folder.close();
+
+    out_file.open(path_file);
+    if(out_file.fail()) return false;
+    out_file.close();
+    
     return true;
 }
 
