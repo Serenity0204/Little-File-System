@@ -43,7 +43,7 @@ Thumbs.db
 
 # Vim temporary files
 .*.swp
-/root/
+
 # Visual Studio generated files
 *.ib_pdb_index
 *.idb
@@ -81,3 +81,6 @@ googletest/
 .vs
 out/
 build/other/
+
+
+*.txt

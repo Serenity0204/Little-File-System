@@ -35,7 +35,7 @@ bool test_folder_file1(bool debug=false)
   
   out.open(root + "test.txt", std::ios_base::app);
   if(out.fail()) return false;
-  out << "Test message" << endl;
+  out << "Test message 1" << endl;
   out.close();
   return true;
 }
