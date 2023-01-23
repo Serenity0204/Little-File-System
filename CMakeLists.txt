@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-project(Project_Name)
+project(Little_File_System)
 
 #. . . . . . . . . . . . . . . . . . . .
 include(GNUInstallDirs)
@@ -61,24 +61,19 @@ ADD_EXECUTABLE(main
     ${SOURCE_FILES}
 )
 
-ADD_EXECUTABLE(basic_test
-    _tests/_test_files/basic_test.cpp
+
+
+ADD_EXECUTABLE(test_file_folder_io
+    _tests/_test_files/test_file_folder_io.cpp
     ${SOURCE_FILES}
 )
 
 
-ADD_EXECUTABLE(testB
-    _tests/_test_files/testB.cpp
-    ${SOURCE_FILES}
-)
 
 
 
 
-
-
-TARGET_LINK_LIBRARIES(basic_test gtest)
-TARGET_LINK_LIBRARIES(testB gtest)
+TARGET_LINK_LIBRARIES(test_file_folder_io gtest)
 
 
 ## copy resources file to build
@@ -90,8 +85,7 @@ find_package(SFML REQUIRED system window graphics network audio)
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(main ${SFML_LIBRARIES})
-    target_link_libraries(basic_test ${SFML_LIBRARIES})
-    target_link_libraries(testB ${SFML_LIBRARIES})
+    target_link_libraries(test_file_folder_io ${SFML_LIBRARIES})
 endif()
 
 
