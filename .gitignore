@@ -70,8 +70,8 @@ Thumbs.db
 # --------
 *.dll
 *.exe
-
-.vscode/
+.root/
+.vscode/*
 CMakeCache.txt
 CMakeFiles/
 bin/
