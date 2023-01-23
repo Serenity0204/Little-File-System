@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-project(Little_File_System)
+project(Project_Name)
 
 #. . . . . . . . . . . . . . . . . . . .
 include(GNUInstallDirs)
@@ -7,10 +7,7 @@ if(MSVC)
     add_compile_options(/W4)
     add_link_options(/W4)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin)
-    # message("compiler: MSVC")
 else()
-    # message("compiler: NOT MSVC")
-    # add_compile_options(-Wall -Wextra -pedantic -Werror -Wl,--fatal-warnings)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 endif()
 
@@ -51,21 +48,29 @@ enable_testing()
 #   Grab all cpp files from includes folder
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 set(INCLUDES_FOLDER includes)
+set(LIB_FOLDER lib)
 FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${INCLUDES_FOLDER}/*.cpp" )
+FILE(GLOB_RECURSE LIB_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${LIB_FOLDER}/*.cpp" )
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-
-
-ADD_EXECUTABLE(main
-    main.cpp
+ADD_EXECUTABLE(test_lib
+    _tests/_test_files/test_lib.cpp
     ${SOURCE_FILES}
+    ${LIB_FILES}
 )
-
 
 
 ADD_EXECUTABLE(test_file_folder_io
     _tests/_test_files/test_file_folder_io.cpp
     ${SOURCE_FILES}
+    ${LIB_FILES}
+)
+
+
+ADD_EXECUTABLE(main
+    main.cpp
+    ${SOURCE_FILES}
+    ${LIB_FILES}
 )
 
 
@@ -73,8 +78,9 @@ ADD_EXECUTABLE(test_file_folder_io
 
 
 
-TARGET_LINK_LIBRARIES(test_file_folder_io gtest)
 
+TARGET_LINK_LIBRARIES(test_lib gtest)
+TARGET_LINK_LIBRARIES(test_file_folder_io gtest)
 
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
@@ -85,7 +91,7 @@ find_package(SFML REQUIRED system window graphics network audio)
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(main ${SFML_LIBRARIES})
+    target_link_libraries(test_lib ${SFML_LIBRARIES})
     target_link_libraries(test_file_folder_io ${SFML_LIBRARIES})
 endif()
-
 

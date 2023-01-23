@@ -12,7 +12,6 @@ using namespace std;
 
 
 
-
 //------------------------------------------------------------------------------
 bool dirExists(const std::string &path) {
     struct stat info;
@@ -35,7 +34,7 @@ bool test_folder_file1(bool debug=false)
   
   out.open(root + "test.txt", std::ios_base::app);
   if(out.fail()) return false;
-  out << "Test message 1" << endl;
+  out << "Test message" << endl;
   out.close();
   return true;
 }
@@ -68,6 +67,6 @@ TEST(TEST_STUB, TestStub)
 int main(int argc, char **argv)
 {
   ::testing::InitGoogleTest(&argc, argv);
-  std::cout<<"\n\n----------running testB.cpp---------\n\n"<<std::endl;
+  std::cout<<"\n\n----------running---------\n\n"<<std::endl;
   return RUN_ALL_TESTS();
 }
