@@ -43,7 +43,7 @@ Thumbs.db
 
 # Vim temporary files
 .*.swp
-
+/root/
 # Visual Studio generated files
 *.ib_pdb_index
 *.idb
@@ -78,7 +78,6 @@ bin/
 build/
 cmake_install.cmake
 googletest/
-
 .vs
 out/
 build/other/
