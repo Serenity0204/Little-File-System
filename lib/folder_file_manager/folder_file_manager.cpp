@@ -47,7 +47,7 @@ bool FolderFileManager::file_exist(const string& path)
 
 bool FolderFileManager::folder_exist(const string& path)
 {
-    if(this->_folder_set.count(this->_base_dir + path) > 0) return true;
+    if(this->_folder_set.count(this->_base_dir + "/"+ path) > 0) return true;
     return false;
 }
 
@@ -55,7 +55,13 @@ bool FolderFileManager::folder_exist(const string& path)
 
 bool FolderFileManager::add_folder(const string& path)
 {
-
+    ofstream outs;
+    string file_path = this->_base_dir + "/"+ path;
+    if(this->_folder_set.count(file_path) > 0) return false;
+    if(mkdir(file_path.c_str()) == -1) return false;
+    this->_folder_set.insert(file_path);
+    this->_add_delete_file_folder(file_path, false);
+    return true;
 }
 
 
@@ -65,11 +71,13 @@ bool FolderFileManager::add_file(const string& path)
     ofstream outs;
     string file_path = this->_base_dir + path;
     if(this->_file_set.count(file_path) > 0) return false;
-    this->_add_delete_file(path);
     outs.open(file_path);
     if(outs.fail()) return false;
     this->_file_set.insert(file_path);
     outs.close();
+    
+    // only add if no error
+    this->_add_delete_file_folder(file_path, true);
     return true;
 }
 
@@ -81,28 +89,32 @@ void FolderFileManager::_read_delete_file_folder()
     if(ins.fail()) return;
     while(getline(ins, line)) this->_file_set.insert(line);
     ins.close();
-    // if(this->_file_set.size() == 0)
-    // {
-    //     cout << "TRUE1" << endl;
-    // }
     ins.open(this->_delete_folder_dir);
     if(ins.fail()) return;
     while(getline(ins, line)) this->_folder_set.insert(line);
     ins.close();
-
-    // if(this->_folder_set.size() == 0)
-    // {
-    //     cout << "TRUE2" << endl;
-    // }
 }
 
 
-void FolderFileManager::_add_delete_file(const string& path)
+void FolderFileManager::_add_delete_file_folder(const string& file_path, bool control)
 {
     ofstream outs;
-    string file_path = this->_base_dir + path;
-    outs.open(this->_delete_file_dir, std::ios_base::app);
+    if(control) outs.open(this->_delete_file_dir, std::ios_base::app);
+    if(!control) outs.open(this->_delete_folder_dir, std::ios_base::app);
     if(outs.fail()) return;
     outs << file_path << endl;
     outs.close();
+}
+
+
+
+bool FolderFileManager::delete_folder(const string& path)
+{
+
+}
+
+
+bool FolderFileManager::delete_file(const string& path)
+{
+
 }

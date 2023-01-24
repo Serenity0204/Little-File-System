@@ -21,7 +21,7 @@ bool test_folder_file1(bool debug=false)
   FolderFileManager fm;
   if(!fm.file_exist(path))
   {
-    bool test = fm.add_file("test.txt");
+    bool test = fm.add_file(path);
     if(!test) return false;
   }
   return true;
@@ -29,14 +29,27 @@ bool test_folder_file1(bool debug=false)
 
 bool test_folder_file2(bool debug=false)
 {
-  const string path = "folder/test.txt";
+  const string path = "/folder/test.txt";
   FolderFileManager fm;
   if(!fm.file_exist(path))
   {
-    bool test = fm.add_file("test.txt");
+    bool test = fm.add_file(path);
     if(!test) return true;
   }
   return false;
+}
+
+
+bool test_folder_file3(bool debug=false)
+{
+  const string path = "test_folder";
+  FolderFileManager fm;
+  if(!fm.folder_exist(path))
+  {
+    bool test = fm.add_folder(path);
+    if(!test) return false;
+  }
+  return true;
 }
 
 
@@ -60,6 +73,13 @@ TEST(TEST_FOLDER_FILE, TestFolderFile1)
 TEST(TEST_FOLDER_FILE, TestFolderFile2)
 {
   bool success = test_folder_file2(debug);
+  EXPECT_EQ(success, true);
+}
+
+
+TEST(TEST_FOLDER_FILE, TestFolderFile3)
+{
+  bool success = test_folder_file3(debug);
   EXPECT_EQ(success, true);
 }
 
