@@ -27,6 +27,8 @@ public:
     FolderFileManager();
     ~FolderFileManager();
 
+    bool file_exist(const string& path);
+    bool folder_exist(const string& path);
     bool add_folder(const string& path);
     bool add_file(const string& path);
 };

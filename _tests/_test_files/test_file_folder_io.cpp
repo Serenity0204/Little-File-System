@@ -17,23 +17,28 @@ using namespace std;
 
 bool test_folder_file1(bool debug=false)
 {
+  const string path = "test.txt";
   FolderFileManager fm;
-  bool test = fm.add_file("test.txt");
-  if(!test) return false;
-  // string root = "../../root/";
-  // if(!dirExists(root))
-  // {
-  //   if(mkdir(root.c_str()) == -1) return false;
-  // }
-
-  // ofstream out;
-  
-  // out.open(root + "test.txt", std::ios_base::app);
-  // if(out.fail()) return false;
-  // out << "Test message 101" << endl;
-  // out.close();
+  if(!fm.file_exist(path))
+  {
+    bool test = fm.add_file("test.txt");
+    if(!test) return false;
+  }
   return true;
 }
+
+bool test_folder_file2(bool debug=false)
+{
+  const string path = "folder/test.txt";
+  FolderFileManager fm;
+  if(!fm.file_exist(path))
+  {
+    bool test = fm.add_file("test.txt");
+    if(!test) return true;
+  }
+  return false;
+}
+
 
 //------------------------------------------------------------------------------
 //@TODO: add more test functions here:
@@ -46,9 +51,15 @@ bool test_folder_file1(bool debug=false)
 // Lord help me! 
 const bool debug = false;
 
-TEST(TEST_STUB, TestStub)
+TEST(TEST_FOLDER_FILE, TestFolderFile1)
 {
   bool success = test_folder_file1(debug);
+  EXPECT_EQ(success, true);
+}
+
+TEST(TEST_FOLDER_FILE, TestFolderFile2)
+{
+  bool success = test_folder_file2(debug);
   EXPECT_EQ(success, true);
 }
 

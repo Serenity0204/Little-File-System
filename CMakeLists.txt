@@ -73,8 +73,8 @@ ADD_EXECUTABLE(main
     ${LIB_FILES}
 )
 
-ADD_EXECUTABLE(remove_dir
-    remove_dir.cpp
+ADD_EXECUTABLE(remove_root_dir
+    remove_root_dir.cpp
     ${SOURCE_FILES}
     ${LIB_FILES}
 )
@@ -85,7 +85,7 @@ ADD_EXECUTABLE(remove_dir
 
 TARGET_LINK_LIBRARIES(test_lib gtest)
 TARGET_LINK_LIBRARIES(test_file_folder_io gtest)
-TARGET_LINK_LIBRARIES(remove_dir gtest)
+TARGET_LINK_LIBRARIES(remove_root_dir gtest)
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
@@ -97,6 +97,6 @@ if (SFML_FOUND)
     target_link_libraries(main ${SFML_LIBRARIES})
     target_link_libraries(test_lib ${SFML_LIBRARIES})
     target_link_libraries(test_file_folder_io ${SFML_LIBRARIES})
-    target_link_libraries(remove_dir ${SFML_LIBRARIES})
+    target_link_libraries(remove_root_dir ${SFML_LIBRARIES})
 endif()
 

@@ -43,7 +43,7 @@ bool remove_all(bool debug=false)
     if(!dirExists(path_root))
     {
       cout << "ROOT DNE" << endl;
-      return false;
+      return true;
     }
     ins_file.open(path_file);
     if(ins_file.fail()) return false;

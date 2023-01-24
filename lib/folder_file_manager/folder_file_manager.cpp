@@ -36,10 +36,22 @@ void FolderFileManager::_init()
     mkdir(this->_base_dir.c_str());
 }
 
-FolderFileManager::~FolderFileManager()
-{
+FolderFileManager::~FolderFileManager(){}
 
+
+bool FolderFileManager::file_exist(const string& path)
+{
+    if(this->_file_set.count(this->_base_dir + path) > 0) return true;
+    return false;
 }
+
+bool FolderFileManager::folder_exist(const string& path)
+{
+    if(this->_folder_set.count(this->_base_dir + path) > 0) return true;
+    return false;
+}
+
+
 
 bool FolderFileManager::add_folder(const string& path)
 {
@@ -69,19 +81,19 @@ void FolderFileManager::_read_delete_file_folder()
     if(ins.fail()) return;
     while(getline(ins, line)) this->_file_set.insert(line);
     ins.close();
-    if(this->_file_set.size() == 0)
-    {
-        cout << "TRUE1" << endl;
-    }
+    // if(this->_file_set.size() == 0)
+    // {
+    //     cout << "TRUE1" << endl;
+    // }
     ins.open(this->_delete_folder_dir);
     if(ins.fail()) return;
     while(getline(ins, line)) this->_folder_set.insert(line);
     ins.close();
 
-    if(this->_folder_set.size() == 0)
-    {
-        cout << "TRUE2" << endl;
-    }
+    // if(this->_folder_set.size() == 0)
+    // {
+    //     cout << "TRUE2" << endl;
+    // }
 }
 
 
