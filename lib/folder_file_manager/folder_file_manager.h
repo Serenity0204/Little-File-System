@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <cstdio>
 #include <unordered_set>
+#include <vector>
 using namespace std;
 
 class FolderFileManager

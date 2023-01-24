@@ -52,6 +52,23 @@ bool test_folder_file3(bool debug=false)
   return true;
 }
 
+bool test_folder_file4(bool debug=false)
+{
+  const string path = "test_folder_to_delete";
+  FolderFileManager fm;
+  if(!fm.folder_exist(path))
+  {
+    bool test = fm.add_folder(path);
+    if(!test) return false;
+  }
+  if(fm.folder_exist(path))
+  {
+    bool test = fm.delete_folder(path);
+    if(!test) return false;
+  }
+  return true;
+}
+
 
 //------------------------------------------------------------------------------
 //@TODO: add more test functions here:
@@ -80,6 +97,12 @@ TEST(TEST_FOLDER_FILE, TestFolderFile2)
 TEST(TEST_FOLDER_FILE, TestFolderFile3)
 {
   bool success = test_folder_file3(debug);
+  EXPECT_EQ(success, true);
+}
+
+TEST(TEST_FOLDER_FILE, TestFolderFile4)
+{
+  bool success = test_folder_file4(debug);
   EXPECT_EQ(success, true);
 }
 
