@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <cstdio>
+#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 using namespace std;
@@ -18,7 +19,7 @@ private:
     string _base_dir;
     string _delete_file_dir;
     string _delete_folder_dir;
-    unordered_set<string> _folder_set;
+    unordered_map<string, vector<string>> _folder_map;
     unordered_set<string> _file_set;
 
     void _init();
