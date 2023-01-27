@@ -102,21 +102,26 @@ int main(int argc, char **argv)
 // #include <sys/types.h>
 // #include <dirent.h>
 // #include <string>
+// #include <vector>
+// #include <iostream>
 // using namespace std;
 
-// void listFiles(const char *path);
+// vector<string> listFiles(const char *path);
 
 // int main()
 // {
 //     // Directory path to list files
-//     string path = "../../root/";
+//     string path = "../../root/user";
 
 //     // Input path from user
-//     printf("Enter path to list files: ");
+//     //printf("Enter path to list files: ");
     
 
-//     listFiles(path.c_str());
-
+//     vector<string> res = listFiles(path.c_str());
+//     for(int i = 0; i < res.size(); ++i)
+//     {
+//       cout << i <<" : " <<res[i] << endl;
+//     }
 //     return 0;
 // }
 
@@ -124,18 +129,21 @@ int main(int argc, char **argv)
 // /**
 //  * Lists all files and sub-directories at given path.
 //  */
-// void listFiles(const char *path)
+// vector<string> listFiles(const char *path)
 // {
+//     vector<string> res;
 //     struct dirent *dp;
 //     DIR *dir = opendir(path);
 
 //     // Unable to open directory stream
 //     if (!dir) 
-//         return; 
+//         return res; 
 
 //     while ((dp = readdir(dir)) != NULL)
 //     {
-//         printf("%s\n", dp->d_name);
+//         if(dp->d_name[0] == '.') continue;
+//         res.push_back(dp->d_name);
+//         //printf("%s\n", dp->d_name);
 //     }
 
 //     // Close directory stream

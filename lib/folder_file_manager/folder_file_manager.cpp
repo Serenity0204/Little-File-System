@@ -144,3 +144,26 @@ bool FolderFileManager::delete_file(const string& path)
     outs.close();
     return true;
 }
+
+
+bool FolderFileManager::get_sub_dir(const string& path, vector<string>& sub_dir)
+{
+    sub_dir.clear();
+    if(!this->folder_exist(path)) return false;
+    
+    string file_path = this->_base_dir + path + "/";
+
+    struct dirent *dp;
+    DIR *dir = opendir(file_path.c_str());
+    // Unable to open directory stream
+    if(!dir) return false; 
+    while ((dp = readdir(dir)) != NULL) 
+    {
+        if(dp->d_name[0] == '.') continue;
+        sub_dir.push_back(dp->d_name);
+    }
+
+    // Close directory stream
+    closedir(dir); 
+    return true;
+}

@@ -7,6 +7,7 @@
 #include <windows.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <dirent.h>
 #include <cstdio>
 #include <unordered_set>
 #include <vector>
@@ -40,6 +41,10 @@ public:
     // delete
     bool delete_folder(const string& path);
     bool delete_file(const string& path);
+
+    // get
+    bool get_sub_dir(const string& path, vector<string>& sub_dir);
+    
 };
     
 #endif // !FOLDER_FILE_MANAGER
