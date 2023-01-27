@@ -76,7 +76,7 @@ bool remove_all(bool debug=false)
 //Lord help me! 
 const bool debug = false;
 
-TEST(BASIC_TEST, BasicTest)
+TEST(MAIN_REMOVE, MainRemove)
 {
   bool success = remove_all(debug);
   EXPECT_EQ(success, true);
@@ -89,3 +89,55 @@ int main(int argc, char **argv)
   std::cout<<"\n\n----------running---------\n\n"<<std::endl;
   return RUN_ALL_TESTS();
 }
+
+
+
+
+
+// /**
+//  * C program to list all files and sub-directories in a directory.
+//  */
+
+// #include <stdio.h>
+// #include <sys/types.h>
+// #include <dirent.h>
+// #include <string>
+// using namespace std;
+
+// void listFiles(const char *path);
+
+// int main()
+// {
+//     // Directory path to list files
+//     string path = "../../root/";
+
+//     // Input path from user
+//     printf("Enter path to list files: ");
+    
+
+//     listFiles(path.c_str());
+
+//     return 0;
+// }
+
+
+// /**
+//  * Lists all files and sub-directories at given path.
+//  */
+// void listFiles(const char *path)
+// {
+//     struct dirent *dp;
+//     DIR *dir = opendir(path);
+
+//     // Unable to open directory stream
+//     if (!dir) 
+//         return; 
+
+//     while ((dp = readdir(dir)) != NULL)
+//     {
+//         printf("%s\n", dp->d_name);
+//     }
+
+//     // Close directory stream
+//     closedir(dir);
+// }

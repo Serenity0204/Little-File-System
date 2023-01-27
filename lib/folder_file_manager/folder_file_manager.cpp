@@ -6,7 +6,7 @@ FolderFileManager::FolderFileManager()
     this->_delete_folder_dir = "../../root/delete_all_folder.txt";
     this->_delete_file_dir = "../../root/delete_all_file.txt";
 
-    this->_folder_map = unordered_map<string, vector<string>>();
+    this->_folder_set = unordered_set<string>();
     this->_file_set = unordered_set<string>();
 
     this->_init();
@@ -51,7 +51,7 @@ bool FolderFileManager::file_exist(const string& path)
 
 bool FolderFileManager::folder_exist(const string& path)
 {
-    if(this->_folder_map.count(this->_base_dir + path + "/") > 0) return true;
+    if(this->_folder_set.count(this->_base_dir + path + "/") > 0) return true;
     return false;
 }
 
@@ -61,9 +61,9 @@ bool FolderFileManager::add_folder(const string& path)
 {
     ofstream outs;
     string file_path = this->_base_dir + path + "/";
-    if(this->_folder_map.count(file_path) > 0) return false;
+    if(this->_folder_set.count(file_path) > 0) return false;
     if(mkdir(file_path.c_str()) == -1) return false;
-    this->_folder_map[file_path] = vector<string>();
+    this->_folder_set.insert(file_path);
 
     // add folder path including ending /
     this->_add_delete_file_folder(file_path, false);
@@ -97,7 +97,7 @@ void FolderFileManager::_read_delete_file_folder()
     ins.close();
     ins.open(this->_delete_folder_dir);
     if(ins.fail()) return;
-    while(getline(ins, line)) this->_folder_map[line] = vector<string>();
+    while(getline(ins, line)) this->_folder_set.insert(line);
     ins.close();
 }
 
@@ -117,13 +117,13 @@ void FolderFileManager::_add_delete_file_folder(const string& file_path, bool co
 bool FolderFileManager::delete_folder(const string& path)
 {
     string file_path = this->_base_dir + path + "/";
-    if(!this->_folder_map.count(file_path)) return false;
+    if(!this->_folder_set.count(file_path)) return false;
     if(rmdir(file_path.c_str()) == -1) return false;
-    this->_folder_map.erase(file_path);
+    this->_folder_set.erase(file_path);
     ofstream outs;
     outs.open(this->_delete_folder_dir);
     if(outs.fail()) return false;
-    for(auto path : this->_folder_map) outs << path.first << endl;
+    for(auto path : this->_folder_set) outs << path << endl;
     outs.close();
     return true;
 }
@@ -135,7 +135,7 @@ bool FolderFileManager::delete_file(const string& path)
     if(!this->_file_set.count(file_path)) return false;
     if(remove(file_path.c_str()) == -1) return false;
     this->_file_set.erase(file_path);
-
+    
     ofstream outs;
     outs.open(this->_delete_file_dir);
     if(outs.fail()) return false;
