@@ -15,6 +15,7 @@ using namespace std;
 //------------------------------------------------------------------------------
 
 
+// adding file
 bool test_folder_file1(bool debug=false)
 {
   const string path = "test.txt";
@@ -27,19 +28,20 @@ bool test_folder_file1(bool debug=false)
   return true;
 }
 
+// adding file in a folder that DNE
 bool test_folder_file2(bool debug=false)
 {
   const string path = "/folder/test.txt";
   FolderFileManager fm;
-  if(!fm.file_exist(path))
-  {
-    bool test = fm.add_file(path);
-    if(!test) return true;
-  }
+
+  bool test = fm.add_file(path);
+  if(!test) return true;
+  
   return false;
 }
 
 
+// adding folder
 bool test_folder_file3(bool debug=false)
 {
   const string path = "test_folder";
@@ -52,6 +54,7 @@ bool test_folder_file3(bool debug=false)
   return true;
 }
 
+// adding folder and delete the folder
 bool test_folder_file4(bool debug=false)
 {
   const string path = "test_folder_to_delete";
@@ -68,6 +71,71 @@ bool test_folder_file4(bool debug=false)
   }
   return true;
 }
+
+// adding folder then adding the file
+bool test_folder_file5(bool debug=false)
+{
+  const string path_folder = "test_folder2";
+  const string path_file = "test_file2.txt";
+
+  FolderFileManager fm;
+  if(!fm.folder_exist(path_folder))
+  {
+    bool test = fm.add_folder(path_folder);
+    if(!test) return false;
+  }
+  if(fm.folder_exist(path_folder))
+  {
+    string nested_path = path_folder + "/" + path_file;
+    if(!fm.file_exist(nested_path))
+    {
+      bool test = fm.add_file(nested_path);
+      if(!test) return false;
+    }
+  }
+  return true;
+}
+
+
+// delete the folder that DNE
+bool test_folder_file6(bool debug=false)
+{
+  const string path = "test_folder5";
+  FolderFileManager fm;
+  bool test = fm.delete_folder(path);
+  if(!test) return true;
+  return false;
+}
+
+// delete the file that DNE
+bool test_folder_file7(bool debug=false)
+{
+  const string path = "test_file5.txt";
+  FolderFileManager fm;
+  bool test = fm.delete_file(path);
+  if(!test) return true;
+  return false;
+}
+
+
+// adding file and delete the file
+bool test_folder_file8(bool debug=false)
+{
+  const string path = "my_file.txt";
+  FolderFileManager fm;
+  if(!fm.file_exist(path))
+  {
+    bool test = fm.add_file(path);
+    if(!test) return false;
+  }
+  if(fm.file_exist(path))
+  {
+    bool test = fm.delete_file(path);
+    if(!test) return false;
+  }
+  return true;
+}
+
 
 
 //------------------------------------------------------------------------------
@@ -103,6 +171,31 @@ TEST(TEST_FOLDER_FILE, TestFolderFile3)
 TEST(TEST_FOLDER_FILE, TestFolderFile4)
 {
   bool success = test_folder_file4(debug);
+  EXPECT_EQ(success, true);
+}
+
+TEST(TEST_FOLDER_FILE, TestFolderFile5)
+{
+  bool success = test_folder_file5(debug);
+  EXPECT_EQ(success, true);
+}
+
+
+TEST(TEST_FOLDER_FILE, TestFolderFile6)
+{
+  bool success = test_folder_file6(debug);
+  EXPECT_EQ(success, true);
+}
+
+TEST(TEST_FOLDER_FILE, TestFolderFile7)
+{
+  bool success = test_folder_file7(debug);
+  EXPECT_EQ(success, true);
+}
+
+TEST(TEST_FOLDER_FILE, TestFolderFile8)
+{
+  bool success = test_folder_file8(debug);
   EXPECT_EQ(success, true);
 }
 

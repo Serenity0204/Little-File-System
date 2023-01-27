@@ -21,3 +21,4 @@ design a text file sytem that can handle (5) text files that allow user to
   2. undo for the 5 most recent save 
 
 design folder and file system to store directories and files
+issue: cannot check if a folder has sub dirs
