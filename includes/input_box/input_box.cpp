@@ -49,14 +49,17 @@ void InputBox::setSelected(bool sel) {
     isSelected = sel;
 
     // If not selected, remove the '_' at the end:
+    std::string newT = "";
     if (!sel) {
+        //newT += "|";
         std::string t = text.str();
-        std::string newT = "";
         for (int i = 0; i < t.length(); i++) {
             newT += t[i];
         }
         textbox.setString(newT);
+        return;
     }
+    //textbox.setString();
 }
 
 std::string InputBox::getText() {
@@ -118,20 +121,22 @@ void InputBox::inputLogic(int charTyped) {
         text << static_cast<char>(charTyped);
     }
     // If the key is delete, then delete the char:
-    else if (charTyped == DELETE_KEY) {
+    if (charTyped == DELETE_KEY) {
         if (text.str().length() > 0) {
             deleteLastChar();
         }
     }
     // Set the textbox text:
-    textbox.setString(text.str() + "|");
+    string str = text.str() + "|";
+    textbox.setString(str);
     //std::cout << text.str() << std::endl;
 }
 
 
 void InputBox::update_input_box()
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+    sf::Event event;
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
     {
         //cout << "User selecting input box" << endl;
         this->setSelected(true);
@@ -143,4 +148,35 @@ void InputBox::update_input_box()
         this->setSelected(false);
         return;
     }
+}
+
+
+void InputBox::isMouseOver(sf::RenderWindow &window, sf::Event& event) {
+	sf::Vector2i mouseCoords({ sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y });
+
+	sf::Vector2f realCoords = window.mapPixelToCoords(mouseCoords);
+
+	float mouseX = realCoords.x;
+	float mouseY = realCoords.y;
+
+	int btnPosX = rect.getPosition().x;
+	int btnPosY = rect.getPosition().y;
+
+	int btnxPosWidth = rect.getPosition().x + rect.getGlobalBounds().width;
+	int btnyPosHeight = rect.getPosition().y + rect.getGlobalBounds().height;
+
+    bool clicked = event.type == sf::Event::MouseButtonPressed;
+	if (mouseX < btnxPosWidth && mouseX > btnPosX && mouseY < btnyPosHeight && mouseY > btnPosY) {
+		
+        if(clicked)
+        {
+            this->setSelected(true);
+            this->textbox.setString(this->getText() + "|");
+            
+            return;
+        }
+    }
+    if(clicked) this->setSelected(false);
+    
+    //this->setSelected(false);
 }

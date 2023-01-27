@@ -8,7 +8,7 @@
 #define DELETE_KEY 8
 #define ENTER_KEY 13
 #define ESCAPE_KEY 27
-
+using namespace std;
 
 
 class InputBox {
@@ -36,7 +36,8 @@ public:
 	// Function for event loop:
 	void typedOn(sf::Event &input);
 
-	void update_input_box();	
+	void update_input_box();
+	void isMouseOver(sf::RenderWindow &window, sf::Event& event);	
 private:
 	sf::Text textbox;
 	std::ostringstream text;
