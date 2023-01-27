@@ -149,8 +149,6 @@ bool FolderFileManager::delete_file(const string& path)
 bool FolderFileManager::get_sub_dir(const string& path, vector<string>& sub_dir)
 {
     sub_dir.clear();
-    if(!this->folder_exist(path)) return false;
-    
     string file_path = this->_base_dir + path + "/";
 
     struct dirent *dp;

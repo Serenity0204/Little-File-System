@@ -137,7 +137,32 @@ bool test_folder_file8(bool debug=false)
 }
 
 
+// test sub dir 1
+bool test_folder_file9(bool debug=false)
+{
+  const string path = "../../root/user/";
+  FolderFileManager fm;
+  vector<string> vec;
+  bool test = fm.get_sub_dir(path, vec);
+  if(!test) return false;
+  if(debug) for(int i = 0; i < vec.size(); ++i) cout << vec[i] << endl;
+  
+  if(vec.size() == 3) return true;
 
+  return false;
+}
+
+// test sub dir 2
+bool test_folder_file10(bool debug=false)
+{
+  const string path = "../../root/user/a";
+  FolderFileManager fm;
+  vector<string> vec;
+  bool test = fm.get_sub_dir(path, vec);
+  if(!test) return true;
+
+  return false;
+}
 //------------------------------------------------------------------------------
 //@TODO: add more test functions here:
 
@@ -199,6 +224,17 @@ TEST(TEST_FOLDER_FILE, TestFolderFile8)
   EXPECT_EQ(success, true);
 }
 
+TEST(TEST_FOLDER_FILE, TestFolderFile9)
+{
+  bool success = test_folder_file9(debug);
+  EXPECT_EQ(success, true);
+}
+
+TEST(TEST_FOLDER_FILE, TestFolderFile10)
+{
+  bool success = test_folder_file10(debug);
+  EXPECT_EQ(success, true);
+}
 //------------------------------------------------------------------------------
 //@TODO: add more test sets to call test functions here:
 
