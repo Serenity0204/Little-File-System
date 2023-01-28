@@ -45,7 +45,8 @@ void Engine::input()
             break;
         }
 
-        this->_input_box.isMouseOver(this->_window, event);
+        // input box update
+        this->_input_box.update_input_box(this->_window, event);
     }
 }
 
@@ -82,8 +83,6 @@ void Engine::run()
        
         // taking input
         this->input();
-        // update input box
-        this->_input_box.update_input_box();
         // clear the screen
         this->_window.clear(sf::Color(0, 102, 0));
         // draw the updated events

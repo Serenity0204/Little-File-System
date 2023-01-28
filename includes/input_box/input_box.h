@@ -36,8 +36,8 @@ public:
 	// Function for event loop:
 	void typedOn(sf::Event &input);
 
-	void update_input_box();
-	void isMouseOver(sf::RenderWindow &window, sf::Event& event);	
+	
+	void update_input_box(sf::RenderWindow &window, sf::Event& event);	
 private:
 	sf::Text textbox;
 	std::ostringstream text;

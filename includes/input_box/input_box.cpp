@@ -9,9 +9,9 @@ InputBox::InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,s
 	hasLimit = false;
     limit = 0;
 
-    rect.setSize(box_size); //sf::Vector2f(300, 100)
-    rect.setFillColor(box_color); //sf::Color::White
-    rect.setPosition(position); //{680, 840}
+    rect.setSize(box_size); 
+    rect.setFillColor(box_color); 
+    rect.setPosition(position); 
     textbox.setCharacterSize(font_size);
     textbox.setFillColor(text_color);
     textbox.setPosition(position);
@@ -51,7 +51,6 @@ void InputBox::setSelected(bool sel) {
     // If not selected, remove the '_' at the end:
     std::string newT = "";
     if (!sel) {
-        //newT += "|";
         std::string t = text.str();
         for (int i = 0; i < t.length(); i++) {
             newT += t[i];
@@ -119,6 +118,7 @@ void InputBox::inputLogic(int charTyped) {
     // If the key pressed isn't delete, or the two selection keys, then append the text with the char:
     if (charTyped != DELETE_KEY && charTyped != ENTER_KEY && charTyped != ESCAPE_KEY) {
         text << static_cast<char>(charTyped);
+        if((text.str().length() + 1) % (int(rect.getSize().x / 15)) == 0) text << endl;
     }
     // If the key is delete, then delete the char:
     if (charTyped == DELETE_KEY) {
@@ -133,25 +133,10 @@ void InputBox::inputLogic(int charTyped) {
 }
 
 
-void InputBox::update_input_box()
-{
-    sf::Event event;
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-    {
-        //cout << "User selecting input box" << endl;
-        this->setSelected(true);
-        return;
-    }
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-    {
-        //cout << "User quit inputing" << endl;
-        this->setSelected(false);
-        return;
-    }
-}
 
 
-void InputBox::isMouseOver(sf::RenderWindow &window, sf::Event& event) {
+
+void InputBox::update_input_box(sf::RenderWindow &window, sf::Event& event) {
 	sf::Vector2i mouseCoords({ sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y });
 
 	sf::Vector2f realCoords = window.mapPixelToCoords(mouseCoords);
@@ -159,24 +144,21 @@ void InputBox::isMouseOver(sf::RenderWindow &window, sf::Event& event) {
 	float mouseX = realCoords.x;
 	float mouseY = realCoords.y;
 
-	int btnPosX = rect.getPosition().x;
-	int btnPosY = rect.getPosition().y;
+	int boxPosX = rect.getPosition().x;
+	int boxPosY = rect.getPosition().y;
 
-	int btnxPosWidth = rect.getPosition().x + rect.getGlobalBounds().width;
-	int btnyPosHeight = rect.getPosition().y + rect.getGlobalBounds().height;
+	int boxXPosWidth = rect.getPosition().x + rect.getGlobalBounds().width;
+	int boxYPosHeight = rect.getPosition().y + rect.getGlobalBounds().height;
 
     bool clicked = event.type == sf::Event::MouseButtonPressed;
-	if (mouseX < btnxPosWidth && mouseX > btnPosX && mouseY < btnyPosHeight && mouseY > btnPosY) {
+	if (mouseX < boxXPosWidth && mouseX > boxPosX && mouseY < boxYPosHeight && mouseY > boxPosY) {
 		
         if(clicked)
         {
             this->setSelected(true);
             this->textbox.setString(this->getText() + "|");
-            
             return;
         }
     }
-    if(clicked) this->setSelected(false);
-    
-    //this->setSelected(false);
+    if(clicked || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) this->setSelected(false);
 }
