@@ -46,7 +46,8 @@ void Engine::input()
         }
 
         // input box update
-        this->_input_box.update_input_box(this->_window, event);
+       this->_input_box.update_input_box(this->_window, event);
+       //this->_cmd.update_cmd(this->_window, event);
     }
 }
 
@@ -59,6 +60,7 @@ void Engine::display()
 
     // display the input box for user to enter bet
     this->_input_box.drawTo(this->_window);
+    //this->_cmd.draw_cmd(this->_window);
 
     this->_header.drawTo(this->_window);
 
@@ -108,6 +110,7 @@ void Engine::_init()
     this->_buttons = Buttons();
     this->_header = Header("TEST HEADER", HEADER_SIZE, HEADER_POS, HEADER_FONT_SIZE, sf::Color(0, 102, 0), sf::Color::Red);
     this->_input_box = InputBox(INPUT_BOX_FONT_SIZE, INPUT_BOX_SIZE, INPUT_BOX_POS, sf::Color::Red, sf::Color::White, false);
+    //this->_cmd = CommandLine();
 }
 // *****************************************************************************************************************
 

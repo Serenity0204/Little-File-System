@@ -15,7 +15,6 @@ class InputBox {
 public:
 	InputBox();
 	InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,sf::Color text_color, sf::Color box_color, bool sel);
-
 	// Make sure font is passed by reference:
 	void setFont(sf::Font &fonts);
 

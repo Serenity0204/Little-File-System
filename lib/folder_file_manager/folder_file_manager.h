@@ -44,6 +44,7 @@ public:
 
     // get
     bool get_sub_dir(const string& path, vector<string>& sub_dir);
+    const string& get_base_dir() const {return this->_base_dir;}
     
 };
     

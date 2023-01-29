@@ -6,6 +6,7 @@
 #include "../input_box/input_box.h"
 #include "../button/buttons.h"
 #include "../header/header.h"
+#include "../command_line/command_line.h"
 using namespace std;
 
 
@@ -19,6 +20,7 @@ private:
     InputBox _input_box;
     Buttons _buttons;
     Header _header;
+    CommandLine _cmd;
     // private member variables here
 
 

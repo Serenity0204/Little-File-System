@@ -25,6 +25,9 @@ InputBox::InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,s
 }
 
 
+
+
+
 // Make sure font is passed by reference:
 void InputBox::setFont(sf::Font &fonts) {
     textbox.setFont(fonts);
@@ -118,7 +121,7 @@ void InputBox::inputLogic(int charTyped) {
     // If the key pressed isn't delete, or the two selection keys, then append the text with the char:
     if (charTyped != DELETE_KEY && charTyped != ENTER_KEY && charTyped != ESCAPE_KEY) {
         text << static_cast<char>(charTyped);
-        if((text.str().length() + 1) % (int(rect.getSize().x / 15)) == 0) text << endl;
+        if((text.str().length() + 1) % (int(rect.getSize().x / 15)) == 0) text << '\n';
     }
     // If the key is delete, then delete the char:
     if (charTyped == DELETE_KEY) {
