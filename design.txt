@@ -12,13 +12,13 @@ project structure:
     --main.cpp // the main entry of the program
     --design.txt // project introduction
     --CMakeLists.txt // cmake for this project
+
+
 // todo
+- design an UI that allows user to input command line to input custom commands, using string parsing -- done for UI
+still need to write the logic for command line string parsing
 
-
-design an UI that allows user to input command line to input custom commands, using string parsing
-design a text file sytem that can handle (5) text files that allow user to
+- design a text file sytem that can handle (5) text files that allow user to
   1. do prefix search 
   2. undo for the 5 most recent save 
 
-design folder and file system to store directories and files
-issue: cannot check if a folder has sub dirs
