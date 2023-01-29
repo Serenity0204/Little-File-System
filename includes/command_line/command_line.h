@@ -18,7 +18,8 @@ private:
 public:
     CommandLine();
     ~CommandLine();
-    //CommandLine& operator = (const CommandLine& rhs);
+
+    void setFont(sf::Font &fonts){this->_command_line.setFont(fonts);}
 	void typed_cmd(sf::Event &input);
 	void update_cmd(sf::RenderWindow &window, sf::Event& event);	
     void draw_cmd(sf::RenderWindow &window);

@@ -14,7 +14,7 @@ using namespace std;
 class InputBox {
 public:
 	InputBox();
-	InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,sf::Color text_color, sf::Color box_color, bool sel);
+	InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,sf::Color text_color, sf::Color box_color, bool sel, string text_str="");
 	// Make sure font is passed by reference:
 	void setFont(sf::Font &fonts);
 
@@ -34,12 +34,13 @@ public:
 	void drawTo(sf::RenderWindow &window);
 	// Function for event loop:
 	void typedOn(sf::Event &input);
-
+	void set_text(const string& str){ this->text += str;}
 	
 	void update_input_box(sf::RenderWindow &window, sf::Event& event);	
 private:
 	sf::Text textbox;
-	std::ostringstream text;
+	string text;
+	int init_text_len;
 	bool isSelected;
 	bool hasLimit;
 	int limit;

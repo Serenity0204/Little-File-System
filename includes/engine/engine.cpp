@@ -35,7 +35,8 @@ void Engine::input()
         // User input text
         if(event.type == sf::Event::TextEntered)
         {
-            this->_input_box.typedOn(event);   
+            //this->_input_box.typedOn(event);   
+            this->_cmd.typed_cmd(event);
             break;
         }
         // User press up and already entered bet
@@ -46,8 +47,8 @@ void Engine::input()
         }
 
         // input box update
-       this->_input_box.update_input_box(this->_window, event);
-       //this->_cmd.update_cmd(this->_window, event);
+       //this->_input_box.update_input_box(this->_window, event);
+       this->_cmd.update_cmd(this->_window, event);
     }
 }
 
@@ -59,8 +60,8 @@ void Engine::display()
 
 
     // display the input box for user to enter bet
-    this->_input_box.drawTo(this->_window);
-    //this->_cmd.draw_cmd(this->_window);
+    //this->_input_box.drawTo(this->_window);
+    this->_cmd.draw_cmd(this->_window);
 
     this->_header.drawTo(this->_window);
 
@@ -75,14 +76,14 @@ void Engine::run()
 {
     // set the position and font before running
     sf::Font arial = config.get_font(ARIAL);
-    this->_input_box.setFont(arial);
-    this->_input_box.setLimit(true, CHAR_LIMIT);
+    // this->_input_box.setFont(arial);
+    // this->_input_box.setLimit(true, CHAR_LIMIT);
+    this->_cmd.setFont(arial);
     this->_header.setFont(arial);
 
     // main loop
     while (this->_window.isOpen())
     {
-       
         // taking input
         this->input();
         // clear the screen
@@ -109,8 +110,8 @@ void Engine::_init()
 
     this->_buttons = Buttons();
     this->_header = Header("TEST HEADER", HEADER_SIZE, HEADER_POS, HEADER_FONT_SIZE, sf::Color(0, 102, 0), sf::Color::Red);
-    this->_input_box = InputBox(INPUT_BOX_FONT_SIZE, INPUT_BOX_SIZE, INPUT_BOX_POS, sf::Color::Red, sf::Color::White, false);
-    //this->_cmd = CommandLine();
+    //this->_input_box = InputBox(INPUT_BOX_FONT_SIZE, INPUT_BOX_SIZE, INPUT_BOX_POS, sf::Color::Red, sf::Color::White, false);
+    this->_cmd = CommandLine();
 }
 // *****************************************************************************************************************
 
