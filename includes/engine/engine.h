@@ -6,7 +6,7 @@
 #include "../input_box/input_box.h"
 #include "../button/buttons.h"
 #include "../header/header.h"
-#include "../command_line/command_line.h"
+#include "../../app/command_line/command_line.h"
 using namespace std;
 
 

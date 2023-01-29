@@ -49,14 +49,18 @@ enable_testing()
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 set(INCLUDES_FOLDER includes)
 set(LIB_FOLDER lib)
+set(APP_FOLDER app)
+
 FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${INCLUDES_FOLDER}/*.cpp" )
 FILE(GLOB_RECURSE LIB_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${LIB_FOLDER}/*.cpp" )
+FILE(GLOB_RECURSE APP_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${APP_FOLDER}/*.cpp" )
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-ADD_EXECUTABLE(test_lib
-    _tests/_test_files/test_lib.cpp
+ADD_EXECUTABLE(test_lib_app
+    _tests/_test_files/test_lib_app.cpp
     ${SOURCE_FILES}
     ${LIB_FILES}
+    ${APP_FILES}
 )
 
 
@@ -64,6 +68,7 @@ ADD_EXECUTABLE(test_file_folder_io
     _tests/_test_files/test_file_folder_io.cpp
     ${SOURCE_FILES}
     ${LIB_FILES}
+    ${APP_FILES}
 )
 
 
@@ -71,19 +76,21 @@ ADD_EXECUTABLE(main
     main.cpp
     ${SOURCE_FILES}
     ${LIB_FILES}
+    ${APP_FILES}
 )
 
 ADD_EXECUTABLE(remove_root_dir
     remove_root_dir.cpp
     ${SOURCE_FILES}
     ${LIB_FILES}
+    ${APP_FILES}
 )
 
 
 
 
 
-TARGET_LINK_LIBRARIES(test_lib gtest)
+TARGET_LINK_LIBRARIES(test_lib_app gtest)
 TARGET_LINK_LIBRARIES(test_file_folder_io gtest)
 TARGET_LINK_LIBRARIES(remove_root_dir gtest)
 ## copy resources file to build
@@ -95,7 +102,7 @@ find_package(SFML REQUIRED system window graphics network audio)
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(main ${SFML_LIBRARIES})
-    target_link_libraries(test_lib ${SFML_LIBRARIES})
+    target_link_libraries(test_lib_app ${SFML_LIBRARIES})
     target_link_libraries(test_file_folder_io ${SFML_LIBRARIES})
     target_link_libraries(remove_root_dir ${SFML_LIBRARIES})
 endif()

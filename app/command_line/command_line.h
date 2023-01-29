@@ -3,8 +3,8 @@
 
 #include <bits/stdc++.h>
 #include <SFML/Graphics.hpp>
-#include "../input_box/input_box.h"
-#include "../config/config.h"
+#include "../../includes/input_box/input_box.h"
+#include "../../includes/config/config.h"
 #include "../../lib/folder_file_manager/folder_file_manager.h"
 using namespace std;
 
