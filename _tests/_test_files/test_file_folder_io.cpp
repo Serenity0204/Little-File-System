@@ -163,6 +163,33 @@ bool test_folder_file10(bool debug=false)
 
   return false;
 }
+
+
+// adding empty file
+bool test_folder_file11(bool debug=false)
+{
+  const string path = "       ";
+  FolderFileManager fm;
+
+  bool test = fm.add_file(path);
+  if(!test) return true;
+
+  return false;
+}
+
+// adding empty folder
+bool test_folder_file12(bool debug=false)
+{
+  const string path = "     ";
+  FolderFileManager fm;
+
+  bool test = fm.add_folder(path);
+  if(!test) return true;
+
+  return false;
+}
+
+
 //------------------------------------------------------------------------------
 //@TODO: add more test functions here:
 
@@ -235,6 +262,23 @@ TEST(TEST_FOLDER_FILE, TestFolderFile10)
   bool success = test_folder_file10(debug);
   EXPECT_EQ(success, true);
 }
+
+TEST(TEST_FOLDER_FILE, TestFolderFile11)
+{
+  bool success = test_folder_file11(debug);
+  EXPECT_EQ(success, true);
+}
+
+
+TEST(TEST_FOLDER_FILE, TestFolderFile12)
+{
+  bool success = test_folder_file12(debug);
+  EXPECT_EQ(success, true);
+}
+
+
+
+
 //------------------------------------------------------------------------------
 //@TODO: add more test sets to call test functions here:
 

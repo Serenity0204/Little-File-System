@@ -57,8 +57,15 @@ bool FolderFileManager::folder_exist(const string& path)
 
 
 
-bool FolderFileManager::add_folder(const string& path)
+
+
+
+bool FolderFileManager::add_folder(string path)
 {
+    int idx = first_not_space(path, 0);
+    if(idx == -1) return false;
+    path = path.substr(idx, path.length());
+
     ofstream outs;
     string file_path = this->_base_dir + path + "/";
     if(this->_folder_set.count(file_path) > 0) return false;
@@ -72,8 +79,12 @@ bool FolderFileManager::add_folder(const string& path)
 
 
 
-bool FolderFileManager::add_file(const string& path)
+bool FolderFileManager::add_file(string path)
 {
+    int idx = first_not_space(path, 0);
+    if(idx == -1) return false;
+    path = path.substr(idx, path.length());
+    
     ofstream outs;
     string file_path = this->_base_dir + path;
     if(this->_file_set.count(file_path) > 0) return false;

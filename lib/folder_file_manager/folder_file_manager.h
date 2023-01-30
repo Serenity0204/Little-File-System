@@ -1,5 +1,6 @@
 #ifndef FOLDER_FILE_MANAGER
 #define FOLDER_FILE_MANAGER
+
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -11,6 +12,8 @@
 #include <cstdio>
 #include <unordered_set>
 #include <vector>
+#include "../utils/helper_functions.h"
+
 using namespace std;
 
 class FolderFileManager
@@ -35,8 +38,8 @@ public:
     bool folder_exist(const string& path);
     
     // insert
-    bool add_folder(const string& path);
-    bool add_file(const string& path);
+    bool add_folder(string path);
+    bool add_file(string path);
 
     // delete
     bool delete_folder(const string& path);
