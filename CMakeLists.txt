@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
-project(Project_Name)
+project(Little_File_System)
 
 #. . . . . . . . . . . . . . . . . . . .
 include(GNUInstallDirs)
@@ -86,13 +86,21 @@ ADD_EXECUTABLE(remove_root_dir
     ${APP_FILES}
 )
 
-
+ADD_EXECUTABLE(test_parser
+    _tests/_test_files/test_parser.cpp
+    ${SOURCE_FILES}
+    ${LIB_FILES}
+    ${APP_FILES}
+)
 
 
 
 TARGET_LINK_LIBRARIES(test_lib_app gtest)
 TARGET_LINK_LIBRARIES(test_file_folder_io gtest)
+TARGET_LINK_LIBRARIES(test_parser gtest)
 TARGET_LINK_LIBRARIES(remove_root_dir gtest)
+
+
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
@@ -104,6 +112,7 @@ if (SFML_FOUND)
     target_link_libraries(main ${SFML_LIBRARIES})
     target_link_libraries(test_lib_app ${SFML_LIBRARIES})
     target_link_libraries(test_file_folder_io ${SFML_LIBRARIES})
+    TARGET_LINK_LIBRARIES(test_parser ${SFML_LIBRARIES})
     target_link_libraries(remove_root_dir ${SFML_LIBRARIES})
 endif()
 

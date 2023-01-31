@@ -68,9 +68,9 @@ Thumbs.db
 
 # Binaries
 # --------
+root/
 *.dll
 *.exe
-.root/
 .vscode/*
 CMakeCache.txt
 CMakeFiles/
