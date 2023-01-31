@@ -34,16 +34,16 @@ public:
     ~FolderFileManager();
 
     // search
-    bool file_exist(const string& path);
-    bool folder_exist(const string& path);
+    bool file_exist(string path);
+    bool folder_exist(string path);
     
     // insert
     bool add_folder(string path);
     bool add_file(string path);
 
     // delete
-    bool delete_folder(const string& path);
-    bool delete_file(const string& path);
+    bool delete_folder(string path);
+    bool delete_file(string path);
 
     // get
     bool get_sub_dir(const string& path, vector<string>& sub_dir);
