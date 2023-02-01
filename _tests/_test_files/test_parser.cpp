@@ -21,8 +21,8 @@ using namespace std;
 
 
 const unordered_map<string, int> test_cmd = {{"back", 0}, {"mkdir", 2}, {"cd", 2}, {"ls", 0}, {"rm", 0}};
-const string root1 = "root:\\user\\>";
-const string root2 = "root:\\my_user\\>";
+const string root1 = "root:\\user\\";
+const string root2 = "root:\\my_user\\";
 
 // test regular
 bool test_parser1(bool debug=false)

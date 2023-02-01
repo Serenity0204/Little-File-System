@@ -3,11 +3,12 @@
 
 InputBox::InputBox(){}
 
-InputBox::InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,sf::Color text_color, sf::Color box_color, bool sel, string text_str) 
+InputBox::InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,sf::Color text_color, sf::Color box_color, bool sel, string text_str, bool need_new_l) 
 {
     isSelected = false;
 	hasLimit = false;
     limit = 0;
+    need_new_line = need_new_l;
     rect.setSize(box_size); 
     rect.setFillColor(box_color); 
     rect.setPosition(position); 
@@ -121,7 +122,7 @@ void InputBox::inputLogic(int charTyped) {
     // If the key pressed isn't delete, or the two selection keys, then append the text with the char:
     if (charTyped != DELETE_KEY && charTyped != ENTER_KEY && charTyped != ESCAPE_KEY) {
         text += static_cast<char>(charTyped);
-        if((text.length() + 1) % (int(rect.getSize().x / 15)) == 0) text += '\n';
+        if(need_new_line && (text.length() + 1) % (int(rect.getSize().x / CHAR_DIVIDE)) == 0) text += '\n';
     }
     // If the key is delete, then delete the char:
     if (charTyped == DELETE_KEY) {
