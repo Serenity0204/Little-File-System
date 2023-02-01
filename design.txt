@@ -6,8 +6,8 @@ project structure:
       --config // managing global resource, and system variables
       --engine // processing input/output and updating the screen
       --header // header class to show text and draw to the screen
-      --input_box // input box that allows user to input from Keyboard, for bet event in this project
-      --lib // include the data structure to be used in this project, includes trie
+      --input_box // input box that allows user to input from Keyboard
+    
       
     --main.cpp // the main entry of the program
     --design.txt // project introduction
