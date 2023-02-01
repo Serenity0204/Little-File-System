@@ -47,7 +47,7 @@ bool FolderFileManager::file_exist(string path)
 {
     int idx = first_not_space(path, 0);
     if(idx == -1) return false;
-    path = path.substr(idx);
+    path = remove_space(path);
 
     if(this->_file_set.count(this->_base_dir + path) > 0) return true;
     return false;
@@ -57,7 +57,7 @@ bool FolderFileManager::folder_exist(string path)
 {
     int idx = first_not_space(path, 0);
     if(idx == -1) return false;
-    path = path.substr(idx);
+    path = remove_space(path);
 
     if(this->_folder_set.count(this->_base_dir + path + "/") > 0) return true;
     return false;
@@ -72,7 +72,7 @@ bool FolderFileManager::add_folder(string path)
 {
     int idx = first_not_space(path, 0);
     if(idx == -1) return false;
-    path = path.substr(idx);
+    path = remove_space(path);
 
     ofstream outs;
     string file_path = this->_base_dir + path + "/";
@@ -91,7 +91,7 @@ bool FolderFileManager::add_file(string path)
 {
     int idx = first_not_space(path, 0);
     if(idx == -1) return false;
-    path = path.substr(idx);
+    path = remove_space(path);
     
     ofstream outs;
     string file_path = this->_base_dir + path;
@@ -137,7 +137,7 @@ bool FolderFileManager::delete_folder(string path)
 {
     int idx = first_not_space(path, 0);
     if(idx == -1) return false;
-    path = path.substr(idx);
+    path = remove_space(path);
 
     string file_path = this->_base_dir + path + "/";
     if(!this->_folder_set.count(file_path)) return false;
@@ -156,7 +156,7 @@ bool FolderFileManager::delete_file(string path)
 {
     int idx = first_not_space(path, 0);
     if(idx == -1) return false;
-    path = path.substr(idx);
+    path = remove_space(path);
     
     string file_path = this->_base_dir + path;
     if(!this->_file_set.count(file_path)) return false;
