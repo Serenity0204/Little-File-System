@@ -17,7 +17,6 @@ private:
     sf::RenderWindow _window;
 
     // system setup here
-    InputBox _input_box;
     Buttons _buttons;
     Header _header;
     CommandLine _cmd;
@@ -30,7 +29,6 @@ private:
     void _init();
     // update
     void _update_buttons_event(sf::Event& event);
-    void _update_input_box_event();
 
 public:
     // constructors and destructors

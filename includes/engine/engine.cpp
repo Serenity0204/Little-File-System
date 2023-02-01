@@ -42,7 +42,6 @@ void Engine::input()
         // User press up and already entered bet
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            this->_update_input_box_event();
             break;
         }
 
@@ -60,7 +59,6 @@ void Engine::display()
 
 
     // display the input box for user to enter bet
-    //this->_input_box.drawTo(this->_window);
     this->_cmd.draw_cmd(this->_window);
 
     this->_header.drawTo(this->_window);
@@ -76,8 +74,6 @@ void Engine::run()
 {
     // set the position and font before running
     sf::Font arial = config.get_font(ARIAL);
-    // this->_input_box.setFont(arial);
-    // this->_input_box.setLimit(true, CHAR_LIMIT);
     this->_cmd.setFont(arial);
     this->_header.setFont(arial);
 
@@ -110,7 +106,6 @@ void Engine::_init()
 
     this->_buttons = Buttons();
     this->_header = Header("TEST HEADER", HEADER_SIZE, HEADER_POS, HEADER_FONT_SIZE, sf::Color(0, 102, 0), sf::Color::Red);
-    //this->_input_box = InputBox(INPUT_BOX_FONT_SIZE, INPUT_BOX_SIZE, INPUT_BOX_POS, sf::Color::Red, sf::Color::White, false);
     this->_cmd = CommandLine();
 }
 // *****************************************************************************************************************
@@ -145,7 +140,3 @@ void Engine::_update_buttons_event(sf::Event& event)
 }
 
 
-void Engine::_update_input_box_event()
-{
-    cout << "Input box event triggered" << endl;
-}
