@@ -11,25 +11,25 @@ CmdParser::CmdParser(string base_name, string system_name)
 
 CmdParser::~CmdParser(){}
 
-void CmdParser::set_available_cmd(const unordered_map<string, int>& cmds)
+void CmdParser::set_available_cmd(const unordered_map<string, vector<int>>& cmds)
 {
     this->_available_cmd = cmds;
 }
 
 
 
-bool CmdParser::parse(string cmd)
+int CmdParser::parse(string cmd)
 {
     // command is not legal
     int legal_length = this->_base_name.length() + this->_system_name.length();
-    if(cmd.length() <= legal_length) return false;
+    if(cmd.length() <= legal_length) return INVALID;
     // check if the command is called with system name
 ;
     string cmd_name = cmd.substr(this->_base_name.length(), this->_system_name.length());
     //cout << "cmd name: " << cmd_name << endl;
-    if(cmd_name != this->_system_name) return false;
+    if(cmd_name != this->_system_name) return INVALID;
 
-    if(cmd[legal_length] != ' ') return false;
+    if(cmd[legal_length] != ' ') return INVALID;
     int startIdx = legal_length + 1;
     int endIdx = first_space(cmd, startIdx);
     //cout << "start:" << startIdx << " , end:" << endIdx << endl;
@@ -39,7 +39,7 @@ bool CmdParser::parse(string cmd)
     // if there's a command, check if it's in the command list
     string command = cmd.substr(startIdx, endIdx - startIdx);
     //cout << "command is:" << command << ",len:" << command.length() << endl;
-    if(!this->_available_cmd.count(command)) return false;
+    if(!this->_available_cmd.count(command)) return INVALID;
 
 
     // back->0
@@ -51,13 +51,18 @@ bool CmdParser::parse(string cmd)
 
     // if endIdx == -1 means there's no subcommand entered, the command
     // is already validated because of above count, and this is a command that does not need subcommand
-    if(endIdx == -1 && this->_available_cmd[command] == 0) return true;
-
+    if(endIdx == -1 && this->_available_cmd[command][1] == 0)
+    {
+        int code = this->_available_cmd[command][0];
+        return code;
+    }
     // if endIdx == -1 and it needs subcommand it's false, or if endIdx != -1 and it doesn't need subcommand it's false as well
-    if((endIdx == -1 && this->_available_cmd[command] != 0) || (endIdx != -1 && this->_available_cmd[command] == 0)) return false;
+    if((endIdx == -1 && this->_available_cmd[command][1] != 0) || (endIdx != -1 && this->_available_cmd[command][1] == 0)) return INVALID;
 
-    if((cmd.length() - cmd.substr(0, endIdx).length()) < this->_available_cmd[command]) return false;
-    return true;
+    if((cmd.length() - cmd.substr(0, endIdx).length()) < this->_available_cmd[command][1]) return INVALID;
+
+    int code = this->_available_cmd[command][0];
+    return code;
 }
 
 

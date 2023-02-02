@@ -21,6 +21,21 @@ enum ACTION_CODE
     TEST = 0,
 };
 
+// back->0
+// mkdir -> 1 + 1 not space == 2
+// cd -> 1 + 1 not space == 2
+// ls->0 
+// touch -> 1 + 1 not space == 2
+// rm->0
+enum PARSE_KEY
+{
+    BACK=0,
+    MKDIR=1,
+    CD=2,
+    TOUCH=3,
+    LS = 4,
+    RM=5,
+};
 
 // add more enum here
 
