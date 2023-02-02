@@ -11,12 +11,12 @@ CommandLine::CommandLine()
     this->_command_line.setLimit(true, CMD_CHAR_LIMIT);
     this->_fm = FolderFileManager();
 }
-CommandLine::~CommandLine()
+CommandLine::~CommandLine(){}
+
+bool CommandLine::update_cmd_event()
 {
-
+    
 }
-
-
 
 void CommandLine::typed_cmd(sf::Event &input)
 {
