@@ -64,7 +64,8 @@ const sf::Vector2f HEADER_POS = sf::Vector2f(430, 200);
 const sf::Vector2f COMMAND_LINE_SIZE = sf::Vector2f(550, 50);
 const sf::Vector2f COMMAND_LINE_POS = sf::Vector2f(600, 550);
 
-
+// global vars
+const unordered_map<string, vector<int>> LFS_CMD = {{"back", {BACK, 0}}, {"touch", {TOUCH, 2}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 0}}};
 
 
 #endif

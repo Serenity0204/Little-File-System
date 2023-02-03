@@ -42,6 +42,7 @@ void Engine::input()
         // User press up and already entered bet
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
+            this->_cmd.update_cmd_event();
             break;
         }
 

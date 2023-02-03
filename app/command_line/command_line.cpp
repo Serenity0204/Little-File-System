@@ -2,6 +2,9 @@
 
 
 
+
+
+
 CommandLine::CommandLine()
 {
     this->_base_dir = this->_fm.get_base_dir();
@@ -9,13 +12,34 @@ CommandLine::CommandLine()
     
     this->_command_line = InputBox(CMD_FONT_SIZE, COMMAND_LINE_SIZE, COMMAND_LINE_POS, sf::Color::Red, sf::Color::Black, true, this->_base_dir,false);
     this->_command_line.setLimit(true, CMD_CHAR_LIMIT);
+    
     this->_fm = FolderFileManager();
+    this->_parser = CmdParser(this->_base_dir, "lfs");
+    this->_parser.set_available_cmd(LFS_CMD);
+
 }
 CommandLine::~CommandLine(){}
 
 bool CommandLine::update_cmd_event()
 {
-    
+    string command_string = this->_command_line.getText();
+    cout << "root:" << command_string << endl;
+    string subcmd = "";
+    int code = this->_parser.parse(command_string, subcmd);
+    if(code == MKDIR)
+    {
+        cout << "mkdir" << endl;
+    }
+    else if(code == CD)
+    {
+        cout << "cd" << endl;
+    }
+    else
+    {
+        cout << "fail" << endl;
+    }
+    cout << "subcommand:" << subcmd << endl;
+    return true;
 }
 
 void CommandLine::typed_cmd(sf::Event &input)

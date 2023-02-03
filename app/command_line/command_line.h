@@ -16,7 +16,7 @@ private:
     InputBox _command_line;
     string _base_dir;
     FolderFileManager _fm;
-    
+    CmdParser _parser;
     string _cur_dir;
 public:
     CommandLine();

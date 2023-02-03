@@ -30,7 +30,7 @@ using namespace std;
 // };
 
 
-const unordered_map<string, vector<int>> test_cmd = {{"back", {BACK, 0}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 0}}};
+const unordered_map<string, vector<int>> test_cmd = {{"back", {BACK, 0}}, {"touch", {TOUCH, 2}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 0}}};
 const string root1 = "root:\\user\\";
 const string root2 = "root:\\my_user\\";
 
@@ -39,27 +39,31 @@ bool test_parser1(bool debug=false)
 {
   CmdParser p(root1, "lfs");
   p.set_available_cmd(test_cmd);
+  string subcmd = "";
 
   string command = root1 + "lfs back";
-  int check = p.parse(command);
+  int check = p.parse(command, subcmd);
   if(check != BACK) return false;
 
   command = root1 + "lfs mkdir a";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != MKDIR) return false;
 
   command = root1 + "lfs cd a";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != CD) return false;
 
   command = root1 + "lfs ls";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != LS) return false;
 
   command = root1 + "lfs rm";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != RM) return false;
 
+  command = root1 + "lfs touch a";
+  check = p.parse(command, subcmd);
+  if(check != TOUCH) return false;
   return true;
 }
 
@@ -68,31 +72,32 @@ bool test_parser2(bool debug=false)
 {
   CmdParser p(root1, "lfs");
   p.set_available_cmd(test_cmd);
+  string subcmd = "";
 
   // adding extra space-> false
   string command = root1 + "lfs back ";
-  int check = p.parse(command);
+  int check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   // two space-> true
   command = root1 + "lfs mkdir  ";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != MKDIR) return false;
 
   // two space-> true
   command = root1 + "lfs cd  ";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != CD) return false;
 
 
   // extra space->false
   command = root1 + "lfs ls ";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   // extra space->false
   command = root1 + "lfs rm ";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   return true;
@@ -104,25 +109,26 @@ bool test_parser3(bool debug=false)
 {
   CmdParser p(root1, "lfs");
   p.set_available_cmd(test_cmd);
+  string subcmd = "";
 
   string command = root1 + "lfs  back";
-  int check = p.parse(command);
+  int check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   command = root1 + "lfs  mkdir a";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   command = root1 + "lfs  cd a";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   command = root1 + "lfs  ls";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   command = root1 + "lfs  rm";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   return true;
@@ -135,56 +141,57 @@ bool test_parser4(bool debug=false)
 {
   CmdParser p(root1, "lfs");
   p.set_available_cmd(test_cmd);
+  string subcmd = "";
 
   // stick together is false
   string command = root1 + "lfsback";
-  int check = p.parse(command);
+  int check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   // missing system name is false
   command = root1 + "lf mkdir a";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   //space between system name is false;
   command = root1 + "l fs cd a";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   // not command is false  
   command = root1 + "lfs";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   // no command but with space is false
   command = root1 + "lfs ";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   // no command but with spaces is false
   command = root1 + "lfs  ";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   // invalid command is false
   command = root1 + "lfs a";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   // empty is false
   command = root1 + "       ";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
   // with subcommand but not space is false
   command = root1 + "lfs mkdirabc";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != INVALID) return false;
 
 
   // subcommand with space is true
   command = root1 + "lfs mkdir a bc";
-  check = p.parse(command);
+  check = p.parse(command, subcmd);
   if(check != MKDIR) return false;
 
   return true;
