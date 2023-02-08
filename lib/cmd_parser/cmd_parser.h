@@ -17,6 +17,7 @@ public:
     CmdParser();
     CmdParser(string base_name, string system_name);
     ~CmdParser();
+    string& get_cur_dir(){return this->_cur_dir;}
     void set_available_cmd(const unordered_map<string, vector<int>>& cmds);
     int parse(string cmd, string& subcmd);
 };

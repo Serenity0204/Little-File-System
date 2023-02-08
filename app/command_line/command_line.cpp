@@ -26,25 +26,32 @@ bool CommandLine::update_cmd_event()
     cout << "root:" << command_string << endl;
     string subcmd = "";
     int code = this->_parser.parse(command_string, subcmd);
+    cout << "subcommand:" << subcmd << endl;
     if(code == MKDIR)
     {
         cout << "mkdir" << endl;
         if(this->_fm.folder_exist(subcmd)) return false;
         bool success = this->_fm.add_folder(subcmd);  
         if(!success) return false;
+        this->_command_line.set_text(this->_fm.get_base_dir());
         return true;
     }
-    if(code == CD)
+    else if(code == CD)
     {
         cout << "cd" << endl;
         if(!this->_fm.folder_exist(subcmd)) return false;
-        
+        this->_parser.get_cur_dir() += subcmd + "/";
+        this->_fm.get_base_dir() += subcmd + "/";
+        cout << this->_fm.get_base_dir() << endl;
+        this->_command_line.set_text(this->_fm.get_base_dir());
+        return true;
     }
     else
     {
-        cout << "fail" << endl;
+        cout << "fail in event" << endl;
+        return false;
     }
-    cout << "subcommand:" << subcmd << endl;
+    
     return true;
 }
 

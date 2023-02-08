@@ -22,3 +22,6 @@ still need to write the logic for command line string parsing
   1. do prefix search 
   2. undo for the 5 most recent save 
 
+
+change the map(value) of parser to struct instead of vector 
+parsing flag and multiple subcommands

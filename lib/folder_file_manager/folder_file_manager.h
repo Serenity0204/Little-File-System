@@ -47,8 +47,7 @@ public:
 
     // get
     bool get_sub_dir(const string& path, vector<string>& sub_dir);
-    string get_base_dir(){return "root:\\user\\";}
-    
+    string& get_base_dir(){return this->_base_dir;}
 };
     
 #endif // !FOLDER_FILE_MANAGER

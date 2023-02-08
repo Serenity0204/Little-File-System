@@ -43,6 +43,10 @@ int CmdParser::parse(string cmd, string& subcmd)
     if(!this->_available_cmd.count(command)) return INVALID;
 
 
+    // lfs rmdir ab 
+    // [lfs, rmdir, ab]
+    // [SYSTEM, COMMAND, SUBCOMMAND, FLAG]
+
     // back->0
     // mkdir -> 1 + 1 not space == 2
     // cd -> 1 + 1 not space == 2
