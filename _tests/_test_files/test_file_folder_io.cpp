@@ -13,7 +13,7 @@ using namespace std;
 #include "../../lib/folder_file_manager/folder_file_manager.h"
 
 //------------------------------------------------------------------------------
-
+// USE THE SCRIPT TO CLEAR THE ROOT BEFORE RUNNING THIS TEST
 
 // adding file
 bool test_folder_file1(bool debug=false)
@@ -140,14 +140,14 @@ bool test_folder_file8(bool debug=false)
 // test sub dir 1
 bool test_folder_file9(bool debug=false)
 {
-  const string path = "../../root/user/";
   FolderFileManager fm;
+  fm.get_base_dir() += "test_folder2/";
   vector<string> vec;
-  bool test = fm.get_sub_dir(path, vec);
+  bool test = fm.get_sub_dir(vec);
   if(!test) return false;
   if(debug) for(int i = 0; i < vec.size(); ++i) cout << vec[i] << endl;
   
-  if(vec.size() == 3) return true;
+  if(vec.size() == 1) return true;
 
   return false;
 }
@@ -155,11 +155,15 @@ bool test_folder_file9(bool debug=false)
 // test sub dir 2
 bool test_folder_file10(bool debug=false)
 {
-  const string path = "../../root/user/a";
   FolderFileManager fm;
+  fm.get_base_dir() += "test_folder/";
   vector<string> vec;
-  bool test = fm.get_sub_dir(path, vec);
-  if(!test) return true;
+
+  bool test = fm.get_sub_dir(vec);
+  if(!test) return false;
+  if(debug) for(int i = 0; i < vec.size(); ++i) cout << vec[i] << endl;
+  
+  if(vec.size() == 0) return true;
 
   return false;
 }

@@ -17,7 +17,7 @@ using namespace std;
 // cd -> 1 + 1 not space == 2
 // ls->0 
 // touch -> 1 + 1 not space == 2
-// rm->0
+// rm-> 1 + 1 not space == 2
 
 // enum PARSE_KEY
 // {
@@ -30,7 +30,7 @@ using namespace std;
 // };
 
 
-const unordered_map<string, vector<int>> test_cmd = {{"back", {BACK, 0}}, {"touch", {TOUCH, 2}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 0}}};
+const unordered_map<string, vector<int>> test_cmd = {{"back", {BACK, 0}}, {"touch", {TOUCH, 2}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 2}}};
 const string root1 = "root:\\user\\";
 const string root2 = "root:\\my_user\\";
 
@@ -57,7 +57,7 @@ bool test_parser1(bool debug=false)
   check = p.parse(command, subcmd);
   if(check != LS) return false;
 
-  command = root1 + "lfs rm";
+  command = root1 + "lfs rm a";
   check = p.parse(command, subcmd);
   if(check != RM) return false;
 

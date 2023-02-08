@@ -21,16 +21,6 @@ CommandLine::CommandLine()
 CommandLine::~CommandLine(){}
 
 
-// enum PARSE_KEY
-// {
-//     BACK=0,
-//     MKDIR=1,
-//     CD=2,
-//     TOUCH=3,
-//     LS = 4,
-//     RM=5,
-//     DEL=6,
-// };
 bool CommandLine::update_cmd_event()
 {
     string command_string = this->_command_line.getText();
@@ -42,7 +32,7 @@ bool CommandLine::update_cmd_event()
     {
         if(this->_fm.get_base_dir() == BASE_DIR_STRING) 
         {
-            cout << "cant go back" << endl;
+            cout << "can't go back" << endl;
             return false;
         }
         string old_str = this->_fm.get_base_dir();
@@ -73,11 +63,44 @@ bool CommandLine::update_cmd_event()
         this->_command_line.set_text(this->_fm.get_base_dir());
         return true;
     }
-    
+    if(code == TOUCH)
+    {
+        if(this->_fm.file_exist(subcmd)) return false;
+        bool success = this->_fm.add_file(subcmd);  
+        if(!success) return false;
+        this->_command_line.set_text(this->_fm.get_base_dir());
+        return true;
+    }
+    if(code == LS)
+    {
+        vector<string> sub_dir;
+        sub_dir.clear();
+        bool check = this->_fm.get_sub_dir(sub_dir);
+        if(!check) return false;
+        for(int i = 0; i < sub_dir.size(); ++i) cout << sub_dir[i] << endl;
+        if(sub_dir.size() == 0) cout << "Empty dir" << endl;
+        cout << endl;
+        this->_command_line.set_text(this->_fm.get_base_dir());
+        return true;
+    }
+    if(code == RM)
+    {
+        if(!this->_fm.folder_exist(subcmd)) return false;
+        bool success = this->_fm.delete_folder(subcmd);
+        if(!success) return false;
+        this->_command_line.set_text(this->_fm.get_base_dir());
+        return true;
+    }
+    if(code == DEL)
+    {
+        if(!this->_fm.file_exist(subcmd)) return false;
+        bool success = this->_fm.delete_file(subcmd);
+        if(!success) return false;
+        this->_command_line.set_text(this->_fm.get_base_dir());
+        return true;
+    }
 
     cout << "fail in event" << endl;
-
-    
     return false;
 }
 
