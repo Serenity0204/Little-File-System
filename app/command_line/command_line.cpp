@@ -20,13 +20,41 @@ CommandLine::CommandLine()
 }
 CommandLine::~CommandLine(){}
 
+
+// enum PARSE_KEY
+// {
+//     BACK=0,
+//     MKDIR=1,
+//     CD=2,
+//     TOUCH=3,
+//     LS = 4,
+//     RM=5,
+//     DEL=6,
+// };
 bool CommandLine::update_cmd_event()
 {
     string command_string = this->_command_line.getText();
-    cout << "root:" << command_string << endl;
+    //cout << "root:" << command_string << endl;
     string subcmd = "";
     int code = this->_parser.parse(command_string, subcmd);
-    cout << "subcommand:" << subcmd << endl;
+    //cout << "subcommand:" << subcmd << endl;
+    if(code == BACK)
+    {
+        if(this->_fm.get_base_dir() == BASE_DIR_STRING) 
+        {
+            cout << "cant go back" << endl;
+            return false;
+        }
+        string old_str = this->_fm.get_base_dir();
+        int idx = 0;
+        for(idx = old_str.length() - 2; idx >= 0; --idx) if(old_str[idx] == '/') break;
+        string new_str = "";
+        for(int i = 0; i <= idx; ++i) new_str += old_str[i];
+        this->_fm.get_base_dir() = new_str;
+        this->_parser.get_cur_dir() = new_str;
+        this->_command_line.set_text(new_str);
+        return true;
+    }
     if(code == MKDIR)
     {
         cout << "mkdir" << endl;
@@ -36,23 +64,21 @@ bool CommandLine::update_cmd_event()
         this->_command_line.set_text(this->_fm.get_base_dir());
         return true;
     }
-    else if(code == CD)
+    if(code == CD)
     {
         cout << "cd" << endl;
         if(!this->_fm.folder_exist(subcmd)) return false;
         this->_parser.get_cur_dir() += subcmd + "/";
         this->_fm.get_base_dir() += subcmd + "/";
-        cout << this->_fm.get_base_dir() << endl;
         this->_command_line.set_text(this->_fm.get_base_dir());
         return true;
     }
-    else
-    {
-        cout << "fail in event" << endl;
-        return false;
-    }
     
-    return true;
+
+    cout << "fail in event" << endl;
+
+    
+    return false;
 }
 
 void CommandLine::typed_cmd(sf::Event &input)

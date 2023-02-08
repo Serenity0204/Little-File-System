@@ -21,12 +21,7 @@ enum ACTION_CODE
     TEST = 0,
 };
 
-// back->0
-// mkdir -> 1 + 1 not space == 2
-// cd -> 1 + 1 not space == 2
-// ls->0 
-// touch -> 1 + 1 not space == 2
-// rm->0
+
 enum PARSE_KEY
 {
     BACK=0,
@@ -35,6 +30,7 @@ enum PARSE_KEY
     TOUCH=3,
     LS = 4,
     RM=5,
+    DEL=6,
 };
 
 // add more enum here
@@ -65,7 +61,8 @@ const sf::Vector2f COMMAND_LINE_SIZE = sf::Vector2f(550, 50);
 const sf::Vector2f COMMAND_LINE_POS = sf::Vector2f(600, 550);
 
 // global vars
-const unordered_map<string, vector<int>> LFS_CMD = {{"back", {BACK, 0}}, {"touch", {TOUCH, 2}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 0}}};
+const string BASE_DIR_STRING = "../../root/user/";
+const unordered_map<string, vector<int>> LFS_CMD = {{"back", {BACK, 0}}, {"touch", {TOUCH, 2}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 0}}, {"del", {DEL, 2}}};
 
 
 #endif
