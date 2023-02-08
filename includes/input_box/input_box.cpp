@@ -17,8 +17,9 @@ InputBox::InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,s
     textbox.setPosition(position);
     isSelected = sel;
 
-    text = text_str;
-    init_text_len = text.length();
+    text = "";
+    init_text_len = 0;
+    set_text(text_str);
     // Check if the textbox is selected upon creation and display it accordingly:
     if(isSelected)
         textbox.setString(text + "|");
@@ -28,7 +29,11 @@ InputBox::InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,s
 
 
 
-
+void InputBox::set_text(const string& str)
+{
+    text += str;
+    init_text_len += str.length();
+}
 
 // Make sure font is passed by reference:
 void InputBox::setFont(sf::Font &fonts) {

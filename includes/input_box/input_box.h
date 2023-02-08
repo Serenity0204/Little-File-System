@@ -35,7 +35,7 @@ public:
 	void drawTo(sf::RenderWindow &window);
 	// Function for event loop:
 	void typedOn(sf::Event &input);
-	void set_text(const string& str){ this->text += str;}
+	void set_text(const string& str);
 	
 	void update_input_box(sf::RenderWindow &window, sf::Event& event);	
 private:

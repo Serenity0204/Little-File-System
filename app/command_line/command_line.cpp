@@ -29,10 +29,16 @@ bool CommandLine::update_cmd_event()
     if(code == MKDIR)
     {
         cout << "mkdir" << endl;
+        if(this->_fm.folder_exist(subcmd)) return false;
+        bool success = this->_fm.add_folder(subcmd);  
+        if(!success) return false;
+        return true;
     }
-    else if(code == CD)
+    if(code == CD)
     {
         cout << "cd" << endl;
+        if(!this->_fm.folder_exist(subcmd)) return false;
+        
     }
     else
     {
