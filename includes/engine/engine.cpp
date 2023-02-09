@@ -34,27 +34,33 @@ void Engine::input()
         }
         // User input text
         if(event.type == sf::Event::TextEntered)
-        {
-            //this->_input_box.typedOn(event);   
+        {  
             this->_cmd.typed_cmd(event);
             break;
         }
         // User press up and already entered bet
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            if(this->_cmd.update_cmd_event())
+            vector<string> strs_to_screen;
+            strs_to_screen.clear();
+            string to_screen = "";
+            if(this->_cmd.update_cmd_event(strs_to_screen))
             {
-                cout << "success cmd" << endl;
+                if(strs_to_screen.size() == 0)
+                {
+                    to_screen = "success";
+                    this->_header.setHeaderText(to_screen);
+                    break;
+                }         
+                for(int i = 0; i < strs_to_screen.size(); ++i) to_screen += strs_to_screen[i] + '\n';
+                this->_header.setHeaderText(to_screen);
+                break;
             }
-            else
-            {
-                cout << "failed" << endl;
-            }
+            to_screen = "failed";
+            this->_header.setHeaderText(to_screen);
             break;
         }
 
-        // input box update
-       //this->_input_box.update_input_box(this->_window, event);
        this->_cmd.update_cmd(this->_window, event);
     }
 }
@@ -113,7 +119,7 @@ void Engine::_init()
 {
 
     this->_buttons = Buttons();
-    this->_header = Header("TEST HEADER", HEADER_SIZE, HEADER_POS, HEADER_FONT_SIZE, sf::Color(0, 102, 0), sf::Color::Red);
+    this->_header = Header("SCREEN", HEADER_SIZE, HEADER_POS, HEADER_FONT_SIZE, sf::Color(0, 102, 0), sf::Color::Red);
     this->_cmd = CommandLine();
 }
 // *****************************************************************************************************************

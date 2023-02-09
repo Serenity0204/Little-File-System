@@ -21,7 +21,7 @@ CommandLine::CommandLine()
 CommandLine::~CommandLine(){}
 
 
-bool CommandLine::update_cmd_event()
+bool CommandLine::update_cmd_event(vector<string>& strs_to_screen)
 {
     string command_string = this->_command_line.getText();
     //cout << "root:" << command_string << endl;
@@ -32,7 +32,7 @@ bool CommandLine::update_cmd_event()
     {
         if(this->_fm.get_base_dir() == BASE_DIR_STRING) 
         {
-            cout << "can't go back" << endl;
+            //cout << "can't go back" << endl;
             return false;
         }
         string old_str = this->_fm.get_base_dir();
@@ -77,9 +77,14 @@ bool CommandLine::update_cmd_event()
         sub_dir.clear();
         bool check = this->_fm.get_sub_dir(sub_dir);
         if(!check) return false;
-        for(int i = 0; i < sub_dir.size(); ++i) cout << sub_dir[i] << endl;
-        if(sub_dir.size() == 0) cout << "Empty dir" << endl;
-        cout << endl;
+        
+        // for(int i = 0; i < sub_dir.size(); ++i) cout << sub_dir[i] << endl;
+        // if(sub_dir.size() == 0) cout << "Empty dir" << endl;
+        // cout << endl;
+        
+        strs_to_screen.clear();
+        strs_to_screen = sub_dir;
+
         this->_command_line.set_text(this->_fm.get_base_dir());
         return true;
     }
