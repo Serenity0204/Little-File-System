@@ -17,9 +17,9 @@ void Buttons::_init_buttons()
 {
     // example
 
-    Button hit_btn("TEST", {150, 50}, 25, sf::Color::White, sf::Color::Red);
+    Button hit_btn("ROOT", {70, 25}, 15, sf::Color::White, sf::Color::Red);
     hit_btn.setFont(config.get_font(ARIAL));
-    hit_btn.setPosition({500, 300});
+    hit_btn.setPosition({1095, 605});
     this->_buttons.push_back(hit_btn);
 }
 
@@ -41,7 +41,7 @@ int Buttons::update_buttons(sf::RenderWindow &window, sf::Event& event)
         bool clicked = this->_buttons[i].isMouseOver(window) && event.type == sf::Event::MouseButtonPressed;
         // if(clicked && i == ACTION CODE DEFINED IN SYSTEM) return ACTION CODE DEFINED IN SYSTEM;
         // ex:
-        if(clicked && i == TEST) return TEST;
+        if(clicked && i == ROOT) return ROOT;
     }
     return INVALID;
 }

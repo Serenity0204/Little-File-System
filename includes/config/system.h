@@ -18,7 +18,7 @@ enum ACTION_CODE
 {
     INVALID = -1,
     // add more action code for button here
-    TEST = 0,
+    ROOT = 0,
 };
 
 

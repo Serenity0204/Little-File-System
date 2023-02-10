@@ -27,6 +27,7 @@ public:
 	void update_cmd(sf::RenderWindow &window, sf::Event& event);	
     bool update_cmd_event(vector<string>& strs_to_screen);
     void draw_cmd(sf::RenderWindow &window);
+    void reset();
 };
 
 #endif

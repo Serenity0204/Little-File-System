@@ -20,6 +20,13 @@ CommandLine::CommandLine()
 }
 CommandLine::~CommandLine(){}
 
+void CommandLine::reset()
+{
+    this->_fm.get_base_dir() = BASE_DIR_STRING;
+    this->_parser.get_cur_dir() = BASE_DIR_STRING;
+    this->_command_line.set_text(BASE_DIR_STRING);
+}
+
 
 bool CommandLine::update_cmd_event(vector<string>& strs_to_screen)
 {
@@ -84,7 +91,7 @@ bool CommandLine::update_cmd_event(vector<string>& strs_to_screen)
         
         strs_to_screen.clear();
         strs_to_screen = sub_dir;
-
+        if(strs_to_screen.size() == 0) strs_to_screen.push_back("");
         this->_command_line.set_text(this->_fm.get_base_dir());
         return true;
     }

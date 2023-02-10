@@ -52,6 +52,12 @@ void Engine::input()
                     this->_header.setHeaderText(to_screen);
                     break;
                 }         
+                if(strs_to_screen.size() == 1 && strs_to_screen[0] == "")
+                {
+                    to_screen = "EMPTY DIRECTORY";
+                    this->_header.setHeaderText(to_screen);
+                    break;
+                }
                 for(int i = 0; i < strs_to_screen.size(); ++i) to_screen += strs_to_screen[i] + '\n';
                 this->_header.setHeaderText(to_screen);
                 break;
@@ -146,9 +152,9 @@ void Engine::_update_buttons_event(sf::Event& event)
     // }
 
     // ex:
-    if(action == TEST)
+    if(action == ROOT)
     {
-        cout << "TEST" << endl;
+        this->_cmd.reset();
         return;
     }
 }
