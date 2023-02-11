@@ -1,27 +1,41 @@
 project structure:
     --_tests // unit test using gtest framework(setup included in cmake)
+
     --assets // used to store image and Font
-    --includes // where all of the code reside
+
+    --includes // where all of the sfml templates reside
       --button // clickable button class, and buttons class for the button used in this project
       --config // managing global resource, and system variables
       --engine // processing input/output and updating the screen
       --header // header class to show text and draw to the screen
       --input_box // input box that allows user to input from Keyboard
-    
+
+    --lib // where all of the non sfml headers reside
+      --lib_include_test // used to test the linking in cmake for lib folder works
+
+    --app // where all of the sfml headers for this project reside
+      --app_include_test // used to test the linking in cmake for app folder works
       
     --main.cpp // the main entry of the program
+
     --design.txt // project introduction
+
     --CMakeLists.txt // cmake for this project
 
 
 // todo
-- design an UI that allows user to input command line to input custom commands, using string parsing -- done for UI
-still need to write the logic for command line string parsing
-
-- design a text file sytem that can handle (5) text files that allow user to
+- design a text file sytem that allows user to
   1. do prefix search 
   2. undo for the 5 most recent save 
+- CMD output
+  1. design a scroll functionality that allows user to scroll up and down to see the 
+     output
+  2. index the output
+  3. seperate the file and folder into two output terminal
+- CMD command
+  1. design an open command that can open the file in a dir
+  2. design a save command that can save the files
 
-
+// improve
 change the map(value) of parser to struct instead of vector 
 parsing flag and multiple subcommands

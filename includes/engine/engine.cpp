@@ -48,7 +48,7 @@ void Engine::input()
             {
                 if(strs_to_screen.size() == 0)
                 {
-                    to_screen = "success";
+                    to_screen = "SUCCESS";
                     this->_header.setHeaderText(to_screen);
                     break;
                 }         
@@ -62,7 +62,7 @@ void Engine::input()
                 this->_header.setHeaderText(to_screen);
                 break;
             }
-            to_screen = "failed";
+            to_screen = "FAILURE";
             this->_header.setHeaderText(to_screen);
             break;
         }
@@ -125,7 +125,7 @@ void Engine::_init()
 {
 
     this->_buttons = Buttons();
-    this->_header = Header("SCREEN", HEADER_SIZE, HEADER_POS, HEADER_FONT_SIZE, sf::Color(0, 102, 0), sf::Color::Red);
+    this->_header = Header("SCREEN", HEADER_SIZE, HEADER_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_cmd = CommandLine();
 }
 // *****************************************************************************************************************
