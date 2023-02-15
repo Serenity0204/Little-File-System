@@ -18,7 +18,8 @@ private:
 
     // system setup here
     Buttons _buttons;
-    Header _header;
+    Header _folder_terminal;
+    Header _file_terminal;
     CommandLine _cmd;
     // private member variables here
 

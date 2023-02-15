@@ -43,19 +43,24 @@ const int WINDOW_HEIGHT = 650;
 const int WINDOW_WIDTH = 1200;
 const int INPUT_BOX_FONT_SIZE = 24;
 const int CMD_FONT_SIZE = 20;
-const int HEADER_FONT_SIZE = 20;
+const int HEADER_FONT_SIZE = 15;
 const int CHAR_LIMIT = 150;
 const int CMD_CHAR_LIMIT = 105;
 const int CHAR_DIVIDE = 12;
-
+const int MAX_LEN_TERMINAL = 7;
 
 
 // system variable config
 // ADD SYSTEM  VARIABLE HERE
 const sf::Vector2f INPUT_BOX_SIZE = sf::Vector2f(700, 120);
 const sf::Vector2f INPUT_BOX_POS = sf::Vector2f(430, 500);
-const sf::Vector2f HEADER_SIZE = sf::Vector2f(300, 500);
-const sf::Vector2f HEADER_POS = sf::Vector2f(900, 0);
+
+const sf::Vector2f FOLDER_TERMINAL_SIZE = sf::Vector2f(150, 500);
+const sf::Vector2f FOLDER_TERMINAL_POS = sf::Vector2f(890, 0);
+
+const sf::Vector2f FILE_TERMINAL_SIZE = sf::Vector2f(150, 500);
+const sf::Vector2f FILE_TERMINAL_POS = sf::Vector2f(1045, 0);
+
 
 const sf::Vector2f COMMAND_LINE_SIZE = sf::Vector2f(1150, 50);
 const sf::Vector2f COMMAND_LINE_POS = sf::Vector2f(15, 580);

@@ -6,7 +6,7 @@
 Engine::Engine()
 {
     //                                                  Change the name of the project here
-    this->_window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Project Name");
+    this->_window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Little File System");
     this->_window.setKeyRepeatEnabled(true);
 
     // ADD MORE IN CTOR
@@ -38,8 +38,9 @@ void Engine::input()
             this->_cmd.typed_cmd(event);
             break;
         }
-        // User press up and already entered bet
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        
+        // update cmd event
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
         {
             vector<string> strs_to_screen;
             strs_to_screen.clear();
@@ -49,21 +50,25 @@ void Engine::input()
                 if(strs_to_screen.size() == 0)
                 {
                     to_screen = "SUCCESS";
-                    this->_header.setHeaderText(to_screen);
+                    this->_folder_terminal.setHeaderText(to_screen);
+                    this->_file_terminal.setHeaderText(to_screen);
                     break;
                 }         
                 if(strs_to_screen.size() == 1 && strs_to_screen[0] == "")
                 {
                     to_screen = "EMPTY DIRECTORY";
-                    this->_header.setHeaderText(to_screen);
+                    this->_folder_terminal.setHeaderText(to_screen);
+                    this->_file_terminal.setHeaderText(to_screen);
                     break;
                 }
                 for(int i = 0; i < strs_to_screen.size(); ++i) to_screen += strs_to_screen[i] + '\n';
-                this->_header.setHeaderText(to_screen);
+                this->_folder_terminal.setHeaderText(to_screen);
+                this->_file_terminal.setHeaderText(to_screen);
                 break;
             }
             to_screen = "FAILURE";
-            this->_header.setHeaderText(to_screen);
+            this->_folder_terminal.setHeaderText(to_screen);
+            this->_file_terminal.setHeaderText(to_screen);
             break;
         }
 
@@ -81,7 +86,8 @@ void Engine::display()
     // display the input box for user to enter bet
     this->_cmd.draw_cmd(this->_window);
 
-    this->_header.drawTo(this->_window);
+    this->_folder_terminal.drawTo(this->_window);
+    this->_file_terminal.drawTo(this->_window);
 
     // display buttons
     this->_buttons.draw_buttons(this->_window);
@@ -95,7 +101,8 @@ void Engine::run()
     // set the position and font before running
     sf::Font arial = config.get_font(ARIAL);
     this->_cmd.setFont(arial);
-    this->_header.setFont(arial);
+    this->_folder_terminal.setFont(arial);
+    this->_file_terminal.setFont(arial);
 
     // main loop
     while (this->_window.isOpen())
@@ -125,7 +132,8 @@ void Engine::_init()
 {
 
     this->_buttons = Buttons();
-    this->_header = Header("SCREEN", HEADER_SIZE, HEADER_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
+    this->_folder_terminal = Header("FOLDER TERMINAL", FOLDER_TERMINAL_SIZE, FOLDER_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
+    this->_file_terminal = Header("FILE TERMINAL", FILE_TERMINAL_SIZE, FILE_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_cmd = CommandLine();
 }
 // *****************************************************************************************************************

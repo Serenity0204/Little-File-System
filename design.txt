@@ -32,9 +32,18 @@ project structure:
      output
   2. index the output
   3. seperate the file and folder into two output terminal
+      --sol: https://stackoverflow.com/questions/146924/how-can-i-tell-if-a-given-path-is-a-directory-or-a-file-c-c
+  4. make the terminal clickable, so when
+     - file is clicked: open the file
+     - folder is clicked: make the folder the root dir
 - CMD command
   1. design an open command that can open the file in a dir
   2. design a save command that can save the files
+  3. design a command that can clear all the directory
+  4. design a command that can clear all the files
+  5. design a command that can do the compound of #3 and #4
+  6. design a move command that can move the file into designated location(hard)
+  7. design a move command that can move the folder into designated location included its subdir(very hard)
 
 // improve
 change the map(value) of parser to struct instead of vector 

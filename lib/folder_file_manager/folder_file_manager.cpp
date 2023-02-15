@@ -188,7 +188,13 @@ bool FolderFileManager::get_sub_dir(vector<string>& sub_dir)
     while ((dp = readdir(dir)) != NULL) 
     {
         if(dp->d_name[0] == '.') continue;
-        sub_dir.push_back(dp->d_name);
+        string name = dp->d_name;
+        if(name.length() >= MAX_LEN_TERMINAL)
+        {
+            name = name.substr(0, MAX_LEN_TERMINAL);
+            name += "...";
+        }
+        sub_dir.push_back(name);
     }
 
     // Close directory stream
