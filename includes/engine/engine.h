@@ -33,6 +33,8 @@ private:
     void _update_buttons_event(sf::Event& event);
 
 public:
+    // // getter
+    // friend string get_input_box_text(Engine engine) {engine._text_file_input.getText();}
     // constructors and destructors
     Engine();
     ~Engine();

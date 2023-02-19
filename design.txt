@@ -12,10 +12,15 @@ project structure:
 
     --lib // where all of the non sfml headers reside
       --lib_include_test // used to test the linking in cmake for lib folder works
-
+      -- cmd_parser // used to parse command
+      -- folder_file_manager // used to manager file and folder iomanip
+      -- trie // trie class
+      -- trie_node // trie node struct
+      -- utils // global helper functions
+      
     --app // where all of the sfml headers for this project reside
       --app_include_test // used to test the linking in cmake for app folder works
-      
+      --command_line // a command line class that can take input and parse command
     --main.cpp // the main entry of the program
 
     --design.txt // project introduction
@@ -24,6 +29,8 @@ project structure:
 
 
 // todo
+- design a data retriver class for engine
+  -after complete the getter use it into the write method in filefolder manager
 - design a text file sytem that allows user to
   1. do prefix search 
   2. undo for the 5 most recent save 

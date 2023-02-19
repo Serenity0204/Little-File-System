@@ -49,6 +49,9 @@ public:
     // get
     bool get_sub_dir(vector<string>& sub_dir_folder, vector<string>& sub_dir_file);
     string& get_base_dir(){return this->_base_dir;}
+
+    // write
+    bool write_file(string path, string message);
 };
     
 #endif // !FOLDER_FILE_MANAGER

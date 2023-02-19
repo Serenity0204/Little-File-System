@@ -37,7 +37,6 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
     //cout << "subcommand:" << subcmd << endl;
     if(code == BACK)
     {
-        cout << "back" << endl;
         if(this->_fm.get_base_dir() == BASE_DIR_STRING) 
         {
             cout << "Error in BACK, Cannot by pass the base dir" << endl;
@@ -51,38 +50,38 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
         this->_fm.get_base_dir() = new_str;
         this->_parser.get_cur_dir() = new_str;
         this->_command_line.set_text(new_str);
+        cout << "back" << endl;
         return BACK;
     }
     if(code == MKDIR)
     {
-        cout << "mkdir" << endl;
         if(this->_fm.folder_exist(subcmd)) return INVALID;
         bool success = this->_fm.add_folder(subcmd);  
         if(!success) return INVALID;
         this->_command_line.set_text(this->_fm.get_base_dir());
+        cout << "mkdir" << endl;
         return MKDIR;
     }
     if(code == CD)
     {
-        cout << "cd" << endl;
         if(!this->_fm.folder_exist(subcmd)) return INVALID;
         this->_parser.get_cur_dir() += subcmd + "/";
         this->_fm.get_base_dir() += subcmd + "/";
         this->_command_line.set_text(this->_fm.get_base_dir());
+        cout << "cd" << endl;
         return CD;
     }
     if(code == TOUCH)
     {
-        cout << "touch" << endl;
         if(this->_fm.file_exist(subcmd)) return INVALID;
         bool success = this->_fm.add_file(subcmd);  
         if(!success) return INVALID;
         this->_command_line.set_text(this->_fm.get_base_dir());
+        cout << "touch" << endl;
         return TOUCH;
     }
     if(code == LS)
     {
-        cout << "ls" << endl;
         vector<string> sub_dir_folder;
         vector<string> sub_dir_file;
         sub_dir_folder.clear();
@@ -98,37 +97,40 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
         if(folder_str.size() == 0) folder_str.push_back("");
         if(file_str.size() == 0) file_str.push_back("");
         this->_command_line.set_text(this->_fm.get_base_dir());
+        cout << "ls" << endl;
         return LS;
     }
     if(code == RM)
     {
-        cout << "rm" << endl;
         if(!this->_fm.folder_exist(subcmd)) return INVALID;
         bool success = this->_fm.delete_folder(subcmd);
         if(!success) return INVALID;
         this->_command_line.set_text(this->_fm.get_base_dir());
+        cout << "rm" << endl;
         return RM;
     }
     if(code == DEL)
     {
-        cout << "del" << endl;
         if(!this->_fm.file_exist(subcmd)) return INVALID;
         bool success = this->_fm.delete_file(subcmd);
         if(!success) return INVALID;
         this->_command_line.set_text(this->_fm.get_base_dir());
+        cout << "del" << endl;
         return DEL;
     }
     if(code == OPEN)
     {
-        cout << "open" << endl;
+        if(!this->_fm.file_exist(subcmd)) return INVALID;
+        //cout << "?" << get_input_box_text() << endl;
         this->_command_line.set_text(this->_fm.get_base_dir());
+        cout << "open" << endl;
         return OPEN;
     }
-    if(code == CLOSE)
+    if(code == SAVE)
     {
-        cout << "close" << endl;
         this->_command_line.set_text(this->_fm.get_base_dir());
-        return CLOSE;
+        cout << "save" << endl;
+        return SAVE;
     }
 
     cout << "fail in event" << endl;

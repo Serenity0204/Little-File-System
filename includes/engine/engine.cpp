@@ -54,7 +54,7 @@ void Engine::input()
             int code = this->_cmd.update_cmd_event(strs_to_screen_folder, strs_to_screen_file);
             if(code != INVALID)
             {
-                if(code != LS && code != OPEN && code != CLOSE)
+                if(code != LS && code != OPEN && code != SAVE)
                 {
                     to_screen_file += "SUCCESS";
                     to_screen_folder += "SUCCESS";
@@ -80,18 +80,18 @@ void Engine::input()
                     this->_file_terminal.setHeaderText(to_screen_file);
                     break;
                 }
-                if(code == CLOSE)
+                if(code == SAVE)
                 {
                     if(!this->_text_file_input_on)
                     {
-                        to_screen_file += "CLOSE FAILURE";
-                        to_screen_folder += "CLOSE FAILURE";
+                        to_screen_file += "SAVE FAILURE";
+                        to_screen_folder += "SAVE FAILURE";
                         this->_folder_terminal.setHeaderText(to_screen_folder);
                         this->_file_terminal.setHeaderText(to_screen_file);
                         break;
                     }
-                    to_screen_file += "CLOSE SUCCESS";
-                    to_screen_folder += "CLOSE SUCCESS";
+                    to_screen_file += "SAVE SUCCESS";
+                    to_screen_folder += "SAVE SUCCESS";
                     this->_text_file_input_on = false;
                     this->_folder_terminal.setHeaderText(to_screen_folder);
                     this->_file_terminal.setHeaderText(to_screen_file);
