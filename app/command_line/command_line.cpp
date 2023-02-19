@@ -28,7 +28,7 @@ void CommandLine::reset()
 }
 
 
-bool CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& file_str)
+int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& file_str)
 {
     string command_string = this->_command_line.getText();
     //cout << "root:" << command_string << endl;
@@ -41,7 +41,7 @@ bool CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& f
         if(this->_fm.get_base_dir() == BASE_DIR_STRING) 
         {
             cout << "Error in BACK, Cannot by pass the base dir" << endl;
-            return false;
+            return INVALID;
         }
         string old_str = this->_fm.get_base_dir();
         int idx = 0;
@@ -51,34 +51,34 @@ bool CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& f
         this->_fm.get_base_dir() = new_str;
         this->_parser.get_cur_dir() = new_str;
         this->_command_line.set_text(new_str);
-        return true;
+        return BACK;
     }
     if(code == MKDIR)
     {
         cout << "mkdir" << endl;
-        if(this->_fm.folder_exist(subcmd)) return false;
+        if(this->_fm.folder_exist(subcmd)) return INVALID;
         bool success = this->_fm.add_folder(subcmd);  
-        if(!success) return false;
+        if(!success) return INVALID;
         this->_command_line.set_text(this->_fm.get_base_dir());
-        return true;
+        return MKDIR;
     }
     if(code == CD)
     {
         cout << "cd" << endl;
-        if(!this->_fm.folder_exist(subcmd)) return false;
+        if(!this->_fm.folder_exist(subcmd)) return INVALID;
         this->_parser.get_cur_dir() += subcmd + "/";
         this->_fm.get_base_dir() += subcmd + "/";
         this->_command_line.set_text(this->_fm.get_base_dir());
-        return true;
+        return CD;
     }
     if(code == TOUCH)
     {
         cout << "touch" << endl;
-        if(this->_fm.file_exist(subcmd)) return false;
+        if(this->_fm.file_exist(subcmd)) return INVALID;
         bool success = this->_fm.add_file(subcmd);  
-        if(!success) return false;
+        if(!success) return INVALID;
         this->_command_line.set_text(this->_fm.get_base_dir());
-        return true;
+        return TOUCH;
     }
     if(code == LS)
     {
@@ -88,12 +88,8 @@ bool CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& f
         sub_dir_folder.clear();
         sub_dir_file.clear();
         bool check = this->_fm.get_sub_dir(sub_dir_folder, sub_dir_file);
-        if(!check) return false;
-        
-        // for(int i = 0; i < sub_dir.size(); ++i) cout << sub_dir[i] << endl;
-        // if(sub_dir.size() == 0) cout << "Empty dir" << endl;
-        // cout << endl;
-        
+        if(!check) return INVALID;
+
         folder_str.clear();
         folder_str = sub_dir_folder;
         file_str.clear();
@@ -102,29 +98,41 @@ bool CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& f
         if(folder_str.size() == 0) folder_str.push_back("");
         if(file_str.size() == 0) file_str.push_back("");
         this->_command_line.set_text(this->_fm.get_base_dir());
-        return true;
+        return LS;
     }
     if(code == RM)
     {
         cout << "rm" << endl;
-        if(!this->_fm.folder_exist(subcmd)) return false;
+        if(!this->_fm.folder_exist(subcmd)) return INVALID;
         bool success = this->_fm.delete_folder(subcmd);
-        if(!success) return false;
+        if(!success) return INVALID;
         this->_command_line.set_text(this->_fm.get_base_dir());
-        return true;
+        return RM;
     }
     if(code == DEL)
     {
         cout << "del" << endl;
-        if(!this->_fm.file_exist(subcmd)) return false;
+        if(!this->_fm.file_exist(subcmd)) return INVALID;
         bool success = this->_fm.delete_file(subcmd);
-        if(!success) return false;
+        if(!success) return INVALID;
         this->_command_line.set_text(this->_fm.get_base_dir());
-        return true;
+        return DEL;
+    }
+    if(code == OPEN)
+    {
+        cout << "open" << endl;
+        this->_command_line.set_text(this->_fm.get_base_dir());
+        return OPEN;
+    }
+    if(code == CLOSE)
+    {
+        cout << "close" << endl;
+        this->_command_line.set_text(this->_fm.get_base_dir());
+        return CLOSE;
     }
 
     cout << "fail in event" << endl;
-    return false;
+    return INVALID;
 }
 
 void CommandLine::typed_cmd(sf::Event &input)

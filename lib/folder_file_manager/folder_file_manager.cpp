@@ -77,9 +77,10 @@ bool FolderFileManager::add_folder(string path)
     ofstream outs;
     string file_path = this->_base_dir + path + "/";
     if(this->_folder_set.count(file_path) > 0) return false;
+    
     if(mkdir(file_path.c_str()) == -1) return false;
+    
     this->_folder_set.insert(file_path);
-
     // add folder path including ending /
     this->_add_delete_file_folder(file_path, false);
     return true;
@@ -91,11 +92,13 @@ bool FolderFileManager::add_file(string path)
 {
     int idx = first_not_space(path, 0);
     if(idx == -1) return false;
-    path = remove_space(path);
     
+    path = remove_space(path);
+
     ofstream outs;
     string file_path = this->_base_dir + path;
     if(this->_file_set.count(file_path) > 0) return false;
+    
     outs.open(file_path);
     if(outs.fail()) return false;
     this->_file_set.insert(file_path);

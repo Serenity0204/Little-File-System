@@ -21,8 +21,9 @@ private:
     Header _folder_terminal;
     Header _file_terminal;
     CommandLine _cmd;
+    InputBox _text_file_input;
     // private member variables here
-
+    bool _text_file_input_on;
 
 
     // private helper functions here

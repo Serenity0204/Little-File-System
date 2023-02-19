@@ -31,6 +31,8 @@ enum PARSE_KEY
     LS = 4,
     RM=5,
     DEL=6,
+    OPEN=7,
+    CLOSE=8,
 };
 
 // add more enum here
@@ -44,6 +46,7 @@ const int WINDOW_WIDTH = 1200;
 const int INPUT_BOX_FONT_SIZE = 24;
 const int CMD_FONT_SIZE = 20;
 const int HEADER_FONT_SIZE = 15;
+const int TEXT_FILE_INPUT_FONT_SIZE = 20;
 const int CHAR_LIMIT = 150;
 const int CMD_CHAR_LIMIT = 105;
 const int CHAR_DIVIDE = 12;
@@ -52,8 +55,8 @@ const int MAX_LEN_TERMINAL = 15;
 
 // system variable config
 // ADD SYSTEM  VARIABLE HERE
-const sf::Vector2f INPUT_BOX_SIZE = sf::Vector2f(700, 120);
-const sf::Vector2f INPUT_BOX_POS = sf::Vector2f(430, 500);
+const sf::Vector2f TEXT_FILE_INPUT_SIZE = sf::Vector2f(700, 400);
+const sf::Vector2f TEXT_FILE_INPUT_POS = sf::Vector2f(150, 150);
 
 const sf::Vector2f FOLDER_TERMINAL_SIZE = sf::Vector2f(150, 500);
 const sf::Vector2f FOLDER_TERMINAL_POS = sf::Vector2f(890, 0);
@@ -67,7 +70,17 @@ const sf::Vector2f COMMAND_LINE_POS = sf::Vector2f(15, 580);
 
 // global vars
 const string BASE_DIR_STRING = "../../root/user/";
-const unordered_map<string, vector<int>> LFS_CMD = {{"back", {BACK, 0}}, {"touch", {TOUCH, 2}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 2}}, {"del", {DEL, 2}}};
+const unordered_map<string, vector<int>> LFS_CMD = {
+    {"back", {BACK, 0}}, 
+    {"touch", {TOUCH, 6}}, 
+    {"mkdir", {MKDIR, 2}}, 
+    {"cd", {CD, 2}}, 
+    {"ls", {LS, 0}}, 
+    {"rm", {RM, 2}}, 
+    {"open", {OPEN, 2}},
+    {"close", {CLOSE, 2}},
+    {"del", {DEL, 2}}
+};
 
 
 #endif

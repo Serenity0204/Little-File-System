@@ -36,6 +36,7 @@ void Engine::input()
         if(event.type == sf::Event::TextEntered)
         {  
             this->_cmd.typed_cmd(event);
+            if(this->_text_file_input_on) this->_text_file_input.typedOn(event);
             break;
         }
         
@@ -50,9 +51,10 @@ void Engine::input()
             string to_screen_file = "FILE TERMINAL:\n\n";
             bool control_file = false, control_folder = false;
 
-            if(this->_cmd.update_cmd_event(strs_to_screen_folder, strs_to_screen_file))
+            int code = this->_cmd.update_cmd_event(strs_to_screen_folder, strs_to_screen_file);
+            if(code != INVALID)
             {
-                if(strs_to_screen_folder.size() == 0 && strs_to_screen_file.size() == 0)
+                if(code != LS && code != OPEN && code != CLOSE)
                 {
                     to_screen_file += "SUCCESS";
                     to_screen_folder += "SUCCESS";
@@ -60,13 +62,49 @@ void Engine::input()
                     this->_file_terminal.setHeaderText(to_screen_file);
                     break;
                 }         
-                if(strs_to_screen_folder.size() == 1 && strs_to_screen_folder[0] == "")
+                if(code == OPEN)
+                {
+                    if(this->_text_file_input_on)
+                    {
+                        to_screen_folder += "OPEN FAILURE";
+                        to_screen_file += "OPEN FAILURE";
+                        this->_folder_terminal.setHeaderText(to_screen_folder);
+                        this->_file_terminal.setHeaderText(to_screen_file);
+                        break;
+                    }
+       
+                    to_screen_file += "OPEN SUCCESS";
+                    to_screen_folder += "OPEN SUCCESS";
+                    this->_text_file_input_on = true;
+                    this->_folder_terminal.setHeaderText(to_screen_folder);
+                    this->_file_terminal.setHeaderText(to_screen_file);
+                    break;
+                }
+                if(code == CLOSE)
+                {
+                    if(!this->_text_file_input_on)
+                    {
+                        to_screen_file += "CLOSE FAILURE";
+                        to_screen_folder += "CLOSE FAILURE";
+                        this->_folder_terminal.setHeaderText(to_screen_folder);
+                        this->_file_terminal.setHeaderText(to_screen_file);
+                        break;
+                    }
+                    to_screen_file += "CLOSE SUCCESS";
+                    to_screen_folder += "CLOSE SUCCESS";
+                    this->_text_file_input_on = false;
+                    this->_folder_terminal.setHeaderText(to_screen_folder);
+                    this->_file_terminal.setHeaderText(to_screen_file);
+                    break;
+                }
+
+                if(code == LS && strs_to_screen_folder.size() == 1 && strs_to_screen_folder[0] == "")
                 {
                     to_screen_folder += "NO FOLDER EXISTS";
                     this->_folder_terminal.setHeaderText(to_screen_folder);
                     control_folder = true;
                 }
-                if(strs_to_screen_file.size() == 1 && strs_to_screen_file[0] == "")
+                if(code == LS && strs_to_screen_file.size() == 1 && strs_to_screen_file[0] == "")
                 {
                     to_screen_file += "NO FILE EXISTS";
                     this->_file_terminal.setHeaderText(to_screen_file);
@@ -88,7 +126,7 @@ void Engine::input()
             this->_file_terminal.setHeaderText(to_screen_file);
             break;
         }
-
+       if(this->_text_file_input_on) this->_text_file_input.update_input_box(this->_window, event);
        this->_cmd.update_cmd(this->_window, event);
     }
 }
@@ -105,6 +143,7 @@ void Engine::display()
 
     this->_folder_terminal.drawTo(this->_window);
     this->_file_terminal.drawTo(this->_window);
+    if(this->_text_file_input_on) this->_text_file_input.drawTo(this->_window);
 
     // display buttons
     this->_buttons.draw_buttons(this->_window);
@@ -120,6 +159,7 @@ void Engine::run()
     this->_cmd.setFont(arial);
     this->_folder_terminal.setFont(arial);
     this->_file_terminal.setFont(arial);
+    this->_text_file_input.setFont(arial);
 
     // main loop
     while (this->_window.isOpen())
@@ -147,10 +187,11 @@ void Engine::run()
 // init the attributes
 void Engine::_init()
 {
-
+    this->_text_file_input_on = false;
     this->_buttons = Buttons();
     this->_folder_terminal = Header("FOLDER TERMINAL", FOLDER_TERMINAL_SIZE, FOLDER_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_file_terminal = Header("FILE TERMINAL", FILE_TERMINAL_SIZE, FILE_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
+    this->_text_file_input= InputBox(TEXT_FILE_INPUT_FONT_SIZE, TEXT_FILE_INPUT_SIZE, TEXT_FILE_INPUT_POS, sf::Color::Red, sf::Color::White, false);
     this->_cmd = CommandLine();
 }
 // *****************************************************************************************************************

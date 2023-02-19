@@ -62,7 +62,16 @@ int CmdParser::parse(string cmd, string& subcmd)
     string prepared_subcmd = remove_space(cmd.substr(endIdx));
     
     if((cmd.length() - cmd.substr(0, endIdx).length()) < this->_available_cmd[command][1]) return INVALID;
-    if(prepared_subcmd.length() > MAX_LEN_TERMINAL) return INVALID;
+    //if(prepared_subcmd.length() > MAX_LEN_TERMINAL) return INVALID;
+    
+    if(command == "touch")
+    {
+        string txt = "";
+        for(int i = prepared_subcmd.length() - 4; i < prepared_subcmd.length(); ++i) txt += prepared_subcmd[i];
+        if(txt != ".txt") return INVALID;
+    }
+    if(command == "mkdir") for(int i = 0; i < prepared_subcmd.length(); ++i) if(prepared_subcmd[i] == '.') return INVALID;
+    
     subcmd = prepared_subcmd;
     //cout << "subcommand:" << subcmd << endl;
     int code = this->_available_cmd[command][0];

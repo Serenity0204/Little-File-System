@@ -16,7 +16,7 @@ using namespace std;
 // mkdir -> 1 + 1 not space == 2
 // cd -> 1 + 1 not space == 2
 // ls->0 
-// touch -> 1 + 1 not space == 2
+// touch -> 1 + 1 not space and .txt == 6
 // rm-> 1 + 1 not space == 2
 
 // enum PARSE_KEY
@@ -30,7 +30,7 @@ using namespace std;
 // };
 
 
-const unordered_map<string, vector<int>> test_cmd = {{"back", {BACK, 0}}, {"touch", {TOUCH, 2}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 2}}};
+const unordered_map<string, vector<int>> test_cmd = {{"back", {BACK, 0}}, {"touch", {TOUCH, 6}}, {"mkdir", {MKDIR, 2}}, {"cd", {CD, 2}}, {"ls", {LS, 0}}, {"rm", {RM, 2}}};
 const string root1 = "root:\\user\\";
 const string root2 = "root:\\my_user\\";
 
@@ -61,7 +61,7 @@ bool test_parser1(bool debug=false)
   check = p.parse(command, subcmd);
   if(check != RM) return false;
 
-  command = root1 + "lfs touch a";
+  command = root1 + "lfs touch a.txt";
   check = p.parse(command, subcmd);
   if(check != TOUCH) return false;
   return true;
@@ -193,6 +193,22 @@ bool test_parser4(bool debug=false)
   command = root1 + "lfs mkdir a bc";
   check = p.parse(command, subcmd);
   if(check != MKDIR) return false;
+
+  command = root1 + "lfs touch c.txt";
+  check = p.parse(command, subcmd);
+  if(check != TOUCH) return false;
+
+  command = root1 + "lfs touch cccc";
+  check = p.parse(command, subcmd);
+  if(check != INVALID) return false;
+
+  command = root1 + "lfs touch ccccc";
+  check = p.parse(command, subcmd);
+  if(check != INVALID) return false;
+
+  command = root1 + "lfs touch cccc.txt";
+  check = p.parse(command, subcmd);
+  if(check != TOUCH) return false;
 
   return true;
 }
