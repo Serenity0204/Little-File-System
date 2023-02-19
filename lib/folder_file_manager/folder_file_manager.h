@@ -47,7 +47,7 @@ public:
     bool delete_file(string path);
 
     // get
-    bool get_sub_dir(vector<string>& sub_dir);
+    bool get_sub_dir(vector<string>& sub_dir_folder, vector<string>& sub_dir_file);
     string& get_base_dir(){return this->_base_dir;}
 };
     

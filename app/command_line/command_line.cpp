@@ -28,7 +28,7 @@ void CommandLine::reset()
 }
 
 
-bool CommandLine::update_cmd_event(vector<string>& strs_to_screen)
+bool CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& file_str)
 {
     string command_string = this->_command_line.getText();
     //cout << "root:" << command_string << endl;
@@ -37,9 +37,10 @@ bool CommandLine::update_cmd_event(vector<string>& strs_to_screen)
     //cout << "subcommand:" << subcmd << endl;
     if(code == BACK)
     {
+        cout << "back" << endl;
         if(this->_fm.get_base_dir() == BASE_DIR_STRING) 
         {
-            //cout << "can't go back" << endl;
+            cout << "Error in BACK, Cannot by pass the base dir" << endl;
             return false;
         }
         string old_str = this->_fm.get_base_dir();
@@ -72,6 +73,7 @@ bool CommandLine::update_cmd_event(vector<string>& strs_to_screen)
     }
     if(code == TOUCH)
     {
+        cout << "touch" << endl;
         if(this->_fm.file_exist(subcmd)) return false;
         bool success = this->_fm.add_file(subcmd);  
         if(!success) return false;
@@ -80,23 +82,31 @@ bool CommandLine::update_cmd_event(vector<string>& strs_to_screen)
     }
     if(code == LS)
     {
-        vector<string> sub_dir;
-        sub_dir.clear();
-        bool check = this->_fm.get_sub_dir(sub_dir);
+        cout << "ls" << endl;
+        vector<string> sub_dir_folder;
+        vector<string> sub_dir_file;
+        sub_dir_folder.clear();
+        sub_dir_file.clear();
+        bool check = this->_fm.get_sub_dir(sub_dir_folder, sub_dir_file);
         if(!check) return false;
         
         // for(int i = 0; i < sub_dir.size(); ++i) cout << sub_dir[i] << endl;
         // if(sub_dir.size() == 0) cout << "Empty dir" << endl;
         // cout << endl;
         
-        strs_to_screen.clear();
-        strs_to_screen = sub_dir;
-        if(strs_to_screen.size() == 0) strs_to_screen.push_back("");
+        folder_str.clear();
+        folder_str = sub_dir_folder;
+        file_str.clear();
+        file_str = sub_dir_file;
+
+        if(folder_str.size() == 0) folder_str.push_back("");
+        if(file_str.size() == 0) file_str.push_back("");
         this->_command_line.set_text(this->_fm.get_base_dir());
         return true;
     }
     if(code == RM)
     {
+        cout << "rm" << endl;
         if(!this->_fm.folder_exist(subcmd)) return false;
         bool success = this->_fm.delete_folder(subcmd);
         if(!success) return false;
@@ -105,6 +115,7 @@ bool CommandLine::update_cmd_event(vector<string>& strs_to_screen)
     }
     if(code == DEL)
     {
+        cout << "del" << endl;
         if(!this->_fm.file_exist(subcmd)) return false;
         bool success = this->_fm.delete_file(subcmd);
         if(!success) return false;

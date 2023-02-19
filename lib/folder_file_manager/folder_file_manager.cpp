@@ -177,24 +177,32 @@ bool FolderFileManager::delete_file(string path)
 }
 
 
-bool FolderFileManager::get_sub_dir(vector<string>& sub_dir)
+bool FolderFileManager::get_sub_dir(vector<string>& sub_dir_folder, vector<string>& sub_dir_file)
 {
-    sub_dir.clear();
+    sub_dir_folder.clear();
     struct dirent *dp;
     DIR *dir = opendir(this->_base_dir.c_str());
     // Unable to open directory stream
     if(!dir) return false; 
     
+    int file_index = 1, folder_index = 1;
     while ((dp = readdir(dir)) != NULL) 
     {
         if(dp->d_name[0] == '.') continue;
         string name = dp->d_name;
-        if(name.length() >= MAX_LEN_TERMINAL)
+
+        if(this->file_exist(name)) 
         {
-            name = name.substr(0, MAX_LEN_TERMINAL);
-            name += "...";
+            name = to_string(file_index) + ": " + name;
+            file_index++;
+            sub_dir_file.push_back(name);
         }
-        sub_dir.push_back(name);
+        if(this->folder_exist(name)) 
+        {
+            name = to_string(folder_index) + ": " + name;
+            folder_index++;
+            sub_dir_folder.push_back(name);
+        }
     }
 
     // Close directory stream

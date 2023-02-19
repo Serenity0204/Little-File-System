@@ -42,11 +42,6 @@ int CmdParser::parse(string cmd, string& subcmd)
     //cout << "command is:" << command << ",len:" << command.length() << endl;
     if(!this->_available_cmd.count(command)) return INVALID;
 
-
-    // lfs rmdir ab 
-    // [lfs, rmdir, ab]
-    // [SYSTEM, COMMAND, SUBCOMMAND, FLAG]
-
     // back->0
     // mkdir -> 1 + 1 not space == 2
     // cd -> 1 + 1 not space == 2
@@ -64,10 +59,12 @@ int CmdParser::parse(string cmd, string& subcmd)
     // if endIdx == -1 and it needs subcommand it's false, or if endIdx != -1 and it doesn't need subcommand it's false as well
     if((endIdx == -1 && this->_available_cmd[command][1] != 0) || (endIdx != -1 && this->_available_cmd[command][1] == 0)) return INVALID;
     
-    subcmd = remove_space(cmd.substr(endIdx));
-    //cout << "subcommand:" << subcmd << endl;
+    string prepared_subcmd = remove_space(cmd.substr(endIdx));
+    
     if((cmd.length() - cmd.substr(0, endIdx).length()) < this->_available_cmd[command][1]) return INVALID;
-
+    if(prepared_subcmd.length() > MAX_LEN_TERMINAL) return INVALID;
+    subcmd = prepared_subcmd;
+    //cout << "subcommand:" << subcmd << endl;
     int code = this->_available_cmd[command][0];
     return code;
 }

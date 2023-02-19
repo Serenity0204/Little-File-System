@@ -142,12 +142,19 @@ bool test_folder_file9(bool debug=false)
 {
   FolderFileManager fm;
   fm.get_base_dir() += "test_folder2/";
-  vector<string> vec;
-  bool test = fm.get_sub_dir(vec);
+  vector<string> folder;
+  vector<string> file;
+  bool test = fm.get_sub_dir(folder, file);
   if(!test) return false;
-  if(debug) for(int i = 0; i < vec.size(); ++i) cout << vec[i] << endl;
-  
-  if(vec.size() == 1) return true;
+  if(debug) 
+  {
+    cout << "folders: " << endl;
+    for(int i = 0; i < folder.size(); ++i) cout << folder[i] << endl;
+    cout << endl;
+    cout << "files: " << endl;
+    for(int i = 0; i < file.size(); ++i) cout << file[i] << endl;
+  }
+  if(file.size() == 1 && folder.size() == 0) return true;
 
   return false;
 }
@@ -157,13 +164,19 @@ bool test_folder_file10(bool debug=false)
 {
   FolderFileManager fm;
   fm.get_base_dir() += "test_folder/";
-  vector<string> vec;
-
-  bool test = fm.get_sub_dir(vec);
+  vector<string> folder;
+  vector <string> file;
+  bool test = fm.get_sub_dir(folder, file);
   if(!test) return false;
-  if(debug) for(int i = 0; i < vec.size(); ++i) cout << vec[i] << endl;
-  
-  if(vec.size() == 0) return true;
+  if(debug) 
+  {
+    cout << "folders: " << endl;
+    for(int i = 0; i < folder.size(); ++i) cout << folder[i] << endl;
+    cout << endl;
+    cout << "files: " << endl;
+    for(int i = 0; i < file.size(); ++i) cout << file[i] << endl;
+  }
+  if(folder.size() == 0 && file.size() == 0) return true;
 
   return false;
 }

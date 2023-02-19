@@ -42,33 +42,50 @@ void Engine::input()
         // update cmd event
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
         {
-            vector<string> strs_to_screen;
-            strs_to_screen.clear();
-            string to_screen = "";
-            if(this->_cmd.update_cmd_event(strs_to_screen))
+            vector<string> strs_to_screen_folder;
+            vector<string> strs_to_screen_file;
+            strs_to_screen_folder.clear();
+            strs_to_screen_file.clear();
+            string to_screen_folder = "FOLDER TERMINAL:\n\n";
+            string to_screen_file = "FILE TERMINAL:\n\n";
+            bool control_file = false, control_folder = false;
+
+            if(this->_cmd.update_cmd_event(strs_to_screen_folder, strs_to_screen_file))
             {
-                if(strs_to_screen.size() == 0)
+                if(strs_to_screen_folder.size() == 0 && strs_to_screen_file.size() == 0)
                 {
-                    to_screen = "SUCCESS";
-                    this->_folder_terminal.setHeaderText(to_screen);
-                    this->_file_terminal.setHeaderText(to_screen);
+                    to_screen_file += "SUCCESS";
+                    to_screen_folder += "SUCCESS";
+                    this->_folder_terminal.setHeaderText(to_screen_folder);
+                    this->_file_terminal.setHeaderText(to_screen_file);
                     break;
                 }         
-                if(strs_to_screen.size() == 1 && strs_to_screen[0] == "")
+                if(strs_to_screen_folder.size() == 1 && strs_to_screen_folder[0] == "")
                 {
-                    to_screen = "EMPTY DIRECTORY";
-                    this->_folder_terminal.setHeaderText(to_screen);
-                    this->_file_terminal.setHeaderText(to_screen);
-                    break;
+                    to_screen_folder += "NO FOLDER EXISTS";
+                    this->_folder_terminal.setHeaderText(to_screen_folder);
+                    control_folder = true;
                 }
-                for(int i = 0; i < strs_to_screen.size(); ++i) to_screen += strs_to_screen[i] + '\n';
-                this->_folder_terminal.setHeaderText(to_screen);
-                this->_file_terminal.setHeaderText(to_screen);
+                if(strs_to_screen_file.size() == 1 && strs_to_screen_file[0] == "")
+                {
+                    to_screen_file += "NO FILE EXISTS";
+                    this->_file_terminal.setHeaderText(to_screen_file);
+                    control_file = true;
+                }
+                if(control_folder && control_file) break;
+
+                for(int i = 0; i < strs_to_screen_folder.size(); ++i) to_screen_folder += strs_to_screen_folder[i] + '\n';
+                for(int i = 0; i < strs_to_screen_file.size(); ++i) to_screen_file += strs_to_screen_file[i] + '\n';
+
+                this->_folder_terminal.setHeaderText(to_screen_folder);
+                this->_file_terminal.setHeaderText(to_screen_file);
                 break;
             }
-            to_screen = "FAILURE";
-            this->_folder_terminal.setHeaderText(to_screen);
-            this->_file_terminal.setHeaderText(to_screen);
+            to_screen_folder += "FAILURE";
+            to_screen_file += "FAILURE";
+
+            this->_folder_terminal.setHeaderText(to_screen_folder);
+            this->_file_terminal.setHeaderText(to_screen_file);
             break;
         }
 

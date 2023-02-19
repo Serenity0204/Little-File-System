@@ -47,7 +47,7 @@ const int HEADER_FONT_SIZE = 15;
 const int CHAR_LIMIT = 150;
 const int CMD_CHAR_LIMIT = 105;
 const int CHAR_DIVIDE = 12;
-const int MAX_LEN_TERMINAL = 7;
+const int MAX_LEN_TERMINAL = 15;
 
 
 // system variable config
