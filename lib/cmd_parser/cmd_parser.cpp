@@ -64,14 +64,27 @@ int CmdParser::parse(string cmd, string& subcmd)
     if((cmd.length() - cmd.substr(0, endIdx).length()) < this->_available_cmd[command][1]) return INVALID;
     //if(prepared_subcmd.length() > MAX_LEN_TERMINAL) return INVALID;
     
+    // checking if the subcmd includes the required file format .txt
     if(command == "touch")
     {
         string txt = "";
         for(int i = prepared_subcmd.length() - 4; i < prepared_subcmd.length(); ++i) txt += prepared_subcmd[i];
         if(txt != ".txt") return INVALID;
     }
-    if(command == "mkdir") for(int i = 0; i < prepared_subcmd.length(); ++i) if(prepared_subcmd[i] == '.') return INVALID;
-    
+
+    // check if the folder name is legal(no .)
+    if(command == "mkdir") 
+    {
+        // only A-Z, a-z, 0-9, and _ allowed
+        for(int i = 0; i < prepared_subcmd.length(); ++i) 
+        {
+            if(prepared_subcmd[i] <= 90 && prepared_subcmd[i] >= 65) continue;
+            if(prepared_subcmd[i] <= 122 && prepared_subcmd[i] >= 97) continue; 
+            if(prepared_subcmd[i] <= 57 && prepared_subcmd[i] >= 48) continue;
+            if(prepared_subcmd[i] == '_') continue;
+            return INVALID;
+        }
+    }
     subcmd = prepared_subcmd;
     //cout << "subcommand:" << subcmd << endl;
     int code = this->_available_cmd[command][0];

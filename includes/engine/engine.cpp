@@ -40,6 +40,13 @@ void Engine::input()
             break;
         }
         
+        // test retrieve
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            cout << "text is:" << retrieve_data.get_input_box_text() << endl;
+            break;
+        }
+
         // update cmd event
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
         {
@@ -172,6 +179,8 @@ void Engine::run()
         this->display();
         // sfml method to display to the screen
         this->_window.display();
+        // load data to retrieve data class
+        retrieve_data.load_input_box_text(*this);
     }
 
 }

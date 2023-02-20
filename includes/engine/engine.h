@@ -7,6 +7,7 @@
 #include "../button/buttons.h"
 #include "../header/header.h"
 #include "../../app/command_line/command_line.h"
+#include "../retrieve_data/retrieve_data.h"
 using namespace std;
 
 
@@ -33,8 +34,8 @@ private:
     void _update_buttons_event(sf::Event& event);
 
 public:
-    // // getter
-    // friend string get_input_box_text(Engine engine) {engine._text_file_input.getText();}
+    // friend class
+    friend class RetrieveData;
     // constructors and destructors
     Engine();
     ~Engine();
