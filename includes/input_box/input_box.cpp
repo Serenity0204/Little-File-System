@@ -171,3 +171,11 @@ void InputBox::update_input_box(sf::RenderWindow &window, sf::Event& event) {
     }
     if(clicked || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) this->setSelected(false);
 }
+
+
+void InputBox::clear_text()
+{
+    text = "";
+    init_text_len = text.length();
+    textbox.setString(text);
+}

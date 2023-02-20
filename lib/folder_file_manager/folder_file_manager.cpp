@@ -5,6 +5,7 @@ FolderFileManager::FolderFileManager()
     this->_base_dir = "../../root/user/";
     this->_delete_folder_dir = "../../root/delete_all_folder.txt";
     this->_delete_file_dir = "../../root/delete_all_file.txt";
+    this->_last_file_open = "";
 
     this->_folder_set = unordered_set<string>();
     this->_file_set = unordered_set<string>();
@@ -212,3 +213,23 @@ bool FolderFileManager::get_sub_dir(vector<string>& sub_dir_folder, vector<strin
     closedir(dir); 
     return true;
 }
+
+
+bool FolderFileManager::write_file(string path)
+{
+    int idx = first_not_space(path, 0);
+    if(idx == -1) return false;
+    string message = retrieve_data.get_input_box_text();
+    path = remove_space(path);
+
+    ofstream outs;
+    string file_path = this->_base_dir + path;
+    // if file DNE it's false
+    if(!this->_file_set.count(file_path)) return false;
+    outs.open(file_path);
+    if(outs.fail()) return false;
+    outs << message << endl;
+    outs.close();
+    return true;
+}
+

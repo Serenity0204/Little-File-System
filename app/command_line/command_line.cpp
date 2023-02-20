@@ -121,7 +121,7 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
     if(code == OPEN)
     {
         if(!this->_fm.file_exist(subcmd)) return INVALID;
-        //cout << "?" << get_input_box_text() << endl;
+        this->_fm.set_last_file_open(subcmd);
         this->_command_line.set_text(this->_fm.get_base_dir());
         cout << "open" << endl;
         return OPEN;
@@ -129,6 +129,11 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
     if(code == SAVE)
     {
         this->_command_line.set_text(this->_fm.get_base_dir());
+        string last_file = this->_fm.get_last_file_open();
+        // trying to save before open
+        if(last_file.length() == 0) return INVALID;
+        bool success = this->_fm.write_file(last_file);
+        if(!success) return INVALID;
         cout << "save" << endl;
         return SAVE;
     }

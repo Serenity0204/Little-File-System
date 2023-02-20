@@ -48,6 +48,7 @@ const int CMD_FONT_SIZE = 20;
 const int HEADER_FONT_SIZE = 15;
 const int TEXT_FILE_INPUT_FONT_SIZE = 20;
 const int CHAR_LIMIT = 150;
+const int TEXT_INPUT_LIMIT = 900;
 const int CMD_CHAR_LIMIT = 105;
 const int CHAR_DIVIDE = 12;
 const int MAX_LEN_TERMINAL = 15;

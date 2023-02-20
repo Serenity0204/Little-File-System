@@ -3,9 +3,7 @@
 
 #include <bits/stdc++.h>
 #include <SFML/Graphics.hpp>
-#include "../engine/engine.h"
-
-class Engine;
+using namespace std;
 
 class RetrieveData
 {
@@ -14,7 +12,7 @@ private:
 public:
     RetrieveData();
     ~RetrieveData();
-    void load_input_box_text(Engine& engine);
+    void load_input_box_text(string text);
     string get_input_box_text();
 };
 

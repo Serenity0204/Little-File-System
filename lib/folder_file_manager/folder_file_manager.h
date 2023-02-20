@@ -14,6 +14,8 @@
 #include <vector>
 #include "../utils/helper_functions.h"
 #include "../../includes/config/config.h"
+#include "../../includes/retrieve_data/retrieve_data.h"
+
 
 using namespace std;
 
@@ -23,6 +25,8 @@ private:
     string _base_dir;
     string _delete_file_dir;
     string _delete_folder_dir;
+    string _last_file_open;
+
     unordered_set<string> _folder_set;
     unordered_set<string> _file_set;
 
@@ -50,8 +54,14 @@ public:
     bool get_sub_dir(vector<string>& sub_dir_folder, vector<string>& sub_dir_file);
     string& get_base_dir(){return this->_base_dir;}
 
+    // open file
+
     // write
-    bool write_file(string path, string message);
+    bool write_file(string path);
+
+    // last file open
+    void set_last_file_open(string path){this->_last_file_open = path;}
+    string get_last_file_open(){return this->_last_file_open;}
 };
     
 #endif // !FOLDER_FILE_MANAGER

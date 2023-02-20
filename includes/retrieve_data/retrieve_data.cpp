@@ -12,7 +12,7 @@ string RetrieveData::get_input_box_text()
     return this->_input_box_text;
 }
 
-void RetrieveData::load_input_box_text(Engine& engine)
+void RetrieveData::load_input_box_text(string text)
 {
-    this->_input_box_text= engine._text_file_input.getText();
+    this->_input_box_text= text;
 }

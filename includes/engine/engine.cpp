@@ -71,35 +71,20 @@ void Engine::input()
                 }         
                 if(code == OPEN)
                 {
-                    if(this->_text_file_input_on)
-                    {
-                        to_screen_folder += "OPEN FAILURE";
-                        to_screen_file += "OPEN FAILURE";
-                        this->_folder_terminal.setHeaderText(to_screen_folder);
-                        this->_file_terminal.setHeaderText(to_screen_file);
-                        break;
-                    }
-       
                     to_screen_file += "OPEN SUCCESS";
                     to_screen_folder += "OPEN SUCCESS";
                     this->_text_file_input_on = true;
+                    this->_text_file_input.clear_text();
                     this->_folder_terminal.setHeaderText(to_screen_folder);
                     this->_file_terminal.setHeaderText(to_screen_file);
                     break;
                 }
                 if(code == SAVE)
                 {
-                    if(!this->_text_file_input_on)
-                    {
-                        to_screen_file += "SAVE FAILURE";
-                        to_screen_folder += "SAVE FAILURE";
-                        this->_folder_terminal.setHeaderText(to_screen_folder);
-                        this->_file_terminal.setHeaderText(to_screen_file);
-                        break;
-                    }
                     to_screen_file += "SAVE SUCCESS";
                     to_screen_folder += "SAVE SUCCESS";
                     this->_text_file_input_on = false;
+                    this->_text_file_input.clear_text();
                     this->_folder_terminal.setHeaderText(to_screen_folder);
                     this->_file_terminal.setHeaderText(to_screen_file);
                     break;
@@ -167,7 +152,7 @@ void Engine::run()
     this->_folder_terminal.setFont(arial);
     this->_file_terminal.setFont(arial);
     this->_text_file_input.setFont(arial);
-
+    this->_text_file_input.setLimit(true, TEXT_INPUT_LIMIT);
     // main loop
     while (this->_window.isOpen())
     {
@@ -180,7 +165,7 @@ void Engine::run()
         // sfml method to display to the screen
         this->_window.display();
         // load data to retrieve data class
-        retrieve_data.load_input_box_text(*this);
+        retrieve_data.load_input_box_text(this->_text_file_input.getText());
     }
 
 }

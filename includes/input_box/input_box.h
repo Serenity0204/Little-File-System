@@ -12,7 +12,8 @@
 using namespace std;
 
 
-class InputBox {
+class InputBox 
+{
 public:
 	InputBox();
 	InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,sf::Color text_color, sf::Color box_color, bool sel, string text_str="", bool need_new_l=true);
@@ -30,6 +31,8 @@ public:
 	void setSelected(bool sel);
 
 	std::string getText();
+
+	void clear_text();
 
 	sf::Text& get_text_box(){return this->textbox;}
 	void drawTo(sf::RenderWindow &window);
