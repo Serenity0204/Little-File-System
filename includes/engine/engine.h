@@ -7,7 +7,7 @@
 #include "../button/buttons.h"
 #include "../header/header.h"
 #include "../../app/command_line/command_line.h"
-#include "../retrieve_data/retrieve_data.h"
+#include "../middleware/middleware.h"
 using namespace std;
 
 
@@ -22,6 +22,7 @@ private:
     Buttons _buttons;
     Header _folder_terminal;
     Header _file_terminal;
+    Header _file_name;
     CommandLine _cmd;
     InputBox _text_file_input;
     // private member variables here
@@ -36,7 +37,7 @@ private:
 
 public:
     // friend class
-    friend class RetrieveData;
+    friend class Middleware;
     // constructors and destructors
     Engine();
     ~Engine();

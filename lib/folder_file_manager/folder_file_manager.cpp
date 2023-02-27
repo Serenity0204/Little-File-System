@@ -219,7 +219,7 @@ bool FolderFileManager::write_file(string path)
 {
     int idx = first_not_space(path, 0);
     if(idx == -1) return false;
-    string message = retrieve_data.get_input_box_text();
+    string message = middleware.get_input_box_text();
     path = remove_space(path);
 
     ofstream outs;

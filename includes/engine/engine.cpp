@@ -43,7 +43,7 @@ void Engine::input()
         // test retrieve
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            cout << "text is:" << retrieve_data.get_input_box_text() << endl;
+            cout << "text is:" << middleware.get_input_box_text() << endl;
             break;
         }
 
@@ -77,6 +77,7 @@ void Engine::input()
                     this->_text_file_input.clear_text();
                     this->_folder_terminal.setHeaderText(to_screen_folder);
                     this->_file_terminal.setHeaderText(to_screen_file);
+                    this->_file_name.setHeaderText(middleware.get_file_name());
                     break;
                 }
                 if(code == SAVE)
@@ -135,8 +136,11 @@ void Engine::display()
 
     this->_folder_terminal.drawTo(this->_window);
     this->_file_terminal.drawTo(this->_window);
-    if(this->_text_file_input_on) this->_text_file_input.drawTo(this->_window);
-
+    if(this->_text_file_input_on) 
+    {
+        this->_text_file_input.drawTo(this->_window);
+        this->_file_name.drawTo(this->_window);
+    }
     // display buttons
     this->_buttons.draw_buttons(this->_window);
 
@@ -149,6 +153,7 @@ void Engine::run()
     // set the position and font before running
     sf::Font arial = config.get_font(ARIAL);
     this->_cmd.setFont(arial);
+    this->_file_name.setFont(arial);
     this->_folder_terminal.setFont(arial);
     this->_file_terminal.setFont(arial);
     this->_text_file_input.setFont(arial);
@@ -165,7 +170,7 @@ void Engine::run()
         // sfml method to display to the screen
         this->_window.display();
         // load data to retrieve data class
-        retrieve_data.load_input_box_text(this->_text_file_input.getText());
+        middleware.load_input_box_text(this->_text_file_input.getText());
     }
 
 }
@@ -185,6 +190,7 @@ void Engine::_init()
     this->_buttons = Buttons();
     this->_folder_terminal = Header("FOLDER TERMINAL", FOLDER_TERMINAL_SIZE, FOLDER_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_file_terminal = Header("FILE TERMINAL", FILE_TERMINAL_SIZE, FILE_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
+    this->_file_name = Header("file name", FILE_NAME_SIZE, FILE_NAME_POS, FILE_NAME_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_text_file_input= InputBox(TEXT_FILE_INPUT_FONT_SIZE, TEXT_FILE_INPUT_SIZE, TEXT_FILE_INPUT_POS, sf::Color::Red, sf::Color::White, false);
     this->_cmd = CommandLine();
 }

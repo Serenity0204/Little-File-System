@@ -39,7 +39,7 @@ public:
 	// Function for event loop:
 	void typedOn(sf::Event &input);
 	void set_text(string str);
-	
+	void set_text_no_limit(string str);
 	void update_input_box(sf::RenderWindow &window, sf::Event& event);	
 private:
 	sf::Text textbox;

@@ -26,7 +26,11 @@ InputBox::InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,s
         textbox.setString(text);
 }
 
-
+void InputBox::set_text_no_limit(string str)
+{
+    text = str;
+    textbox.setString(text);
+}
 
 void InputBox::set_text(string str)
 {
