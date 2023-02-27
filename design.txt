@@ -53,3 +53,64 @@ project structure:
 // improve
 change the map(value) of parser to struct instead of vector 
 parsing flag and multiple subcommands
+
+
+
+source code of nary tree 
+
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+// define the n-ary tree node structure
+template<class T>
+struct Node {
+    T data;
+    vector<Node<T>*> children;
+};
+
+// function to print the subtree rooted at a node
+template<class T>
+void printSubtree(Node<T>* node, int depth, bool lastChild) {
+    // print the node's data with appropriate indentation and prefix
+    for (int i = 0; i < depth - 1; i++) {
+        cout << "   ";
+    }
+    cout << (lastChild ? "└──" : "├──");
+    cout << node->data << endl;
+
+    // recursively print each child node
+    for (int i = 0; i < node->children.size(); i++) {
+        bool isLastChild = (i == node->children.size() - 1);
+        printSubtree(node->children[i], depth + 1, isLastChild);
+    }
+}
+
+// function to print the entire tree
+template<class T>
+void printTree(Node<T>* root) {
+    printSubtree(root, 1, true);
+}
+
+// example usage
+int main() {
+    // create an example n-ary tree
+    Node<string>* root = new Node<string>({"test1", {}});
+    Node<string>* node2 = new Node<string>({"test2", {}});
+    Node<string>* node3 = new Node<string>({"test3", {}});
+    Node<string>* node4 = new Node<string>({"test4", {}});
+    Node<string>* node5 = new Node<string>({"test5", {}});
+    Node<string>* node6 = new Node<string>({"test6", {}});
+    Node<string>* node7 = new Node<string>({"test7", {}});
+    Node<string>* node8 = new Node<string>({"test8", {}});
+    
+    root->children = {node2, node3, node4};
+    node2->children = {node5, node6};
+    node5->children = {node7, node8};
+    // print the tree using ASCII characters
+    printTree(root);
+
+    return 0;
+}
