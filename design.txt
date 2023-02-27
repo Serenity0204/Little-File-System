@@ -61,7 +61,7 @@ source code of nary tree
 
 #include <iostream>
 #include <vector>
-
+#include <string>
 using namespace std;
 
 // define the n-ary tree node structure
@@ -94,6 +94,36 @@ void printTree(Node<T>* root) {
     printSubtree(root, 1, true);
 }
 
+
+
+template<class T>
+void printSubtreeStr(Node<T>* node, int depth, bool lastChild, string& output) {
+    // append the node's data with appropriate indentation and prefix
+    for (int i = 0; i < depth - 1; i++) {
+        output += "    ";
+    }
+    output += (lastChild ? "└──" : "├──");
+    output += node->data + "\n";
+
+    // recursively print each child node
+    for (int i = 0; i < node->children.size(); i++) {
+        bool isLastChild = (i == node->children.size() - 1);
+        printSubtreeStr(node->children[i], depth + 1, isLastChild, output);
+    }
+}
+
+// function to print the entire tree
+template<class T>
+string treeToString(Node<T>* root) {
+    string output;
+    printSubtreeStr(root, 1, true, output);
+    return output;
+}
+
+
+
+
+
 // example usage
 int main() {
     // create an example n-ary tree
@@ -111,6 +141,8 @@ int main() {
     node5->children = {node7, node8};
     // print the tree using ASCII characters
     printTree(root);
-
+    cout << endl;
+    string output = treeToString(root);
+    cout << output;
     return 0;
 }
