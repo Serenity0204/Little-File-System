@@ -62,18 +62,19 @@ source code of nary tree
 #include <iostream>
 #include <vector>
 #include <string>
+#include <memory>
 using namespace std;
 
 // define the n-ary tree node structure
 template<class T>
 struct Node {
     T data;
-    vector<Node<T>*> children;
+    vector<shared_ptr<Node<T>>> children;
 };
 
 // function to print the subtree rooted at a node
 template<class T>
-void printSubtree(Node<T>* node, int depth, bool lastChild) {
+void printSubtree(shared_ptr<Node<T>> node, int depth, bool lastChild) {
     // print the node's data with appropriate indentation and prefix
     for (int i = 0; i < depth - 1; i++) {
         cout << "   ";
@@ -90,14 +91,14 @@ void printSubtree(Node<T>* node, int depth, bool lastChild) {
 
 // function to print the entire tree
 template<class T>
-void printTree(Node<T>* root) {
+void printTree(shared_ptr<Node<T>> root) {
     printSubtree(root, 1, true);
 }
 
 
 
 template<class T>
-void printSubtreeStr(Node<T>* node, int depth, bool lastChild, string& output) {
+void printSubtreeStr(shared_ptr<Node<T>> node, int depth, bool lastChild, string& output) {
     // append the node's data with appropriate indentation and prefix
     for (int i = 0; i < depth - 1; i++) {
         output += "    ";
@@ -114,7 +115,7 @@ void printSubtreeStr(Node<T>* node, int depth, bool lastChild, string& output) {
 
 // function to print the entire tree
 template<class T>
-string treeToString(Node<T>* root) {
+string treeToString(shared_ptr<Node<T>> root) {
     string output;
     printSubtreeStr(root, 1, true, output);
     return output;
@@ -127,22 +128,24 @@ string treeToString(Node<T>* root) {
 // example usage
 int main() {
     // create an example n-ary tree
-    Node<string>* root = new Node<string>({"test1", {}});
-    Node<string>* node2 = new Node<string>({"test2", {}});
-    Node<string>* node3 = new Node<string>({"test3", {}});
-    Node<string>* node4 = new Node<string>({"test4", {}});
-    Node<string>* node5 = new Node<string>({"test5", {}});
-    Node<string>* node6 = new Node<string>({"test6", {}});
-    Node<string>* node7 = new Node<string>({"test7", {}});
-    Node<string>* node8 = new Node<string>({"test8", {}});
+    // auto root = make_shared<Node<string>>({"test1", {}});
+    vector<shared_ptr<Node<string>>> vec;
+    for(int i = 0; i <= 8; ++i)
+    {
+        auto root = make_shared<Node<string>>();
+        root->data = "test" + to_string(i);
+        root->children = {};
+        vec.push_back(root);
+    }
     
-    root->children = {node2, node3, node4};
-    node2->children = {node5, node6};
-    node5->children = {node7, node8};
+    vec[0]->children = {vec[1], vec[2], vec[3]};
+    vec[1]->children = {vec[4], vec[5]};
+    vec[4]->children = {vec[6], vec[7]};
     // print the tree using ASCII characters
-    printTree(root);
+    printTree(vec[0]);
     cout << endl;
-    string output = treeToString(root);
+    string output = treeToString(vec[0]);
     cout << output;
     return 0;
 }
+
