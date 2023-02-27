@@ -75,6 +75,7 @@ void Engine::input()
                     to_screen_folder += "OPEN SUCCESS";
                     this->_text_file_input_on = true;
                     this->_text_file_input.clear_text();
+                    this->_text_file_input.set_text_no_limit(middleware.get_text_input());
                     this->_folder_terminal.setHeaderText(to_screen_folder);
                     this->_file_terminal.setHeaderText(to_screen_file);
                     this->_file_name.setHeaderText(middleware.get_file_name());

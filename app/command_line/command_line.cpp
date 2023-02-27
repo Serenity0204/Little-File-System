@@ -123,6 +123,7 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
         if(!this->_fm.file_exist(subcmd)) return INVALID;
         this->_fm.set_last_file_open(subcmd);
         middleware.load_file_name(subcmd);
+        middleware.load_text_input(this->_fm.get_file_text(subcmd));
         this->_command_line.set_text(this->_fm.get_base_dir());
         cout << "open" << endl;
         return OPEN;

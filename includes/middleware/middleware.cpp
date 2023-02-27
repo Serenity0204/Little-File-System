@@ -27,3 +27,12 @@ string Middleware::get_file_name()
 {
     return this->_file_name;
 }
+
+void Middleware::load_text_input(string text)
+{
+    this->_text_input = text;
+}
+string Middleware::get_text_input()
+{
+    return this->_text_input;
+}

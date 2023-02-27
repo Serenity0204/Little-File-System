@@ -121,8 +121,6 @@ void FolderFileManager::_read_delete_file_folder()
     ins.open(this->_delete_folder_dir);
     if(ins.fail()) return;
     while(getline(ins, line)) this->_folder_set.insert(line);
-
-
     ins.close();
 }
 
@@ -233,3 +231,24 @@ bool FolderFileManager::write_file(string path)
     return true;
 }
 
+
+string FolderFileManager::get_file_text(string path)
+{
+    int idx = first_not_space(path, 0);
+    if(idx == -1) return "";
+    path = remove_space(path);
+    string file_path = this->_base_dir + path;
+    if(!this->_file_set.count(file_path)) return "";
+
+    string res = "";
+    string line;
+
+    ifstream ins;
+    ins.open(file_path);
+    if(ins.fail()) return "";
+    while(getline(ins, line)) res += line + '\n';
+    ins.close();
+    // remove last \n
+    res = res.substr(0, res.length() - 1);
+    return res;
+}

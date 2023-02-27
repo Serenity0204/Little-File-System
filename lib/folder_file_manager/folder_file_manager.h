@@ -55,7 +55,7 @@ public:
     string& get_base_dir(){return this->_base_dir;}
 
     // open file
-
+    string get_file_text(string path);
     // write
     bool write_file(string path);
 
