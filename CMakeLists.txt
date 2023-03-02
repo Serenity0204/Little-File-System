@@ -93,11 +93,20 @@ ADD_EXECUTABLE(test_parser
     ${APP_FILES}
 )
 
+ADD_EXECUTABLE(test_directory_tree
+    _tests/_test_files/test_directory_tree.cpp
+    ${SOURCE_FILES}
+    ${LIB_FILES}
+    ${APP_FILES}
+)
+
+
 
 
 TARGET_LINK_LIBRARIES(test_lib_app gtest)
 TARGET_LINK_LIBRARIES(test_file_folder_io gtest)
 TARGET_LINK_LIBRARIES(test_parser gtest)
+TARGET_LINK_LIBRARIES(test_directory_tree gtest)
 TARGET_LINK_LIBRARIES(remove_root_dir gtest)
 
 
@@ -112,7 +121,8 @@ if (SFML_FOUND)
     target_link_libraries(main ${SFML_LIBRARIES})
     target_link_libraries(test_lib_app ${SFML_LIBRARIES})
     target_link_libraries(test_file_folder_io ${SFML_LIBRARIES})
-    TARGET_LINK_LIBRARIES(test_parser ${SFML_LIBRARIES})
+    target_link_libraries(test_parser ${SFML_LIBRARIES})
+    target_link_libraries(test_directory_tree ${SFML_LIBRARIES})
     target_link_libraries(remove_root_dir ${SFML_LIBRARIES})
 endif()
 
