@@ -61,12 +61,7 @@ public:
     bool write_file(string path);
 
     // last file open
-    void set_last_file_open(string path)
-    {
-        this->_last_dir_open = this->_base_dir;
-        this->_last_file_open = path;
-    }
-    
+    void set_last_file_open(string path);    
     string get_last_dir_open(){return this->_last_dir_open;}
     string get_last_file_open(){return this->_last_file_open;}
 };

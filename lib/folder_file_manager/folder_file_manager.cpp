@@ -252,3 +252,10 @@ string FolderFileManager::get_file_text(string path)
     res = res.substr(0, res.length() - 1);
     return res;
 }
+
+
+void FolderFileManager::set_last_file_open(string path)
+{
+    this->_last_dir_open = this->_base_dir;
+    this->_last_file_open = path;
+}
