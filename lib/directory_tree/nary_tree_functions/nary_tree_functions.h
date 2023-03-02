@@ -6,7 +6,7 @@ using namespace std;
 
 void print_subtree(shared_ptr<Node> node, int depth, bool lastChild);
 void print_tree(shared_ptr<Node> root);
-void print_subtree_str(shared_ptr<Node> node, int depth, bool lastChild, string& output);
+void subtree_str(shared_ptr<Node> node, int depth, bool lastChild, string& output);
 string tree_to_string(shared_ptr<Node> root);
 
     

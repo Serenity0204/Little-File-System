@@ -11,7 +11,6 @@ struct Node {
     string _data;
     vector<shared_ptr<Node>> _children;
     Node(string data="", vector<shared_ptr<Node>> children={});
-    Node();
     ~Node();
 };
 
