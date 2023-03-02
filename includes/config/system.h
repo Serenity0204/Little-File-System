@@ -66,7 +66,7 @@ const sf::Vector2f FOLDER_TERMINAL_POS = sf::Vector2f(890, 0);
 const sf::Vector2f FILE_TERMINAL_SIZE = sf::Vector2f(150, 500);
 const sf::Vector2f FILE_TERMINAL_POS = sf::Vector2f(1045, 0);
 
-const sf::Vector2f FILE_NAME_SIZE = sf::Vector2f(150, 35);
+const sf::Vector2f FILE_NAME_SIZE = sf::Vector2f(700, 35);
 const sf::Vector2f FILE_NAME_POS = sf::Vector2f(150, 115);
 
 

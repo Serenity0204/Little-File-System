@@ -122,7 +122,7 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
     {
         if(!this->_fm.file_exist(subcmd)) return INVALID;
         this->_fm.set_last_file_open(subcmd);
-        middleware.load_file_name(subcmd);
+        middleware.load_file_name("file name: " + this->_base_dir + subcmd);
         middleware.load_text_input(this->_fm.get_file_text(subcmd));
         this->_command_line.set_text(this->_fm.get_base_dir());
         cout << "open" << endl;
@@ -132,9 +132,14 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
     {
         this->_command_line.set_text(this->_fm.get_base_dir());
         string last_file = this->_fm.get_last_file_open();
+        string cur_dir = this->_fm.get_base_dir();
+        string last_dir = this->_fm.get_last_dir_open();
+
         // trying to save before open
         if(last_file.length() == 0) return INVALID;
+        this->_fm.get_base_dir() = last_dir;
         bool success = this->_fm.write_file(last_file);
+        this->_fm.get_base_dir() = cur_dir;
         if(!success) return INVALID;
         cout << "save" << endl;
         return SAVE;

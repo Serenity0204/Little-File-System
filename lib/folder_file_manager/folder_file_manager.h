@@ -26,6 +26,7 @@ private:
     string _delete_file_dir;
     string _delete_folder_dir;
     string _last_file_open;
+    string _last_dir_open;
 
     unordered_set<string> _folder_set;
     unordered_set<string> _file_set;
@@ -60,7 +61,13 @@ public:
     bool write_file(string path);
 
     // last file open
-    void set_last_file_open(string path){this->_last_file_open = path;}
+    void set_last_file_open(string path)
+    {
+        this->_last_dir_open = this->_base_dir;
+        this->_last_file_open = path;
+    }
+    
+    string get_last_dir_open(){return this->_last_dir_open;}
     string get_last_file_open(){return this->_last_file_open;}
 };
     
