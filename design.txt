@@ -9,12 +9,13 @@ project structure:
       --engine // processing input/output and updating the screen
       --header // header class to show text and draw to the screen
       --input_box // input box that allows user to input from Keyboard
-      --retrieve_data // retrieve data from engine
+      --middleware // retrieve/input data from/to engine
 
     --lib // where all of the non sfml headers reside
       --lib_include_test // used to test the linking in cmake for lib folder works
       --cmd_parser // used to parse command
-      --folder_file_manager // used to manager file and folder iomanip
+      --folder_file_manager // used to manager file and folder
+      --directory_tree // used to show the directory structure in tree format
       --trie // trie class
       --trie_node // trie node struct
       --utils // global helper functions
@@ -30,8 +31,6 @@ project structure:
 
 
 // todo
-- design a data retriver class for engine
-  -after complete the getter use it into the write method in filefolder manager
 - design a text file sytem that allows user to
   1. do prefix search 
   2. undo for the 5 most recent save 
@@ -42,22 +41,13 @@ project structure:
      - file is clicked: open the file
      - folder is clicked: make the folder the root dir
 - CMD command
-  1. design an open command that can open the file in a dir(need to fix to load previous content)
-  2. design a save command that can save the files
   3. design a command that can clear all the directory
   4. design a command that can clear all the files
   5. design a command that can do the compound of #3 and #4
   6. design a move command that can move the file into designated location(hard)
   7. design a move command that can move the folder into designated location included its subdir(very hard)
+  8. design a command that will show instruction
 
 // improve
 change the map(value) of parser to struct instead of vector 
 parsing flag and multiple subcommands
-
-
-
-source code of nary tree 
-
-
-
-
