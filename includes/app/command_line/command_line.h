@@ -7,11 +7,11 @@
 #include <unordered_map>
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "../../includes/input_box/input_box.h"
-#include "../../includes/config/config.h"
-#include "../../lib/folder_file_manager/folder_file_manager.h"
-#include "../../lib/cmd_parser/cmd_parser.h"
-#include "../../includes/middleware/middleware.h"
+#include "../../core/input_box/input_box.h"
+#include "../../core/config/config.h"
+#include "../../components/folder_file_manager/folder_file_manager.h"
+#include "../../components/cmd_parser/cmd_parser.h"
+#include "../../core/middleware/middleware.h"
 using namespace std;
 
 //class FolderFileManager;

@@ -13,8 +13,8 @@
 #include <unordered_set>
 #include <vector>
 #include "../utils/helper_functions.h"
-#include "../../includes/config/config.h"
-#include "../../includes/middleware/middleware.h"
+#include "../../core/config/config.h"
+#include "../../core/middleware/middleware.h"
 
 
 using namespace std;

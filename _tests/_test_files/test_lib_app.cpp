@@ -4,8 +4,8 @@
 
 //------------------------------------------------------------------------------
 //Files we are testing:
-#include "../../lib/lib_include_test/lib_include_test.h"
-#include "../../app/app_include_test/app_include_test.h"
+#include "../../includes/components/lib_include_test/lib_include_test.h"
+#include "../../includes/app/app_include_test/app_include_test.h"
 
 //------------------------------------------------------------------------------
 

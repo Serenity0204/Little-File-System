@@ -5,8 +5,8 @@
 #include <unordered_map>
 //------------------------------------------------------------------------------
 //Files we are testing:
-#include "../../lib/cmd_parser/cmd_parser.h"
-#include "../../includes/config/config.h"
+#include "../../includes/components/cmd_parser/cmd_parser.h"
+#include "../../includes/core/config/config.h"
 //------------------------------------------------------------------------------
 
 using namespace std;

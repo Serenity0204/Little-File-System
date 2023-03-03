@@ -4,7 +4,7 @@
 
 //------------------------------------------------------------------------------
 //Files we are testing:
-#include "../../lib/directory_tree//nary_tree/nary_tree.h"
+#include "../../includes/components/directory_tree/nary_tree/nary_tree.h"
 
 //------------------------------------------------------------------------------
 
