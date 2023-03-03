@@ -1,6 +1,10 @@
 #ifndef HELPER_FUNCTIONS_H
 #define HELPER_FUNCTIONS_H
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+#include <cassert>
+#include <unordered_map>
+#include <memory>
 using namespace std;
 
 int first_not_space(string str, int startIdx);

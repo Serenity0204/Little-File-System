@@ -1,7 +1,11 @@
 #ifndef COMMAND_LINE_H
 #define COMMAND_LINE_H
 
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+#include <cassert>
+#include <unordered_map>
+#include <memory>
 #include <SFML/Graphics.hpp>
 #include "../../includes/input_box/input_box.h"
 #include "../../includes/config/config.h"

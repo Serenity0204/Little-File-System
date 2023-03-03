@@ -1,7 +1,11 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+#include <cassert>
+#include <unordered_map>
+#include <memory>
 #include <SFML/Graphics.hpp>
 
 class Button {

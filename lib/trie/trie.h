@@ -1,6 +1,10 @@
 #ifndef TRIE_H
 #define TRIE_H
-#include <bits/stdc++.h>
+#include <string>
+#include <vector>
+#include <cassert>
+#include <unordered_map>
+#include <memory>
 using namespace std;
 
 
