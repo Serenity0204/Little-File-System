@@ -44,6 +44,20 @@ enable_testing()
 
 
 
+# Define the SFML version to use
+set(SFML_VERSION "2.5.1")
+
+# Declare SFML as an external project
+FetchContent_Declare(
+  SFML
+  URL https://www.sfml-dev.org/files/SFML-${SFML_VERSION}-sources.zip
+)
+
+# Build SFML as part of the project
+FetchContent_MakeAvailable(SFML)
+
+
+
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 #   Grab all cpp files from includes folder
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
@@ -109,20 +123,16 @@ TARGET_LINK_LIBRARIES(test_parser gtest)
 TARGET_LINK_LIBRARIES(test_directory_tree gtest)
 TARGET_LINK_LIBRARIES(remove_root_dir gtest)
 
-
+TARGET_LINK_LIBRARIES(main sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(test_lib_app sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(test_file_folder_io sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(test_parser sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(test_directory_tree sfml-graphics sfml-window sfml-system)
+TARGET_LINK_LIBRARIES(remove_root_dir sfml-graphics sfml-window sfml-system)
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
-find_package(SFML REQUIRED system window graphics network audio)
-if (SFML_FOUND)
-    include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(main ${SFML_LIBRARIES})
-    target_link_libraries(test_lib_app ${SFML_LIBRARIES})
-    target_link_libraries(test_file_folder_io ${SFML_LIBRARIES})
-    target_link_libraries(test_parser ${SFML_LIBRARIES})
-    target_link_libraries(test_directory_tree ${SFML_LIBRARIES})
-    target_link_libraries(remove_root_dir ${SFML_LIBRARIES})
-endif()
+
+
 
