@@ -40,6 +40,8 @@ bool test_nary_tree2(bool debug=false)
   NaryTree nt("test0");
   shared_ptr<Node> root = nt.get_root(); 
   for(int i = 1; i <= 3; ++i) nt.insert(root, "test" + to_string(i));
+  for(int i = 4; i <= 5; ++i) nt.insert(root->_children[0], "test" + to_string(i));
+  for(int i = 6; i <= 7; ++i) nt.insert(root->_children[0]->_children[0], "test" + to_string(i));
   cout << nt << endl;
   return true;
 }
