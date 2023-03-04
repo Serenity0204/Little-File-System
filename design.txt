@@ -52,3 +52,17 @@ project structure:
 // improve
 change the map(value) of parser to struct instead of vector 
 parsing flag and multiple subcommands
+
+
+// file system code
+fs::path current_dir = fs::current_path().parent_path().parent_path();
+current_dir /= "root";
+std::cout << current_dir.string() << std::endl;
+try
+{
+  fs::remove_all(current_dir);
+}
+catch(const std::experimental::filesystem::filesystem_error &e)
+{
+  cout << "err";
+}

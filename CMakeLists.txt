@@ -107,18 +107,28 @@ ADD_EXECUTABLE(test_directory_tree
 )
 
 
+## std filesystem
+TARGET_LINK_LIBRARIES(main stdc++fs)
+TARGET_LINK_LIBRARIES(test_file_folder_io stdc++fs)
+TARGET_LINK_LIBRARIES(test_parser stdc++fs)
+TARGET_LINK_LIBRARIES(test_directory_tree stdc++fs)
+TARGET_LINK_LIBRARIES(remove_root_dir stdc++fs)
 
 
+## gtest
+TARGET_LINK_LIBRARIES(main gtest)
 TARGET_LINK_LIBRARIES(test_file_folder_io gtest)
 TARGET_LINK_LIBRARIES(test_parser gtest)
 TARGET_LINK_LIBRARIES(test_directory_tree gtest)
 TARGET_LINK_LIBRARIES(remove_root_dir gtest)
 
+## sfml
 TARGET_LINK_LIBRARIES(main sfml-graphics sfml-window sfml-system)
 TARGET_LINK_LIBRARIES(test_file_folder_io sfml-graphics sfml-window sfml-system)
 TARGET_LINK_LIBRARIES(test_parser sfml-graphics sfml-window sfml-system)
 TARGET_LINK_LIBRARIES(test_directory_tree sfml-graphics sfml-window sfml-system)
 TARGET_LINK_LIBRARIES(remove_root_dir sfml-graphics sfml-window sfml-system)
+
 ## copy resources file to build
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
 
