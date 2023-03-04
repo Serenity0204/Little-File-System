@@ -73,46 +73,30 @@ FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${INCLUDE
 ADD_EXECUTABLE(test_file_folder_io
     _tests/_test_files/test_file_folder_io.cpp
     ${SOURCE_FILES}
-    ${LIB_FILES}
-    ${APP_FILES}
 )
 
 
 ADD_EXECUTABLE(main
     main.cpp
     ${SOURCE_FILES}
-    ${LIB_FILES}
-    ${APP_FILES}
 )
 
 ADD_EXECUTABLE(remove_root_dir
     remove_root_dir.cpp
     ${SOURCE_FILES}
-    ${LIB_FILES}
-    ${APP_FILES}
 )
 
 ADD_EXECUTABLE(test_parser
     _tests/_test_files/test_parser.cpp
     ${SOURCE_FILES}
-    ${LIB_FILES}
-    ${APP_FILES}
 )
 
 ADD_EXECUTABLE(test_directory_tree
     _tests/_test_files/test_directory_tree.cpp
     ${SOURCE_FILES}
-    ${LIB_FILES}
-    ${APP_FILES}
 )
 
 
-## std filesystem
-TARGET_LINK_LIBRARIES(main stdc++fs)
-TARGET_LINK_LIBRARIES(test_file_folder_io stdc++fs)
-TARGET_LINK_LIBRARIES(test_parser stdc++fs)
-TARGET_LINK_LIBRARIES(test_directory_tree stdc++fs)
-TARGET_LINK_LIBRARIES(remove_root_dir stdc++fs)
 
 
 ## gtest
