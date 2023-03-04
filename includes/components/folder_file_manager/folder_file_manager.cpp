@@ -16,7 +16,11 @@ FolderFileManager::FolderFileManager()
 
 void FolderFileManager::_init()
 {
+    #ifdef WIN32
     mkdir("../../root/"); 
+    #else
+    mkdir("../../root/", 0755);
+    #endif
     ifstream ins;
     ins.open(this->_delete_file_dir);
     if(ins.fail())
@@ -37,8 +41,11 @@ void FolderFileManager::_init()
         outs.close();  
     }
     ins.close();
-
+    #ifdef WIN32
     mkdir(this->_base_dir.c_str());
+    #else
+    mkdir(this->_base_dir.c_str(), 0755);
+    #endif
 }
 
 FolderFileManager::~FolderFileManager(){}
@@ -77,10 +84,14 @@ bool FolderFileManager::add_folder(string path)
 
     ofstream outs;
     string file_path = this->_base_dir + path + "/";
-    if(this->_folder_set.count(file_path) > 0) return false;
+    if(this->_folder_set.count(file_path) > 0) return false;   
     
+    #ifdef WIN32
     if(mkdir(file_path.c_str()) == -1) return false;
-    
+    #else
+    if(mkdir(file_path.c_str(), 0755) == -1) return false;
+    #endif
+
     this->_folder_set.insert(file_path);
     // add folder path including ending /
     this->_add_delete_file_folder(file_path, false);
