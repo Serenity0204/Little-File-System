@@ -62,9 +62,6 @@ FetchContent_MakeAvailable(SFML)
 #   Grab all cpp files from includes folder
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 set(INCLUDES_FOLDER includes)
-set(LIB_FOLDER lib)
-set(APP_FOLDER app)
-
 FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${INCLUDES_FOLDER}/*.cpp")
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
