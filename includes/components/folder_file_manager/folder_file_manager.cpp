@@ -16,7 +16,7 @@ FolderFileManager::FolderFileManager()
 
 void FolderFileManager::_init()
 {
-    mkdir("../../root/");
+    mkdir("../../root/"); 
     ifstream ins;
     ins.open(this->_delete_file_dir);
     if(ins.fail())

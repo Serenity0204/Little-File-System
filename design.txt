@@ -3,26 +3,27 @@ project structure:
 
     --assets // used to store image and Font
 
-    --includes // where all of the sfml templates reside
-      --button // clickable button class, and buttons class for the button used in this project
-      --config // managing global resource, and system variables
-      --engine // processing input/output and updating the screen
-      --header // header class to show text and draw to the screen
-      --input_box // input box that allows user to input from Keyboard
-      --middleware // retrieve/input data from/to engine
+    --includes // where all of the code resides
+      --core // where all of the sfml templates reside
+        --button // clickable button class, and buttons class for the button used in this project
+        --config // managing global resource, and system variables
+        --engine // processing input/output and updating the screen
+        --header // header class to show text and draw to the screen
+        --input_box // input box that allows user to input from Keyboard
+        --middleware // retrieve/input data from/to engine
 
-    --lib // where all of the non sfml headers reside
-      --lib_include_test // used to test the linking in cmake for lib folder works
-      --cmd_parser // used to parse command
-      --folder_file_manager // used to manager file and folder
-      --directory_tree // used to show the directory structure in tree format
-      --trie // trie class
-      --trie_node // trie node struct
-      --utils // global helper functions
+      --component // where all of the non sfml headers reside
+        --lib_include_test // used to test the linking in cmake for lib folder works
+        --cmd_parser // used to parse command
+        --folder_file_manager // used to manager file and folder
+        --directory_tree // used to show the directory structure in tree format
+        --trie // trie class
+        --trie_node // trie node struct
+        --utils // global helper functions
       
-    --app // where all of the sfml headers for this project reside
-      --app_include_test // used to test the linking in cmake for app folder works
-      --command_line // a command line class that can take input and parse command
+      --app // where all of the sfml headers for this project reside
+        --directory_tree // directory tree to show on screen, implemented by nary tree
+        --command_line // a command line class that can take input and parse command
     --main.cpp // the main entry of the program
 
     --design.txt // project introduction

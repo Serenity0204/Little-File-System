@@ -65,17 +65,9 @@ set(INCLUDES_FOLDER includes)
 set(LIB_FOLDER lib)
 set(APP_FOLDER app)
 
-FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${INCLUDES_FOLDER}/*.cpp" )
-FILE(GLOB_RECURSE LIB_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${LIB_FOLDER}/*.cpp" )
-FILE(GLOB_RECURSE APP_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${APP_FOLDER}/*.cpp" )
+FILE(GLOB_RECURSE SOURCE_FILES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}   "${INCLUDES_FOLDER}/*.cpp")
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-ADD_EXECUTABLE(test_lib_app
-    _tests/_test_files/test_lib_app.cpp
-    ${SOURCE_FILES}
-    ${LIB_FILES}
-    ${APP_FILES}
-)
 
 
 ADD_EXECUTABLE(test_file_folder_io
@@ -117,14 +109,12 @@ ADD_EXECUTABLE(test_directory_tree
 
 
 
-TARGET_LINK_LIBRARIES(test_lib_app gtest)
 TARGET_LINK_LIBRARIES(test_file_folder_io gtest)
 TARGET_LINK_LIBRARIES(test_parser gtest)
 TARGET_LINK_LIBRARIES(test_directory_tree gtest)
 TARGET_LINK_LIBRARIES(remove_root_dir gtest)
 
 TARGET_LINK_LIBRARIES(main sfml-graphics sfml-window sfml-system)
-TARGET_LINK_LIBRARIES(test_lib_app sfml-graphics sfml-window sfml-system)
 TARGET_LINK_LIBRARIES(test_file_folder_io sfml-graphics sfml-window sfml-system)
 TARGET_LINK_LIBRARIES(test_parser sfml-graphics sfml-window sfml-system)
 TARGET_LINK_LIBRARIES(test_directory_tree sfml-graphics sfml-window sfml-system)

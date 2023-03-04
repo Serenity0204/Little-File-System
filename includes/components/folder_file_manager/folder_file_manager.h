@@ -14,10 +14,11 @@
 #include "../utils/helper_functions.h"
 #include "../../core/config/config.h"
 #include "../../core/middleware/middleware.h"
-
+#include <unistd.h>
 
 using namespace std;
-
+// if mac replaced by mkdir(dirPath, 0777) for all mkdir 
+// and #include <unistd.h> for rmdir for mac
 class FolderFileManager
 {
 private:
