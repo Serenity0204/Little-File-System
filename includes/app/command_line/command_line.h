@@ -11,7 +11,7 @@
 #include "../../core/config/config.h"
 #include "../../components/folder_file_manager/folder_file_manager.h"
 #include "../../components/cmd_parser/cmd_parser.h"
-#include "../../core/middleware/middleware.h"
+#include "../../utils/middleware/middleware.h"
 using namespace std;
 
 //class FolderFileManager;

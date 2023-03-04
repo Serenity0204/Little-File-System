@@ -10,7 +10,6 @@ project structure:
         --engine // processing input/output and updating the screen
         --header // header class to show text and draw to the screen
         --input_box // input box that allows user to input from Keyboard
-        --middleware // retrieve/input data from/to engine
 
       --component // where all of the non sfml headers reside
         --lib_include_test // used to test the linking in cmake for lib folder works
@@ -19,15 +18,18 @@ project structure:
         --directory_tree // used to show the directory structure in tree format
         --trie // trie class
         --trie_node // trie node struct
-        --utils // global helper functions
       
       --app // where all of the sfml headers for this project reside
         --directory_tree // directory tree to show on screen, implemented by nary tree
         --command_line // a command line class that can take input and parse command
+
+      --utils // middleware and helper function
+        --middleware // retrieve/input data from/to engine
+        --helper // helper functions
+
     --main.cpp // the main entry of the program
-
+    --remove_root_dir.cpp // remove root script
     --design.txt // project introduction
-
     --CMakeLists.txt // cmake for this project
 
 

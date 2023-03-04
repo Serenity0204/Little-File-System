@@ -11,9 +11,9 @@
 #include <cstdio>
 #include <unordered_set>
 #include <vector>
-#include "../utils/helper_functions.h"
+#include "../../utils/helper/helper_functions.h"
 #include "../../core/config/config.h"
-#include "../../core/middleware/middleware.h"
+#include "../../utils/middleware/middleware.h"
 #include <unistd.h>
 
 using namespace std;
