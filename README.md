@@ -64,7 +64,7 @@ Can be found in https://github.com/Serenity0204/Little_File_System/blob/master/d
 
 ## System Setup
 
-To run this project, please follow the system requirements below, this project CAN ONLY RUN on windows.
+To run this project, please follow the system requirements below.
 
 
 `Windows: `
@@ -73,3 +73,4 @@ To run this project, please follow the system requirements below, this project C
 
 `SFML setup: `
   - windows: https://docs.google.com/document/d/13Tn2sq9-CtAMuUenALlj1l4f8xL-BzeI8-DKRjhdPu0/edit?usp=sharing
+  - mac https://docs.google.com/document/d/1ujZWMMvwwIH_dAd-X4JvcVdtn7B71-joOjbOo-vVXLY/edit?usp=sharing
