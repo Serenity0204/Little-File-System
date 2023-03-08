@@ -3,11 +3,11 @@
 #include <iomanip>
 #include <string>
 #include <fstream>
-#include <windows.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <cstdio>
 #include <queue>
+#include <unistd.h>
 using namespace std;
 
 
