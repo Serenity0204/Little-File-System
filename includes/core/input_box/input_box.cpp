@@ -25,6 +25,12 @@ InputBox::InputBox(int font_size,sf::Vector2f box_size, sf::Vector2f position ,s
     else
         textbox.setString(text);
 }
+void InputBox::setColor(sf::Color color)
+{
+    this->textbox.setFillColor(color);
+}
+
+
 
 void InputBox::set_text_no_limit(string str)
 {
@@ -87,7 +93,10 @@ void InputBox::drawTo(sf::RenderWindow &window) {
 void InputBox::typedOn(sf::Event &input) {
     if (isSelected) {
         int charTyped = input.text.unicode;
-
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::C)) return;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::V)) return;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::X)) return;
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::A)) return;
         // Only allow normal inputs:
         if (charTyped < 128) {
             if (hasLimit) {

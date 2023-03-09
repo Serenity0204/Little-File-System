@@ -22,8 +22,6 @@ void Engine::input()
     sf::Event event;
     while (this->_window.pollEvent(event))
     {
-        // calling update event helper functions
-        this->_update_buttons_event(event);
 
         // User quit
         if(event.type == sf::Event::Closed)
@@ -35,93 +33,27 @@ void Engine::input()
         // User input text
         if(event.type == sf::Event::TextEntered)
         {  
+            bool ctrlC = (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::C));
+            bool ctrlX = (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::X));
+            bool ctrlV = (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::V));
+            bool ctrlA = (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::A));
             this->_cmd.typed_cmd(event);
             if(this->_text_file_input_on) this->_text_file_input.typedOn(event);
+            if(!ctrlC && !ctrlX && !ctrlV && !ctrlA) 
+            {
+                this->_is_selected = false;
+                this->_text_file_input.setColor(sf::Color::Red);
+            }
             break;
         }
         
-        // test retrieve
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-        {
-            cout << "text is:" << middleware.get_input_box_text() << endl;
-            break;
-        }
-
         // update cmd event
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-        {
-            vector<string> strs_to_screen_folder;
-            vector<string> strs_to_screen_file;
-            strs_to_screen_folder.clear();
-            strs_to_screen_file.clear();
-            string to_screen_folder = "FOLDER TERMINAL:\n\n";
-            string to_screen_file = "FILE TERMINAL:\n\n";
-            bool control_file = false, control_folder = false;
-
-            int code = this->_cmd.update_cmd_event(strs_to_screen_folder, strs_to_screen_file);
-            if(code != INVALID)
-            {
-                if(code != LS && code != OPEN && code != SAVE)
-                {
-                    to_screen_file += "SUCCESS";
-                    to_screen_folder += "SUCCESS";
-                    this->_folder_terminal.setHeaderText(to_screen_folder);
-                    this->_file_terminal.setHeaderText(to_screen_file);
-                    break;
-                }         
-                if(code == OPEN)
-                {
-                    to_screen_file += "OPEN SUCCESS";
-                    to_screen_folder += "OPEN SUCCESS";
-                    this->_text_file_input_on = true;
-                    this->_text_file_input.clear_text();
-                    this->_text_file_input.set_text_no_limit(middleware.get_text_input());
-                    this->_folder_terminal.setHeaderText(to_screen_folder);
-                    this->_file_terminal.setHeaderText(to_screen_file);
-                    this->_file_name.setHeaderText(middleware.get_file_name());
-                    break;
-                }
-                if(code == SAVE)
-                {
-                    to_screen_file += "SAVE SUCCESS";
-                    to_screen_folder += "SAVE SUCCESS";
-                    this->_text_file_input_on = false;
-                    this->_text_file_input.clear_text();
-                    this->_folder_terminal.setHeaderText(to_screen_folder);
-                    this->_file_terminal.setHeaderText(to_screen_file);
-                    break;
-                }
-
-                if(code == LS && strs_to_screen_folder.size() == 1 && strs_to_screen_folder[0] == "")
-                {
-                    to_screen_folder += "NO FOLDER EXISTS";
-                    this->_folder_terminal.setHeaderText(to_screen_folder);
-                    control_folder = true;
-                }
-                if(code == LS && strs_to_screen_file.size() == 1 && strs_to_screen_file[0] == "")
-                {
-                    to_screen_file += "NO FILE EXISTS";
-                    this->_file_terminal.setHeaderText(to_screen_file);
-                    control_file = true;
-                }
-                if(control_folder && control_file) break;
-
-                for(int i = 0; i < strs_to_screen_folder.size(); ++i) to_screen_folder += strs_to_screen_folder[i] + '\n';
-                for(int i = 0; i < strs_to_screen_file.size(); ++i) to_screen_file += strs_to_screen_file[i] + '\n';
-
-                this->_folder_terminal.setHeaderText(to_screen_folder);
-                this->_file_terminal.setHeaderText(to_screen_file);
-                break;
-            }
-            to_screen_folder += "FAILURE";
-            to_screen_file += "FAILURE";
-
-            this->_folder_terminal.setHeaderText(to_screen_folder);
-            this->_file_terminal.setHeaderText(to_screen_file);
-            break;
-        }
-       if(this->_text_file_input_on) this->_text_file_input.update_input_box(this->_window, event);
-       this->_cmd.update_cmd(this->_window, event);
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) this->_update_terminal_event();
+        if(this->_text_file_input_on) this->_text_file_input.update_input_box(this->_window, event);
+        // calling update event helper functions
+        this->_update_buttons_event(event);
+        this->_update_keyboard_event();
+        this->_cmd.update_cmd(this->_window, event);
     }
 }
 
@@ -188,6 +120,7 @@ void Engine::run()
 void Engine::_init()
 {
     this->_text_file_input_on = false;
+    this->_is_selected = false;
     this->_buttons = Buttons();
     this->_folder_terminal = Header("FOLDER TERMINAL", FOLDER_TERMINAL_SIZE, FOLDER_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_file_terminal = Header("FILE TERMINAL", FILE_TERMINAL_SIZE, FILE_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
@@ -199,11 +132,126 @@ void Engine::_init()
 
 
 
+// update events
+// *****************************************************************************************************************
+
+// update keyboard
+void Engine::_update_keyboard_event()
+{
+    // copy
+    if(this->_text_file_input_on && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+    {
+        if(!this->_text_file_input.is_selected()) return;
+        if(!this->_is_selected) return;
+        cout << "copy:" << middleware.get_input_box_text() << endl;
+        middleware.load_text_copy(middleware.get_input_box_text());
+        this->_is_selected = false;
+        return;
+    }
+    // cut
+    if(this->_text_file_input_on && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+    {
+        if(!this->_text_file_input.is_selected()) return;
+        if(!this->_is_selected) return;
+        cout << "cut:" << middleware.get_input_box_text() << endl;
+        middleware.load_text_copy(middleware.get_input_box_text());
+        this->_text_file_input.clear_text();
+        this->_is_selected = false;
+        return;
+    }
+    // paste
+    if(this->_text_file_input_on && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::V))
+    {
+        if(!this->_text_file_input.is_selected()) return;
+        cout << "paste:" << middleware.get_text_copy() <<endl;
+        string text = middleware.get_text_copy();
+        this->_text_file_input.set_text_no_limit(text);
+        this->_is_selected = false;
+        return;
+    }
+    if(this->_text_file_input_on && sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) && sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    {
+        if(!this->_text_file_input.is_selected()) return;
+        cout << "select" << endl;
+        this->_is_selected = true;
+        this->_text_file_input.setColor(sf::Color::Blue);
+        return;
+    }
+}
 
 
+// update terminal
+void Engine::_update_terminal_event()
+{
+    vector<string> strs_to_screen_folder;
+    vector<string> strs_to_screen_file;
+    strs_to_screen_folder.clear();
+    strs_to_screen_file.clear();
+    string to_screen_folder = "FOLDER TERMINAL:\n\n";
+    string to_screen_file = "FILE TERMINAL:\n\n";
+    bool control_file = false, control_folder = false;
 
+    int code = this->_cmd.update_cmd_event(strs_to_screen_folder, strs_to_screen_file);
+    if(code != INVALID)
+    {
+        if(code != LS && code != OPEN && code != SAVE)
+        {
+            to_screen_file += "SUCCESS";
+            to_screen_folder += "SUCCESS";
+            this->_folder_terminal.setHeaderText(to_screen_folder);
+            this->_file_terminal.setHeaderText(to_screen_file);
+            return;
+        }         
+        if(code == OPEN)
+        {
+            to_screen_file += "OPEN SUCCESS";
+            to_screen_folder += "OPEN SUCCESS";
+            this->_text_file_input_on = true;
+            this->_text_file_input.clear_text();
+            this->_text_file_input.set_text_no_limit(middleware.get_text_input());
+            this->_folder_terminal.setHeaderText(to_screen_folder);
+            this->_file_terminal.setHeaderText(to_screen_file);
+            this->_file_name.setHeaderText(middleware.get_file_name());
+            return;
+        }
+        if(code == SAVE)
+        {
+            to_screen_file += "SAVE SUCCESS";
+            to_screen_folder += "SAVE SUCCESS";
+            this->_text_file_input_on = false;
+            this->_text_file_input.clear_text();
+            this->_folder_terminal.setHeaderText(to_screen_folder);
+            this->_file_terminal.setHeaderText(to_screen_file);
+            return;
+        }
 
+        if(code == LS && strs_to_screen_folder.size() == 1 && strs_to_screen_folder[0] == "")
+        {
+            to_screen_folder += "NO FOLDER EXISTS";
+            this->_folder_terminal.setHeaderText(to_screen_folder);
+            control_folder = true;
+        }
+        if(code == LS && strs_to_screen_file.size() == 1 && strs_to_screen_file[0] == "")
+        {
+            to_screen_file += "NO FILE EXISTS";
+            this->_file_terminal.setHeaderText(to_screen_file);
+            control_file = true;
+        }
+        if(control_folder && control_file) return;
 
+        for(int i = 0; i < strs_to_screen_folder.size(); ++i) to_screen_folder += strs_to_screen_folder[i] + '\n';
+        for(int i = 0; i < strs_to_screen_file.size(); ++i) to_screen_file += strs_to_screen_file[i] + '\n';
+
+        this->_folder_terminal.setHeaderText(to_screen_folder);
+        this->_file_terminal.setHeaderText(to_screen_file);
+        return;
+    }
+    to_screen_folder += "FAILURE";
+    to_screen_file += "FAILURE";
+
+    this->_folder_terminal.setHeaderText(to_screen_folder);
+    this->_file_terminal.setHeaderText(to_screen_file);
+}
 
 
 // update buttons event
@@ -226,4 +274,5 @@ void Engine::_update_buttons_event(sf::Event& event)
     }
 }
 
+// *****************************************************************************************************************
 

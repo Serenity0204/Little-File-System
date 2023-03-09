@@ -15,6 +15,7 @@ private:
     string _input_box_text;
     string _file_name;
     string _text_input;
+    string _text_copy;
 public:
     Middleware();
     ~Middleware();
@@ -24,6 +25,8 @@ public:
     string get_file_name();
     void load_text_input(string text);
     string get_text_input();
+    void load_text_copy(string text);
+    string get_text_copy();
 };
 
 extern Middleware middleware;

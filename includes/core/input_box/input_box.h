@@ -31,9 +31,9 @@ public:
 	void setSelected(bool sel);
 
 	std::string getText();
-
+	bool is_selected(){return this->isSelected;}
 	void clear_text();
-
+	void setColor(sf::Color color);
 	sf::Text& get_text_box(){return this->textbox;}
 	void drawTo(sf::RenderWindow &window);
 	// Function for event loop:

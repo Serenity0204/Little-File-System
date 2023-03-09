@@ -9,7 +9,7 @@ CommandLine::CommandLine()
 {
     this->_base_dir = this->_fm.get_base_dir();
     this->_cur_dir = this->_base_dir;
-    
+    this->_open = false;
     this->_command_line = InputBox(CMD_FONT_SIZE, COMMAND_LINE_SIZE, COMMAND_LINE_POS, sf::Color::Red, sf::Color::Black, true, this->_base_dir,false);
     this->_command_line.setLimit(true, CMD_CHAR_LIMIT);
     
@@ -120,16 +120,19 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
     }
     if(code == OPEN)
     {
+        if(this->_open) return INVALID;
         if(!this->_fm.file_exist(subcmd)) return INVALID;
         this->_fm.set_last_file_open(subcmd);
         middleware.load_file_name("file name: " + this->_base_dir + subcmd);
         middleware.load_text_input(this->_fm.get_file_text(subcmd));
         this->_command_line.set_text(this->_fm.get_base_dir());
         cout << "open" << endl;
+        this->_open = true;
         return OPEN;
     }
     if(code == SAVE)
     {
+        if(!this->_open) return INVALID;
         this->_command_line.set_text(this->_fm.get_base_dir());
         string last_file = this->_fm.get_last_file_open();
         string cur_dir = this->_fm.get_base_dir();
@@ -142,6 +145,7 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
         this->_fm.get_base_dir() = cur_dir;
         if(!success) return INVALID;
         cout << "save" << endl;
+        this->_open = false;
         return SAVE;
     }
 

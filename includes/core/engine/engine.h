@@ -27,14 +27,15 @@ private:
     InputBox _text_file_input;
     // private member variables here
     bool _text_file_input_on;
-
+    bool _is_selected;
 
     // private helper functions here
     // init
     void _init();
     // update
     void _update_buttons_event(sf::Event& event);
-
+    void _update_keyboard_event();
+    void _update_terminal_event();
 public:
     // friend class
     friend class Middleware;

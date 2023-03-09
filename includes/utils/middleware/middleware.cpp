@@ -36,3 +36,12 @@ string Middleware::get_text_input()
 {
     return this->_text_input;
 }
+
+void Middleware::load_text_copy(string text)
+{
+    this->_text_copy = text;
+}
+string Middleware::get_text_copy()
+{
+    return this->_text_copy;
+}
