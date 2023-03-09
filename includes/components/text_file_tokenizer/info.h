@@ -1,10 +1,9 @@
 #ifndef INFO_H
 #define INFO_H
+
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <unordered_map>
-#include <vector>
 using namespace std;
 
 struct Info

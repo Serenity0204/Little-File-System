@@ -17,7 +17,8 @@ public:
     NaryTree(string data);
     ~NaryTree();
     friend std::ostream& operator << (std::ostream& outs, const NaryTree& print_me);
-    void insert(shared_ptr<Node> parent, string data);
+    void insert(shared_ptr<Node> parent, shared_ptr<Node> self);
+    void set_root(shared_ptr<Node> root);
     string tree_string();
     shared_ptr<Node>& get_root(){return this->_root;}
 private:

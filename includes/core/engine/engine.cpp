@@ -30,6 +30,17 @@ void Engine::input()
             this->_window.close();
             break;
         }
+
+        // test directory tree
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+        {
+            DirectoryTree d;
+            d.build();
+            cout << "test directory tree engine starts:" << endl << endl;
+            cout << d.get_directory_tree_string() << endl;
+            cout << "test directory tree engine ends." << endl;
+        }
+
         // User input text
         if(event.type == sf::Event::TextEntered)
         {  
@@ -49,10 +60,13 @@ void Engine::input()
         
         // update cmd event
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) this->_update_terminal_event();
+        // update text file input
         if(this->_text_file_input_on) this->_text_file_input.update_input_box(this->_window, event);
         // calling update event helper functions
         this->_update_buttons_event(event);
+        // update keyboard
         this->_update_keyboard_event();
+        // update commandline
         this->_cmd.update_cmd(this->_window, event);
     }
 }

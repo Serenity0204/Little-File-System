@@ -4,77 +4,48 @@
 
 //------------------------------------------------------------------------------
 //Files we are testing:
-#include "../../includes/components/nary_tree/nary_tree/nary_tree.h"
-#include "../../includes/components/text_file_tokenizer/text_file_tokenizer.h"
+#include "../../includes/app/directory_tree/directory_tree.h"
 //------------------------------------------------------------------------------
 
 using namespace std;
 
 
-bool test_nary_tree1(bool debug=false)
+
+bool test_directory_tree1(bool debug=false)
 {
-  // auto root = make_shared<Node<string>>({"test1", {}});
-  vector<shared_ptr<Node>> vec;
-  for(int i = 0; i <= 8; ++i)
-  {
-      auto root = make_shared<Node>();
-      root->_data = "test" + to_string(i);
-      root->_children = {};
-      vec.push_back(root);
-  }
-  
-  vec[0]->_children = {vec[1], vec[2], vec[3]};
-  vec[1]->_children = {vec[4], vec[5]};
-  vec[4]->_children = {vec[6], vec[7]};
-  // print the tree using ASCII characters
-  //print_tree(vec[0]);
-  cout << endl;
-  string output = tree_to_string(vec[0]);
-  //cout << output;
+  DirectoryTree d;
+  d.build();
+  cout << "test directory tree 1 starts:" << endl << endl;
+  cout << d;
+  cout << "test directory tree 1 ends." << endl;
   return true;
 }
 
-bool test_nary_tree2(bool debug=false)
+bool test_directory_tree2(bool debug=false)
 {
-  
-  NaryTree nt("test0");
-  shared_ptr<Node> root = nt.get_root(); 
-  for(int i = 1; i <= 3; ++i) nt.insert(root, "test" + to_string(i));
-  for(int i = 4; i <= 5; ++i) nt.insert(root->_children[0], "test" + to_string(i));
-  for(int i = 6; i <= 7; ++i) nt.insert(root->_children[0]->_children[0], "test" + to_string(i));
-  //cout << nt << endl;
-  cout << nt.tree_string() << endl;
+  DirectoryTree d;
+  d.build();
+  cout << "test directory tree 2 starts:" << endl << endl;
+  cout << d.get_directory_tree_string() << endl;
+  cout << "test directory tree 2 ends." << endl;
   return true;
 }
-
-bool test_file_tk1(bool debug=false)
-{
-  TextFileTokenizer tk;
-  tk.tokenize();
-  vector<Info> vec = tk.get_infos();
-  for(int i = 0; i < vec.size(); ++i) cout << vec[i] << endl;
-  return true;
-}
-
 
 //Lord help me! 
 const bool debug = false;
 
-TEST(TEST_NARY_TREE, TestNaryTree1)
+TEST(TEST_DIRECTORY_TREE, TestDirectoryTree1)
 {
-  bool success = test_nary_tree1(debug);
+  bool success = test_directory_tree1(debug);
   EXPECT_EQ(success, true);
 }
-TEST(TEST_NARY_TREE, TestNaryTree2)
+
+TEST(TEST_DIRECTORY_TREE, TestDirectoryTree2)
 {
-  bool success = test_nary_tree2(debug);
+  bool success = test_directory_tree2(debug);
   EXPECT_EQ(success, true);
 }
-TEST(TEST_FILE_TK, TestFileTk1)
-{
-  bool success = test_file_tk1(debug);
-  EXPECT_EQ(success, true);
-}
+
 int main(int argc, char **argv)
 {
   ::testing::InitGoogleTest(&argc, argv);
