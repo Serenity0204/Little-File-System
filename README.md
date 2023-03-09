@@ -17,6 +17,9 @@ desired behaviours, the custom part of command is quoted {}, and the command is 
 ## Demo
 use this to generate image link: https://postimages.org/
 
+* directory tree
+[![directory-tree.png](https://i.postimg.cc/3R5mB8XT/directory-tree.png)](https://postimg.cc/Mc5nZ83P) 
+
 * touch
 [![touch.png](https://i.postimg.cc/3NNJW8xn/touch.png)](https://postimg.cc/p5Nt6t8F)
 * mkdir
@@ -53,7 +56,7 @@ Can be found in https://github.com/Serenity0204/Little_File_System/blob/master/d
 
 
 ## Features
-
+- has a directory tree that shows the files and folders in tree like format
 - has persistent storage that the files and folders will all be saved after closing the program, the data will remain when restart the program
 - supports complex file and folder operations like create, read, update, and delete
 - allows the user to switch between directories
