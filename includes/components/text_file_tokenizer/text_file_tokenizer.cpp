@@ -8,13 +8,9 @@ TextFileTokenizer::TextFileTokenizer()
     this->_cache_folder = vector<string>();
     this->_infos = vector<Info>();
     this->_read();
-    this->tokenize();
 }
 
-TextFileTokenizer::~TextFileTokenizer()
-{
-
-}
+TextFileTokenizer::~TextFileTokenizer(){}
 
 void TextFileTokenizer::_read()
 {
@@ -39,15 +35,11 @@ void TextFileTokenizer::_read()
         line = line.substr(6, line.length());
         this->_cache_folder.push_back(line);
     }
-
-
-    cout << "read:" << endl;
-    for(int i = 0; i < this->_cache_file.size(); ++i) cout << this->_cache_file[i] << endl;
-    for(int i = 0; i < this->_cache_folder.size(); ++i) cout << this->_cache_folder[i] << endl;
-    cout << "end read" << endl << endl;
-
-
     ins.close();
+    // cout << "read:" << endl;
+    // for(int i = 0; i < this->_cache_file.size(); ++i) cout << this->_cache_file[i] << endl;
+    // for(int i = 0; i < this->_cache_folder.size(); ++i) cout << this->_cache_folder[i] << endl;
+    // cout << "end read" << endl << endl;
 }
 
 void TextFileTokenizer::_tokenize_helper(bool file_or_folder, int idx)
@@ -77,7 +69,5 @@ void TextFileTokenizer::tokenize()
     this->_infos.clear();
     for(int i = 0; i < this->_cache_folder.size(); ++i) this->_tokenize_helper(false, i);
     for(int i = 0; i < this->_cache_file.size(); ++i) this->_tokenize_helper(true, i);
-
-    for(int i = 0; i < this->_infos.size(); ++i) cout << this->_infos[i] << endl;
-    
+    //for(int i = 0; i < this->_infos.size(); ++i) cout << this->_infos[i] << endl;
 }

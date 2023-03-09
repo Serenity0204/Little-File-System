@@ -49,6 +49,9 @@ bool test_nary_tree2(bool debug=false)
 bool test_file_tk1(bool debug=false)
 {
   TextFileTokenizer tk;
+  tk.tokenize();
+  vector<Info> vec = tk.get_infos();
+  for(int i = 0; i < vec.size(); ++i) cout << vec[i] << endl;
   return true;
 }
 
@@ -56,16 +59,16 @@ bool test_file_tk1(bool debug=false)
 //Lord help me! 
 const bool debug = false;
 
-// TEST(TEST_NARY_TREE, TestNaryTree1)
-// {
-//   bool success = test_nary_tree1(debug);
-//   EXPECT_EQ(success, true);
-// }
-// TEST(TEST_NARY_TREE, TestNaryTree2)
-// {
-//   bool success = test_nary_tree2(debug);
-//   EXPECT_EQ(success, true);
-// }
+TEST(TEST_NARY_TREE, TestNaryTree1)
+{
+  bool success = test_nary_tree1(debug);
+  EXPECT_EQ(success, true);
+}
+TEST(TEST_NARY_TREE, TestNaryTree2)
+{
+  bool success = test_nary_tree2(debug);
+  EXPECT_EQ(success, true);
+}
 TEST(TEST_FILE_TK, TestFileTk1)
 {
   bool success = test_file_tk1(debug);
