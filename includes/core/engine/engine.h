@@ -21,11 +21,16 @@ private:
 
     // system setup here
     Buttons _buttons;
+
     Header _folder_terminal;
     Header _file_terminal;
     Header _file_name;
-    CommandLine _cmd;
+    Header _dir_tree_screen;
+
     InputBox _text_file_input;
+
+    CommandLine _cmd;
+    DirectoryTree _directory_tree;
     // private member variables here
     bool _text_file_input_on;
     bool _is_selected;

@@ -28,7 +28,7 @@ void DirectoryTree::build()
     this->_cache.clear();
     this->_tk.tokenize();
     vector<Info> infos = this->_tk.get_infos();
-    
+
     shared_ptr<Node> root = make_shared<Node>("root");
     this->_nary_tree.set_root(root);
     this->_cache.push_back(root);
@@ -39,6 +39,7 @@ void DirectoryTree::build()
         shared_ptr<Node> user = make_shared<Node>("user");
         this->_nary_tree.insert(this->_nary_tree.get_root(), user);
         this->_cache.push_back(user);
+        this->_str_representation = this->_nary_tree.tree_string();
         return;
     }
 

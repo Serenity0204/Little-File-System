@@ -52,7 +52,9 @@ project structure:
   6. design a move command that can move the file into designated location(hard)
   7. design a move command that can move the folder into designated location included its subdir(very hard)
   8. design a command that will show instruction
-
+- Directory tree
+  1. make the header change its font size according to the header's text
+  
 // improve
 change the map(value) of parser to struct instead of vector 
 parsing flag and multiple subcommands

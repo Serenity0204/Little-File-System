@@ -88,6 +88,8 @@ void Engine::display()
         this->_text_file_input.drawTo(this->_window);
         this->_file_name.drawTo(this->_window);
     }
+    if(!this->_text_file_input_on) this->_dir_tree_screen.drawTo(this->_window);
+
     // display buttons
     this->_buttons.draw_buttons(this->_window);
 
@@ -100,11 +102,16 @@ void Engine::run()
     // set the position and font before running
     sf::Font arial = config.get_font(ARIAL);
     this->_cmd.setFont(arial);
+
     this->_file_name.setFont(arial);
     this->_folder_terminal.setFont(arial);
     this->_file_terminal.setFont(arial);
+    this->_dir_tree_screen.setFont(arial);
+
     this->_text_file_input.setFont(arial);
     this->_text_file_input.setLimit(true, TEXT_INPUT_LIMIT);
+    
+
     // main loop
     while (this->_window.isOpen())
     {
@@ -135,12 +142,21 @@ void Engine::_init()
 {
     this->_text_file_input_on = false;
     this->_is_selected = false;
+
+    // app components
+    // initialize command line first b/c it will initialize file folder manager
+    this->_cmd = CommandLine();
+    this->_directory_tree = DirectoryTree();
+    this->_directory_tree.build();
+
+    // preowned
     this->_buttons = Buttons();
     this->_folder_terminal = Header("FOLDER TERMINAL", FOLDER_TERMINAL_SIZE, FOLDER_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_file_terminal = Header("FILE TERMINAL", FILE_TERMINAL_SIZE, FILE_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_file_name = Header("file name", FILE_NAME_SIZE, FILE_NAME_POS, FILE_NAME_FONT_SIZE, sf::Color::Black, sf::Color::Red);
+    this->_dir_tree_screen = Header(this->_directory_tree.get_directory_tree_string(), TEXT_FILE_INPUT_SIZE, TEXT_FILE_INPUT_POS, TEXT_FILE_INPUT_FONT_SIZE, sf::Color::White, sf::Color::Red);
     this->_text_file_input= InputBox(TEXT_FILE_INPUT_FONT_SIZE, TEXT_FILE_INPUT_SIZE, TEXT_FILE_INPUT_POS, sf::Color::Red, sf::Color::White, false);
-    this->_cmd = CommandLine();
+    
 }
 // *****************************************************************************************************************
 
@@ -208,6 +224,12 @@ void Engine::_update_terminal_event()
     int code = this->_cmd.update_cmd_event(strs_to_screen_folder, strs_to_screen_file);
     if(code != INVALID)
     {
+        // if touch, mkdir, rm, del either one of these happens then rebuild directory tree
+        if(code == DEL || code == RM || code == MKDIR || code == TOUCH)
+        {
+            this->_directory_tree.build();
+            this->_dir_tree_screen.setHeaderText(this->_directory_tree.get_directory_tree_string());
+        }
         if(code != LS && code != OPEN && code != SAVE)
         {
             to_screen_file += "SUCCESS";
