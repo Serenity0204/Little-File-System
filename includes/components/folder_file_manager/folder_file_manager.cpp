@@ -53,9 +53,9 @@ FolderFileManager::~FolderFileManager(){}
 
 bool FolderFileManager::file_exist(string path)
 {
-    int idx = first_not_space(path, 0);
+    int idx = Helper::first_not_space(path, 0);
     if(idx == -1) return false;
-    path = remove_space(path);
+    path = Helper::remove_space(path);
 
     if(this->_file_set.count(this->_base_dir + path) > 0) return true;
     return false;
@@ -63,9 +63,9 @@ bool FolderFileManager::file_exist(string path)
 
 bool FolderFileManager::folder_exist(string path)
 {
-    int idx = first_not_space(path, 0);
+    int idx = Helper::first_not_space(path, 0);
     if(idx == -1) return false;
-    path = remove_space(path);
+    path = Helper::remove_space(path);
 
     if(this->_folder_set.count(this->_base_dir + path + "/") > 0) return true;
     return false;
@@ -78,9 +78,9 @@ bool FolderFileManager::folder_exist(string path)
 
 bool FolderFileManager::add_folder(string path)
 {
-    int idx = first_not_space(path, 0);
+    int idx = Helper::first_not_space(path, 0);
     if(idx == -1) return false;
-    path = remove_space(path);
+    path = Helper::remove_space(path);
 
     ofstream outs;
     string file_path = this->_base_dir + path + "/";
@@ -102,10 +102,10 @@ bool FolderFileManager::add_folder(string path)
 
 bool FolderFileManager::add_file(string path)
 {
-    int idx = first_not_space(path, 0);
+    int idx = Helper::first_not_space(path, 0);
     if(idx == -1) return false;
     
-    path = remove_space(path);
+    path = Helper::remove_space(path);
 
     ofstream outs;
     string file_path = this->_base_dir + path;
@@ -150,9 +150,9 @@ void FolderFileManager::_add_delete_file_folder(const string& file_path, bool co
 
 bool FolderFileManager::delete_folder(string path)
 {
-    int idx = first_not_space(path, 0);
+    int idx = Helper::first_not_space(path, 0);
     if(idx == -1) return false;
-    path = remove_space(path);
+    path = Helper::remove_space(path);
     string file_path = this->_base_dir + path + "/";
     if(!this->_folder_set.count(file_path)) return false;
     
@@ -171,9 +171,9 @@ bool FolderFileManager::delete_folder(string path)
 
 bool FolderFileManager::delete_file(string path)
 {
-    int idx = first_not_space(path, 0);
+    int idx = Helper::first_not_space(path, 0);
     if(idx == -1) return false;
-    path = remove_space(path);
+    path = Helper::remove_space(path);
     
     string file_path = this->_base_dir + path;
     if(!this->_file_set.count(file_path)) return false;
@@ -226,10 +226,10 @@ bool FolderFileManager::get_sub_dir(vector<string>& sub_dir_folder, vector<strin
 
 bool FolderFileManager::write_file(string path)
 {
-    int idx = first_not_space(path, 0);
+    int idx = Helper::first_not_space(path, 0);
     if(idx == -1) return false;
     string message = middleware.get_input_box_text();
-    path = remove_space(path);
+    path = Helper::remove_space(path);
 
     ofstream outs;
     string file_path = this->_base_dir + path;
@@ -245,9 +245,9 @@ bool FolderFileManager::write_file(string path)
 
 string FolderFileManager::get_file_text(string path)
 {
-    int idx = first_not_space(path, 0);
+    int idx = Helper::first_not_space(path, 0);
     if(idx == -1) return "";
-    path = remove_space(path);
+    path = Helper::remove_space(path);
     string file_path = this->_base_dir + path;
     if(!this->_file_set.count(file_path)) return "";
 

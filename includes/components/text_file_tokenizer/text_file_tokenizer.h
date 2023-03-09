@@ -4,7 +4,9 @@
 #include <iomanip>
 #include <string>
 #include <fstream>
+#include <unordered_map>
 #include <vector>
+#include "../../utils/helper/helper_functions.h"
 using namespace std;
 
 
@@ -16,12 +18,17 @@ using namespace std;
 class TextFileTokenizer
 {
 private:
-    vector<string> _cache;
-    void read();
+    vector<string> _cache_folder;
+    vector<string> _cache_file;
+    vector<Info> _infos;
+    void _read();
+
+    void _tokenize_helper(bool file_or_folder, int idx);
 public:
     TextFileTokenizer();
     ~TextFileTokenizer();
-    
+    void tokenize();
+    vector<Info>& get_infos(){return this->_infos;}
 };
 
     

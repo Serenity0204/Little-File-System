@@ -32,7 +32,7 @@ int CmdParser::parse(string cmd, string& subcmd)
 
     if(cmd[legal_length] != ' ') return INVALID;
     int startIdx = legal_length + 1;
-    int endIdx = first_space(cmd, startIdx);
+    int endIdx = Helper::first_space(cmd, startIdx);
     //cout << "start:" << startIdx << " , end:" << endIdx << endl;
 
 
@@ -59,7 +59,7 @@ int CmdParser::parse(string cmd, string& subcmd)
     // if endIdx == -1 and it needs subcommand it's false, or if endIdx != -1 and it doesn't need subcommand it's false as well
     if((endIdx == -1 && this->_available_cmd[command][1] != 0) || (endIdx != -1 && this->_available_cmd[command][1] == 0)) return INVALID;
     
-    string prepared_subcmd = remove_space(cmd.substr(endIdx));
+    string prepared_subcmd = Helper::remove_space(cmd.substr(endIdx));
     
     if((cmd.length() - cmd.substr(0, endIdx).length()) < this->_available_cmd[command][1]) return INVALID;
     //if(prepared_subcmd.length() > MAX_LEN_TERMINAL) return INVALID;

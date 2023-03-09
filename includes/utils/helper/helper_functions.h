@@ -5,9 +5,20 @@
 #include <cassert>
 #include <unordered_map>
 #include <memory>
-using namespace std;
+#include "../../components/text_file_tokenizer/info.h"
 
-int first_not_space(string str, int startIdx);
-int first_space(string str, int startIdx);
-string remove_space(string str);
+
+
+
+
+namespace Helper
+{
+    int first_not_space(string str, int startIdx);
+    int first_space(string str, int startIdx);
+    string remove_space(string str);
+    bool isIn(vector<Info> info_vec, Info find);
+};
+
+
+
 #endif // !HELPER_FUNCTIONS_H
