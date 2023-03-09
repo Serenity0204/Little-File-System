@@ -23,7 +23,7 @@ void NaryTree::insert(shared_ptr<Node> parent, string data)
     parent->_children.push_back(newNode);
 }
 
-void NaryTree::remove(shared_ptr<Node> parent, string data)
+string NaryTree::tree_string()
 {
-    
+    return tree_to_string(this->_root);
 }

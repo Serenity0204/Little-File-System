@@ -7,7 +7,7 @@
 void print_subtree(shared_ptr<Node> node, int depth, bool lastChild) {
     // print the node's data with appropriate indentation and prefix
     for (int i = 0; i < depth - 1; i++) {
-        cout << "   ";
+        cout << "       ";
     }
     cout << (lastChild ? "|____" : "|----");
     cout << node->_data << endl;
@@ -30,7 +30,7 @@ void print_tree(shared_ptr<Node> root) {
 void subtree_str(shared_ptr<Node> node, int depth, bool lastChild, string& output) {
     // append the node's data with appropriate indentation and prefix
     for (int i = 0; i < depth - 1; i++) {
-        output += "    ";
+        output += "       ";
     }
     output += (lastChild ? "|____" : "|----");
     output += node->_data + "\n";
