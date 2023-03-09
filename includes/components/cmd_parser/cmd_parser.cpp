@@ -70,6 +70,24 @@ int CmdParser::parse(string cmd, string& subcmd)
         string txt = "";
         for(int i = prepared_subcmd.length() - 4; i < prepared_subcmd.length(); ++i) txt += prepared_subcmd[i];
         if(txt != ".txt") return INVALID;
+        int dot_count = 0;
+
+        for(int i = 0; i < prepared_subcmd.length(); ++i)
+        {
+            // only A-Z, a-z, 0-9, and _ allowed, and count the dot
+            if(prepared_subcmd[i] <= 90 && prepared_subcmd[i] >= 65) continue;
+            if(prepared_subcmd[i] <= 122 && prepared_subcmd[i] >= 97) continue; 
+            if(prepared_subcmd[i] <= 57 && prepared_subcmd[i] >= 48) continue;
+            if(prepared_subcmd[i] == '_') continue;
+            if(prepared_subcmd[i] == '.')
+            {
+                dot_count++;
+                continue;
+            }
+            return INVALID;
+        }
+        // only one dot allowed
+        if(dot_count > 1) return INVALID;
     }
 
     // check if the folder name is legal(no .)
