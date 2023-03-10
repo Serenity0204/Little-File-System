@@ -85,6 +85,7 @@ bool FolderFileManager::add_folder(string path)
     ofstream outs;
     string file_path = this->_base_dir + path + "/";
     if(this->_folder_set.count(file_path) > 0) return false;   
+    if(!this->_count()) return false;
     
     #ifdef WIN32
     if(mkdir(file_path.c_str()) == -1) return false;
@@ -110,6 +111,7 @@ bool FolderFileManager::add_file(string path)
     ofstream outs;
     string file_path = this->_base_dir + path;
     if(this->_file_set.count(file_path) > 0) return false;
+    if(!this->_count()) return false;
     
     outs.open(file_path);
     if(outs.fail()) return false;
@@ -146,7 +148,74 @@ void FolderFileManager::_add_delete_file_folder(const string& file_path, bool co
     outs.close();
 }
 
+bool FolderFileManager::remove_all()
+{
 
+    ifstream ins_folder, ins_file;
+    string path_folder = "../../root/delete_all_folder.txt";
+    string path_file = "../../root/delete_all_file.txt";
+    string path_user = "../../root/user";
+    string path_root = "../../root";
+    if(!Helper::dir_exists(path_root))
+    {
+      cout << "ROOT DNE" << endl;
+      return true;
+    }
+    ins_file.open(path_file);
+    if(ins_file.fail()) return false;
+    ins_folder.open(path_folder);
+    if(ins_folder.fail()) return false;
+    string line_folder, line_file;
+
+    queue<string> folder_q;
+    queue<string> file_q;
+    while(getline(ins_file, line_file)) file_q.push(line_file);
+    while(getline(ins_folder, line_folder)) folder_q.push(line_folder);
+
+
+    while(!file_q.empty()) 
+    {
+      int check = remove(file_q.front().c_str());
+      if(check != -1)
+      {
+        file_q.pop();
+        continue;;
+      }
+      string first = file_q.front();
+      file_q.pop();
+      file_q.push(first);
+    }  
+
+    while(!folder_q.empty())
+    {
+      int check = rmdir(folder_q.front().c_str());
+      if(check != -1)
+      {
+        folder_q.pop();
+        continue;
+      }
+      string first = folder_q.front();
+      folder_q.pop();
+      folder_q.push(first);
+    }
+
+    
+
+
+    ins_file.close();
+    ins_folder.close();
+    ofstream out_folder, out_file;
+    out_folder.open(path_folder);
+    if(out_folder.fail()) return false;
+    out_folder.close();
+
+    out_file.open(path_file);
+    if(out_file.fail()) return false;
+    out_file.close();
+    
+
+    return true;
+}
 
 bool FolderFileManager::delete_folder(string path)
 {
@@ -189,6 +258,17 @@ bool FolderFileManager::delete_file(string path)
     return true;
 }
 
+bool FolderFileManager::_count()
+{
+    vector<string> _folders;
+    vector<string> _files;
+    _folders.clear();
+    _files.clear();
+    bool sub_dir = this->get_sub_dir(_folders, _files);
+    if(!sub_dir) return false;
+    if(_folders.size() + _files.size() >= 10) return false;
+    return true;
+}
 
 bool FolderFileManager::get_sub_dir(vector<string>& sub_dir_folder, vector<string>& sub_dir_file)
 {

@@ -46,9 +46,6 @@ project structure:
      - file is clicked: open the file
      - folder is clicked: make the folder the root dir
 - CMD command
-  3. design a command that can clear all the directory
-  4. design a command that can clear all the files
-  5. design a command that can do the compound of #3 and #4
   6. design a move command that can move the file into designated location(hard)
   7. design a move command that can move the folder into designated location included its subdir(very hard)
   8. design a command that will show instruction

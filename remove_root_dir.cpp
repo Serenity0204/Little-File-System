@@ -21,7 +21,6 @@ bool dirExists(const std::string &path) {
 
 
 
-// remove bottom to top?
 bool remove_all(bool debug=false)
 {
     ifstream ins_folder, ins_file;

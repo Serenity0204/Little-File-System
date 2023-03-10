@@ -148,7 +148,14 @@ int CommandLine::update_cmd_event(vector<string>& folder_str, vector<string>& fi
         this->_open = false;
         return SAVE;
     }
-
+    if(code == CLEAR)
+    {
+        bool success = this->_fm.remove_all();
+        if(!success) return INVALID;
+        this->reset();
+        cout << "clear" << endl;
+        return CLEAR;
+    }
     cout << "fail in event" << endl;
     return INVALID;
 }

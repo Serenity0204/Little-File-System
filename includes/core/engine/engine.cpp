@@ -154,9 +154,17 @@ void Engine::_init()
     this->_folder_terminal = Header("FOLDER TERMINAL", FOLDER_TERMINAL_SIZE, FOLDER_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_file_terminal = Header("FILE TERMINAL", FILE_TERMINAL_SIZE, FILE_TERMINAL_POS, HEADER_FONT_SIZE, sf::Color::Black, sf::Color::Red);
     this->_file_name = Header("file name", FILE_NAME_SIZE, FILE_NAME_POS, FILE_NAME_FONT_SIZE, sf::Color::Black, sf::Color::Red);
-    this->_dir_tree_screen = Header(this->_directory_tree.get_directory_tree_string(), TEXT_FILE_INPUT_SIZE, TEXT_FILE_INPUT_POS, TEXT_FILE_INPUT_FONT_SIZE, sf::Color::White, sf::Color::Red);
+    this->_dir_tree_screen = Header(this->_directory_tree.get_directory_tree_string(), TEXT_FILE_INPUT_SIZE, TEXT_FILE_INPUT_POS, 15, sf::Color::White, sf::Color::Red);
     this->_text_file_input= InputBox(TEXT_FILE_INPUT_FONT_SIZE, TEXT_FILE_INPUT_SIZE, TEXT_FILE_INPUT_POS, sf::Color::Red, sf::Color::White, false);
     
+    int v = 0, h = 0;
+    Helper::count_string_dimension(this->_directory_tree.get_directory_tree_string(), v, h);
+    if(v >= 24 || h >= 50) 
+    {
+        this->_dir_tree_screen.setHeaderText("Your directory tree is too big! Type \"lfs clear\" to clear all of the directories");
+        return;
+    }
+
 }
 // *****************************************************************************************************************
 
@@ -225,10 +233,17 @@ void Engine::_update_terminal_event()
     if(code != INVALID)
     {
         // if touch, mkdir, rm, del either one of these happens then rebuild directory tree
-        if(code == DEL || code == RM || code == MKDIR || code == TOUCH)
+        if(code == DEL || code == RM || code == MKDIR || code == TOUCH || code == CLEAR)
         {
             this->_directory_tree.build();
-            this->_dir_tree_screen.setHeaderText(this->_directory_tree.get_directory_tree_string());
+            int v = 0, h = 0;
+            Helper::count_string_dimension(this->_directory_tree.get_directory_tree_string(), v, h);
+            if(v < 24 && h < 50) this->_dir_tree_screen.setHeaderText(this->_directory_tree.get_directory_tree_string());
+            if(v >= 24 || h >= 50) 
+            {
+                this->_dir_tree_screen.setHeaderText("Your directory tree is too big! Type \"lfs clear\" to clear all of the directories");
+                return;
+            }
         }
         if(code != LS && code != OPEN && code != SAVE)
         {

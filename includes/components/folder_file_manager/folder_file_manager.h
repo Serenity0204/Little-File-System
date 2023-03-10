@@ -11,10 +11,14 @@
 #include <cstdio>
 #include <unordered_set>
 #include <vector>
+#include <queue>
+#include <unistd.h>
 #include "../../utils/helper/helper_functions.h"
 #include "../../core/config/config.h"
 #include "../../utils/middleware/middleware.h"
-#include <unistd.h>
+
+
+
 
 using namespace std;
 // if mac replaced by mkdir(dirPath, 0777) for all mkdir 
@@ -35,6 +39,8 @@ private:
     void _read_delete_file_folder();
     // true for adding in file, false for adding in folder
     void _add_delete_file_folder(const string& path, bool control);
+    // check if full
+    bool _count();
 public:
     FolderFileManager();
     ~FolderFileManager();
@@ -50,7 +56,7 @@ public:
     // delete
     bool delete_folder(string path);
     bool delete_file(string path);
-
+    bool remove_all();
     // get
     bool get_sub_dir(vector<string>& sub_dir_folder, vector<string>& sub_dir_file);
     string& get_base_dir(){return this->_base_dir;}

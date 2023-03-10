@@ -52,7 +52,7 @@ void TextFileTokenizer::_tokenize_helper(bool file_or_folder, int idx)
         if(input_str[j] == '/')
         {
             Info info(parent, concat, level);
-            if(!Helper::isIn(this->_infos, info)) this->_infos.push_back(info);
+            if(!Helper::is_in(this->_infos, info)) this->_infos.push_back(info);
             level++;
             parent = concat;
             concat = "";

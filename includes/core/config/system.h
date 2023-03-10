@@ -37,6 +37,7 @@ enum PARSE_KEY
     DEL=6,
     OPEN=7,
     SAVE=8,
+    CLEAR = 9,
 };
 
 // add more enum here
@@ -88,7 +89,8 @@ const unordered_map<string, vector<int>> LFS_CMD = {
     {"rm", {RM, 2}}, 
     {"open", {OPEN, 2}},
     {"save", {SAVE, 0}},
-    {"del", {DEL, 2}}
+    {"del", {DEL, 2}},
+    {"clear", {CLEAR, 0}},
 };
 
 

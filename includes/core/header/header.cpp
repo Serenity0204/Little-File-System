@@ -9,10 +9,11 @@ Header::Header(std::string headerText, sf::Vector2f headerSize, sf::Vector2f hea
     _header.setPosition(headerPos);
     _text.setPosition(headerPos);
 
-    
 	_text.setString(headerText);
 	_text.setCharacterSize(charSize);
 	_text.setFillColor(textColor);
+
+	_char_size = charSize;
 }
 
 Header::~Header(){}
@@ -22,6 +23,11 @@ void Header::setFont(sf::Font &fonts)
     _text.setFont(fonts);
 }
 
+void Header::setHeaderFontSize(int size)
+{
+	_char_size = size;
+	_text.setCharacterSize(size);
+}
 void Header::drawTo(sf::RenderWindow &window)
 {
 	window.draw(_header);
