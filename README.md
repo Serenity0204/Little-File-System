@@ -53,8 +53,10 @@ use this to generate image link: https://postimages.org/
 
 ## Design
 Can be found in https://github.com/Serenity0204/Little_File_System/blob/master/design.txt
+
 ## Todos
 Can also be found in https://github.com/Serenity0204/Little_File_System/blob/master/design.txt
+
 ## Features
 - has a directory tree that shows the files and folders in tree like format
 - has persistent storage that the files and folders will all be saved after closing the program, the data will remain when restart the program

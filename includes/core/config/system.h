@@ -63,7 +63,7 @@ const int MAX_LEN_TERMINAL = 15;
 // system variable config
 // ADD SYSTEM  VARIABLE HERE
 const sf::Vector2f TEXT_FILE_INPUT_SIZE = sf::Vector2f(700, 400);
-const sf::Vector2f TEXT_FILE_INPUT_POS = sf::Vector2f(150, 150);
+const sf::Vector2f TEXT_FILE_INPUT_POS = sf::Vector2f(85, 100);
 
 const sf::Vector2f FOLDER_TERMINAL_SIZE = sf::Vector2f(150, 500);
 const sf::Vector2f FOLDER_TERMINAL_POS = sf::Vector2f(890, 0);
@@ -72,7 +72,7 @@ const sf::Vector2f FILE_TERMINAL_SIZE = sf::Vector2f(150, 500);
 const sf::Vector2f FILE_TERMINAL_POS = sf::Vector2f(1045, 0);
 
 const sf::Vector2f FILE_NAME_SIZE = sf::Vector2f(700, 35);
-const sf::Vector2f FILE_NAME_POS = sf::Vector2f(150, 115);
+const sf::Vector2f FILE_NAME_POS = sf::Vector2f(85, 65);
 
 
 const sf::Vector2f COMMAND_LINE_SIZE = sf::Vector2f(1150, 50);

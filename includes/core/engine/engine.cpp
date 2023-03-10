@@ -150,7 +150,7 @@ void Engine::_init()
     
     int v = 0, h = 0;
     Helper::count_string_dimension(this->_directory_tree.get_directory_tree_string(), v, h);
-    if(v >= 18 || h >= 50) 
+    if(v >= 18 || h >= 60) 
     {
         this->_dir_tree_screen.setHeaderText("Your directory tree is too big! Type \"lfs clear\" to clear all of the directories \nor delete some unused files/folders");
         return;
@@ -229,12 +229,13 @@ void Engine::_update_terminal_event()
             this->_directory_tree.build();
             int v = 0, h = 0;
             Helper::count_string_dimension(this->_directory_tree.get_directory_tree_string(), v, h);
-            if(v < 18 && h < 50) this->_dir_tree_screen.setHeaderText(this->_directory_tree.get_directory_tree_string());
-            if(v >= 18 || h >= 50) 
+            if(v < 18 && h < 60) this->_dir_tree_screen.setHeaderText(this->_directory_tree.get_directory_tree_string());
+            if(v >= 18 || h >= 60) 
             {
                 this->_dir_tree_screen.setHeaderText("Your directory tree is too big! Type \"lfs clear\" to clear all of the directories \nor delete some unused files/folders");
                 return;
             }
+            cout << h << endl;
         }
         if(code != LS && code != OPEN && code != SAVE)
         {
