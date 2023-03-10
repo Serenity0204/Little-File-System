@@ -8,7 +8,6 @@
 CommandLine::CommandLine()
 {
     this->_base_dir = this->_fm.get_base_dir();
-    this->_cur_dir = this->_base_dir;
     this->_open = false;
     this->_command_line = InputBox(CMD_FONT_SIZE, COMMAND_LINE_SIZE, COMMAND_LINE_POS, sf::Color::Red, sf::Color::Black, true, this->_base_dir,false);
     this->_command_line.setLimit(true, CMD_CHAR_LIMIT);

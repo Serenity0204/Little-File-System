@@ -23,7 +23,6 @@ private:
     string _base_dir;
     FolderFileManager _fm;
     CmdParser _parser;
-    string _cur_dir;
     bool _open;
 public:
     CommandLine();

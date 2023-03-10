@@ -212,7 +212,8 @@ bool FolderFileManager::remove_all()
     out_file.open(path_file);
     if(out_file.fail()) return false;
     out_file.close();
-    
+    this->_file_set.clear();
+    this->_folder_set.clear();
 
     return true;
 }

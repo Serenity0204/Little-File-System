@@ -14,12 +14,10 @@ project structure:
         --input_box // input box that allows user to input from Keyboard
 
       --component // low level logic goes here
-        --lib_include_test // used to test the linking in cmake for lib folder works
         --cmd_parser // used to parse command
         --folder_file_manager // used to manager file and folder
-        --directory_tree // used to show the directory structure in tree format
-        --trie // trie class
-        --trie_node // trie node struct
+        --nary_tree // nary tree implementation
+        --text_file_tokenizer // tokenize text file texts into Info struct so can be used to build directory tree
       
       --app // app components used in this project
         --directory_tree // directory tree to show on screen, implemented using nary tree
@@ -49,8 +47,6 @@ project structure:
   6. design a move command that can move the file into designated location(hard)
   7. design a move command that can move the folder into designated location included its subdir(very hard)
   8. design a command that will show instruction
-- Directory tree
-  1. make the header change its font size according to the header's text
   
 // improve
 change the map(value) of parser to struct instead of vector 
