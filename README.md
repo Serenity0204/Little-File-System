@@ -13,6 +13,7 @@ desired behaviours, the custom part of command is quoted {}, and the command is 
 * "lfs open {filename}.txt" to open the file, and click the file to start entering text
 * "lfs save" to save the most recent opened file
 * "lfs del {filename}.txt" to delete the file
+* "lfs clear" to clear all the folders and files
 
 ## Demo
 use this to generate image link: https://postimages.org/
