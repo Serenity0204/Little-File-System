@@ -2,8 +2,8 @@
 #define NARY_TREE_H
 
 
-#include "../nary_tree_functions/nary_tree_functions.h"
-#include "../nary_node/nary_node.h"
+#include "nary_tree_functions.h"
+#include "nary_node.h"
 #include <unordered_map>
 #include <iostream>
 #include <string>

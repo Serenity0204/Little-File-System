@@ -1,6 +1,6 @@
 #ifndef NARY_TREE_FUNCTIONS_H
 #define NARY_TREE_FUNCTIONS_H
-#include "../nary_node/nary_node.h"
+#include "nary_node.h"
 using namespace std;
 
 

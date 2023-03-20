@@ -10,7 +10,7 @@
 #include <sys/types.h>
 #include <cstdio>
 #include <unistd.h>
-#include "../../components/text_file_tokenizer/info.h"
+#include "../text_file_tokenizer/info.h"
 
 
 

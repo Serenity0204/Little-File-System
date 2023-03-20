@@ -6,8 +6,8 @@
 #include <cassert>
 #include <unordered_map>
 #include <memory>
-#include "../../components/nary_tree/nary_tree/nary_tree.h"
-#include "../../components/text_file_tokenizer/text_file_tokenizer.h"
+#include "../nary_tree/nary_tree.h"
+#include "../text_file_tokenizer/text_file_tokenizer.h"
 using namespace std;
 
 class DirectoryTree

@@ -13,9 +13,9 @@
 #include <vector>
 #include <queue>
 #include <unistd.h>
-#include "../../utils/helper/helper_functions.h"
-#include "../../core/config/config.h"
-#include "../../utils/middleware/middleware.h"
+#include "../helper/helper_functions.h"
+#include "../config/config.h"
+#include "../middleware/middleware.h"
 
 
 

@@ -4,7 +4,7 @@
 
 //------------------------------------------------------------------------------
 //Files we are testing:
-#include "../../includes/app/directory_tree/directory_tree.h"
+#include "../../includes/directory_tree/directory_tree.h"
 //------------------------------------------------------------------------------
 
 using namespace std;

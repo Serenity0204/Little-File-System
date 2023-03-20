@@ -9,7 +9,7 @@ using namespace std;
 //------------------------------------------------------------------------------
 //@TODO: include all files we are testing:
 
-#include "../../includes/components/folder_file_manager/folder_file_manager.h"
+#include "../../includes/folder_file_manager/folder_file_manager.h"
 
 //------------------------------------------------------------------------------
 // USE THE SCRIPT TO CLEAR THE ROOT BEFORE RUNNING THIS TEST

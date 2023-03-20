@@ -6,9 +6,9 @@
 #include "../input_box/input_box.h"
 #include "../button/buttons.h"
 #include "../header/header.h"
-#include "../../app/command_line/command_line.h"
-#include "../../utils/middleware/middleware.h"
-#include "../../app/directory_tree/directory_tree.h"
+#include "../command_line/command_line.h"
+#include "../middleware/middleware.h"
+#include "../directory_tree/directory_tree.h"
 using namespace std;
 
 

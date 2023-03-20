@@ -6,24 +6,17 @@ project structure:
     --demo // used to store demo for project
 
     --includes // where all of the code resides
-      --core // where all of the sfml templates reside
         --button // clickable button class, and buttons class for the button used in this project
         --config // managing global resource, and system variables
         --engine // processing input/output and updating the screen
         --header // header class to show text and draw to the screen
         --input_box // input box that allows user to input from Keyboard
-
-      --component // low level logic goes here
         --cmd_parser // used to parse command
         --folder_file_manager // used to manager file and folder
         --nary_tree // nary tree implementation
         --text_file_tokenizer // tokenize text file texts into Info struct so can be used to build directory tree
-      
-      --app // app components used in this project
         --directory_tree // directory tree to show on screen, implemented using nary tree
         --command_line // a command line class that can take input and parse command
-
-      --utils // middleware and helper function
         --middleware // retrieve/input data from/to engine
         --helper // helper functions
 
