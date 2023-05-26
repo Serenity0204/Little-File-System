@@ -1,6 +1,6 @@
 
 # Little File System
-A little file system that built with C++ SFML that simulates common operations on windows file system,
+A file system simulator that built with C++ SFML that simulates common operations on windows file system,
 the user can select the terminal by clicking the terminal, and type in different commands to achieve 
 desired behaviours, the custom part of command is quoted {}, and the command is in "", the user can type:
 
