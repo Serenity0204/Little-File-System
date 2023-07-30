@@ -74,7 +74,7 @@ To run this project, please follow the system requirements below.
 
 
 `Windows: `
-  - compiler: g++ 7.3.0 
+  - compiler: g++ 13.1.0
   - cmake: 3.20.0
 
 `SFML setup: `

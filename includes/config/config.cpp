@@ -65,6 +65,6 @@ void Config::_set_font()
     // set font example
     
     auto f1 = std::make_shared<sf::Font>();
-    f1->loadFromFile("../assets/arial.ttf");
+    f1->loadFromFile("assets/arial.ttf");
     this->_font_map[ARIAL] = f1;
 }
